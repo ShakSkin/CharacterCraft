@@ -1,0 +1,1865 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Server License — CharacterCraft AI NPC Packs</title>
+    <meta name="description" content="The CharacterCraft Server License. 5 full AI NPC character packs, complete world lore system, NPC relationship map, API cost optimization, and commercial use rights. One-time crypto payment.">
+    <meta property="og:title" content="Server License — CharacterCraft AI NPC Packs">
+    <meta property="og:description" content="Five characters. One world. Commercial rights. Everything a serious Minecraft RPG server needs to run AI NPCs at scale.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://shakskin.github.io/CharacterCraft/license.html">
+    <link rel="canonical" href="https://shakskin.github.io/CharacterCraft/license.html">
+    <base href="https://shakskin.github.io/CharacterCraft/">
+    <style>
+        :root {
+            --gold:          #D4A537;
+            --gold-light:    #F2D06B;
+            --bg-primary:    #0A0A0F;
+            --bg-secondary:  #12121A;
+            --bg-card:       #1A1A25;
+            --bg-hover:      #222233;
+            --text-primary:  #E8E8F0;
+            --text-secondary:#9999AA;
+            --text-muted:    #666677;
+            --border:        #2A2A3A;
+            --green:         #4CAF50;
+            --urgent-red:    #FF4444;
+            --purple:        #9B59B6;
+            --teal:          #1ABC9C;
+            --amber:         #F39C12;
+            --blue:          #3498DB;
+        }
+
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family:  'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
+            background:   var(--bg-primary);
+            color:        var(--text-primary);
+            line-height:  1.6;
+            overflow-x:   hidden;
+        }
+
+        /* ── NAV ── */
+        nav {
+            position:        sticky;
+            top:             0;
+            z-index:         1000;
+            background:      rgba(10,10,15,0.97);
+            backdrop-filter: blur(12px);
+            border-bottom:   1px solid var(--border);
+            padding:         0 2rem;
+        }
+
+        .nav-inner {
+            max-width:       1200px;
+            margin:          0 auto;
+            display:         flex;
+            justify-content: space-between;
+            align-items:     center;
+            height:          64px;
+        }
+
+        .nav-logo {
+            font-size:       1.25rem;
+            font-weight:     700;
+            color:           var(--gold);
+            text-decoration: none;
+            letter-spacing:  -0.3px;
+        }
+
+        .nav-logo span { color: var(--text-primary); }
+
+        .nav-links {
+            display:     flex;
+            gap:         2rem;
+            list-style:  none;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color:           var(--text-secondary);
+            text-decoration: none;
+            font-size:       0.9rem;
+            font-weight:     500;
+            transition:      color 0.2s;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active { color: var(--gold); }
+
+        .nav-links .nav-cta {
+            background:    var(--gold);
+            color:         #000;
+            padding:       0.5rem 1.25rem;
+            border-radius: 6px;
+            font-weight:   700;
+            transition:    background 0.2s;
+        }
+
+        .nav-links .nav-cta:hover { background: var(--gold-light); color: #000; }
+
+        .nav-toggle {
+            display:    none;
+            background: none;
+            border:     none;
+            color:      var(--text-primary);
+            font-size:  1.5rem;
+            cursor:     pointer;
+        }
+
+        /* ── HERO ── */
+        .hero {
+            padding:         6rem 2rem 4rem;
+            text-align:      center;
+            position:        relative;
+            overflow:        hidden;
+        }
+
+        .hero::before {
+            content:        '';
+            position:       absolute;
+            inset:          0;
+            background:     radial-gradient(ellipse at 50% 0%,
+                                rgba(26,188,156,0.09) 0%,
+                                transparent 65%);
+            pointer-events: none;
+        }
+
+        .hero::after {
+            content:        '';
+            position:       absolute;
+            bottom:         0;
+            left:           0;
+            right:          0;
+            height:         160px;
+            background:     linear-gradient(transparent, var(--bg-primary));
+            pointer-events: none;
+        }
+
+        .hero-inner {
+            max-width: 800px;
+            margin:    0 auto;
+            position:  relative;
+            z-index:   1;
+        }
+
+        .hero-eyebrow {
+            display:        inline-flex;
+            align-items:    center;
+            gap:            0.5rem;
+            background:     rgba(26,188,156,0.08);
+            border:         1px solid rgba(26,188,156,0.2);
+            color:          var(--teal);
+            font-size:      0.75rem;
+            font-weight:    700;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            padding:        0.35rem 1rem;
+            border-radius:  50px;
+            margin-bottom:  1.5rem;
+        }
+
+        .hero h1 {
+            font-size:     clamp(2.25rem, 5.5vw, 3.5rem);
+            font-weight:   800;
+            line-height:   1.1;
+            margin-bottom: 1.25rem;
+            letter-spacing:-0.75px;
+        }
+
+        .hero h1 .teal { color: var(--teal); }
+
+        .hero-sub {
+            font-size:     1.05rem;
+            color:         var(--text-secondary);
+            max-width:     620px;
+            margin:        0 auto 2.5rem;
+            line-height:   1.8;
+        }
+
+        /* Price callout in hero */
+        .hero-price-block {
+            display:         inline-flex;
+            align-items:     center;
+            gap:             1.25rem;
+            background:      rgba(26,188,156,0.06);
+            border:          1px solid rgba(26,188,156,0.2);
+            border-radius:   14px;
+            padding:         1.25rem 2rem;
+            margin-bottom:   2rem;
+            flex-wrap:       wrap;
+            justify-content: center;
+        }
+
+        .hero-price {
+            font-size:   2.5rem;
+            font-weight: 800;
+            color:       var(--teal);
+            line-height: 1;
+        }
+
+        .hero-price-detail {
+            text-align: left;
+        }
+
+        .hero-price-detail .orig {
+            font-size:       0.82rem;
+            color:           var(--text-muted);
+            text-decoration: line-through;
+            display:         block;
+        }
+
+        .hero-price-detail .save {
+            font-size:    0.8rem;
+            font-weight:  700;
+            color:        var(--urgent-red);
+            background:   rgba(255,68,68,0.08);
+            border:       1px solid rgba(255,68,68,0.15);
+            padding:      0.15rem 0.5rem;
+            border-radius:50px;
+            display:      inline-block;
+        }
+
+        .hero-price-detail .note {
+            font-size:  0.78rem;
+            color:      var(--text-muted);
+            display:    block;
+            margin-top: 0.25rem;
+        }
+
+        .hero-actions {
+            display:         flex;
+            gap:             1rem;
+            justify-content: center;
+            flex-wrap:       wrap;
+            margin-bottom:   2rem;
+        }
+
+        .btn-primary {
+            display:         inline-flex;
+            align-items:     center;
+            gap:             0.5rem;
+            padding:         1rem 2.5rem;
+            background:      var(--teal);
+            color:           #000;
+            border-radius:   10px;
+            font-size:       1rem;
+            font-weight:     700;
+            text-decoration: none;
+            transition:      all 0.2s;
+        }
+
+        .btn-primary:hover {
+            filter:    brightness(1.1);
+            transform: translateY(-2px);
+            box-shadow:0 8px 30px rgba(26,188,156,0.3);
+        }
+
+        .btn-secondary {
+            display:         inline-flex;
+            align-items:     center;
+            gap:             0.5rem;
+            padding:         1rem 2rem;
+            background:      transparent;
+            color:           var(--text-primary);
+            border:          1px solid var(--border);
+            border-radius:   10px;
+            font-size:       1rem;
+            font-weight:     600;
+            text-decoration: none;
+            transition:      all 0.2s;
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--teal);
+            color:        var(--teal);
+            transform:    translateY(-2px);
+        }
+
+        /* delivery badges */
+        .hero-badges {
+            display:         flex;
+            align-items:     center;
+            justify-content: center;
+            gap:             1rem;
+            flex-wrap:       wrap;
+        }
+
+        .hero-badge {
+            display:     flex;
+            align-items: center;
+            gap:         0.35rem;
+            font-size:   0.78rem;
+            color:       var(--text-muted);
+            font-weight: 600;
+        }
+
+        .hero-badge .dot {
+            width:        7px;
+            height:       7px;
+            border-radius:50%;
+            background:   var(--teal);
+            flex-shrink:  0;
+        }
+
+        /* ── SECTIONS ── */
+        .section { padding: 5rem 2rem; }
+
+        .section-inner {
+            max-width: 1100px;
+            margin:    0 auto;
+        }
+
+        .section-label {
+            display:        inline-block;
+            color:          var(--teal);
+            font-size:      0.72rem;
+            font-weight:    700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom:  0.6rem;
+        }
+
+        .section-title {
+            font-size:     clamp(1.5rem, 3vw, 2.1rem);
+            font-weight:   700;
+            margin-bottom: 0.85rem;
+            line-height:   1.2;
+        }
+
+        .section-desc {
+            color:         var(--text-secondary);
+            font-size:     1rem;
+            max-width:     640px;
+            margin-bottom: 3rem;
+            line-height:   1.75;
+        }
+
+        /* ── WHAT YOU GET ── */
+        .whats-in-section { background: var(--bg-secondary); }
+
+        .delivery-grid {
+            display:               grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap:                   1.25rem;
+        }
+
+        .delivery-card {
+            background:    var(--bg-card);
+            border:        1px solid var(--border);
+            border-radius: 12px;
+            padding:       1.75rem;
+            transition:    border-color 0.2s, transform 0.2s;
+        }
+
+        .delivery-card:hover {
+            border-color: rgba(26,188,156,0.25);
+            transform:    translateY(-3px);
+        }
+
+        .delivery-icon {
+            font-size:     2rem;
+            margin-bottom: 0.85rem;
+            display:       block;
+        }
+
+        .delivery-card h3 {
+            font-size:     1rem;
+            font-weight:   700;
+            margin-bottom: 0.4rem;
+            color:         var(--text-primary);
+        }
+
+        .delivery-card p {
+            font-size:   0.84rem;
+            color:       var(--text-secondary);
+            line-height: 1.65;
+        }
+
+        .delivery-files {
+            margin-top:  0.85rem;
+            padding-top: 0.85rem;
+            border-top:  1px solid var(--border);
+        }
+
+        .delivery-file {
+            display:     flex;
+            align-items: center;
+            gap:         0.45rem;
+            font-size:   0.78rem;
+            color:       var(--text-muted);
+            padding:     0.2rem 0;
+            font-family: 'Courier New', monospace;
+        }
+
+        .delivery-file-icon { font-size: 0.75rem; }
+
+        /* ── CHARACTER SELECTION ── */
+        .chars-section { background: var(--bg-primary); }
+
+        .chars-note {
+            background:    rgba(26,188,156,0.05);
+            border:        1px solid rgba(26,188,156,0.15);
+            border-radius: 10px;
+            padding:       1.25rem 1.5rem;
+            margin-bottom: 2rem;
+            display:       flex;
+            align-items:   flex-start;
+            gap:           0.75rem;
+        }
+
+        .chars-note-icon { font-size: 1.1rem; flex-shrink: 0; margin-top: 0.1rem; }
+
+        .chars-note p {
+            font-size:   0.88rem;
+            color:       var(--text-secondary);
+            line-height: 1.65;
+        }
+
+        .chars-note strong { color: var(--teal); }
+
+        .chars-grid {
+            display:               grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap:                   1rem;
+        }
+
+        .char-card {
+            background:    var(--bg-card);
+            border:        1px solid var(--border);
+            border-radius: 12px;
+            padding:       1.5rem;
+            transition:    border-color 0.2s;
+            position:      relative;
+        }
+
+        .char-card.available { border-color: rgba(26,188,156,0.2); }
+        .char-card.coming    { opacity: 0.55; }
+
+        .char-card-header {
+            display:       flex;
+            align-items:   center;
+            gap:           0.75rem;
+            margin-bottom: 0.85rem;
+        }
+
+        .char-emoji { font-size: 1.75rem; }
+
+        .char-name {
+            font-size:   0.95rem;
+            font-weight: 700;
+        }
+
+        .char-role {
+            font-size:  0.75rem;
+            color:      var(--text-muted);
+            margin-top: 0.1rem;
+        }
+
+        .char-status {
+            position:    absolute;
+            top:         1rem;
+            right:       1rem;
+            font-size:   0.62rem;
+            font-weight: 700;
+            letter-spacing:1px;
+            text-transform:uppercase;
+            padding:     0.18rem 0.55rem;
+            border-radius:50px;
+        }
+
+        .status-live {
+            background:   rgba(26,188,156,0.1);
+            color:        var(--teal);
+            border:       1px solid rgba(26,188,156,0.25);
+        }
+
+        .status-soon {
+            background:   rgba(102,102,119,0.1);
+            color:        var(--text-muted);
+            border:       1px solid var(--border);
+        }
+
+        .char-memories {
+            display:     flex;
+            align-items: center;
+            gap:         0.4rem;
+            font-size:   0.78rem;
+            color:       var(--text-muted);
+        }
+
+        .char-mem-dot {
+            width:        6px;
+            height:       6px;
+            border-radius:50%;
+            background:   var(--teal);
+        }
+
+        /* ── HOW IT WORKS ── */
+        .how-section { background: var(--bg-secondary); }
+
+        .timeline {
+            position:       relative;
+            padding-left:   2rem;
+        }
+
+        .timeline::before {
+            content:    '';
+            position:   absolute;
+            left:       19px;
+            top:        0;
+            bottom:     0;
+            width:      2px;
+            background: linear-gradient(to bottom,
+                            var(--teal),
+                            rgba(26,188,156,0.1));
+        }
+
+        .timeline-item {
+            position:      relative;
+            padding:       0 0 2.5rem 2.5rem;
+        }
+
+        .timeline-item:last-child { padding-bottom: 0; }
+
+        .timeline-dot {
+            position:        absolute;
+            left:            -2rem;
+            top:             0.2rem;
+            width:           40px;
+            height:          40px;
+            border-radius:   50%;
+            background:      rgba(26,188,156,0.1);
+            border:          2px solid rgba(26,188,156,0.3);
+            display:         flex;
+            align-items:     center;
+            justify-content: center;
+            font-size:       1rem;
+            z-index:         1;
+        }
+
+        .timeline-item h3 {
+            font-size:     1rem;
+            font-weight:   700;
+            margin-bottom: 0.4rem;
+            color:         var(--text-primary);
+        }
+
+        .timeline-item p {
+            font-size:   0.88rem;
+            color:       var(--text-secondary);
+            line-height: 1.7;
+            max-width:   620px;
+        }
+
+        .timeline-time {
+            display:       inline-flex;
+            align-items:   center;
+            gap:           0.3rem;
+            font-size:     0.72rem;
+            font-weight:   700;
+            color:         var(--teal);
+            background:    rgba(26,188,156,0.08);
+            border:        1px solid rgba(26,188,156,0.15);
+            padding:       0.15rem 0.55rem;
+            border-radius: 50px;
+            margin-top:    0.5rem;
+        }
+
+        /* ── COMPARISON TABLE ── */
+        .compare-section { background: var(--bg-primary); }
+
+        .compare-table-wrap {
+            overflow-x:    auto;
+            border-radius: 12px;
+            border:        1px solid var(--border);
+        }
+
+        table.compare {
+            width:           100%;
+            border-collapse: collapse;
+            min-width:       680px;
+        }
+
+        table.compare thead tr {
+            background:    var(--bg-secondary);
+            border-bottom: 1px solid var(--border);
+        }
+
+        table.compare thead th {
+            padding:    1rem 1.25rem;
+            font-size:  0.82rem;
+            font-weight:700;
+            text-align: left;
+            color:      var(--text-secondary);
+        }
+
+        table.compare thead th.col-feature {
+            color:     var(--text-muted);
+            font-size: 0.72rem;
+        }
+
+        table.compare thead th.col-hl {
+            color:      var(--teal);
+            background: rgba(26,188,156,0.04);
+        }
+
+        table.compare tbody tr {
+            border-bottom: 1px solid var(--border);
+            transition:    background 0.15s;
+        }
+
+        table.compare tbody tr:last-child { border-bottom: none; }
+        table.compare tbody tr:hover { background: var(--bg-hover); }
+
+        table.compare tbody td {
+            padding:    0.85rem 1.25rem;
+            font-size:  0.84rem;
+            color:      var(--text-secondary);
+        }
+
+        table.compare tbody td:first-child {
+            color:      var(--text-primary);
+            font-weight:600;
+        }
+
+        table.compare tbody td.col-hl { background: rgba(26,188,156,0.03); }
+
+        .cmp-yes  { color: var(--green); font-weight: 700; }
+        .cmp-no   { color: var(--text-muted); }
+        .cmp-part { color: var(--amber); font-weight: 600; }
+        .cmp-val  { color: var(--text-primary); font-weight: 600; }
+
+        /* ── USE CASES ── */
+        .use-section { background: var(--bg-secondary); }
+
+        .use-grid {
+            display:               grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap:                   1.25rem;
+        }
+
+        .use-card {
+            background:    var(--bg-card);
+            border:        1px solid var(--border);
+            border-radius: 12px;
+            padding:       1.75rem;
+            display:       flex;
+            gap:           1.25rem;
+            align-items:   flex-start;
+            transition:    border-color 0.2s;
+        }
+
+        .use-card:hover { border-color: rgba(26,188,156,0.2); }
+
+        .use-icon {
+            font-size:  2rem;
+            flex-shrink:0;
+            line-height:1;
+        }
+
+        .use-card h3 {
+            font-size:     1rem;
+            font-weight:   700;
+            margin-bottom: 0.4rem;
+        }
+
+        .use-card p {
+            font-size:   0.84rem;
+            color:       var(--text-secondary);
+            line-height: 1.65;
+        }
+
+        /* ── RIGHTS SECTION ── */
+        .rights-section { background: var(--bg-primary); }
+
+        .rights-grid {
+            display:               grid;
+            grid-template-columns: 1fr 1fr;
+            gap:                   1.25rem;
+        }
+
+        .rights-col {
+            background:    var(--bg-card);
+            border:        1px solid var(--border);
+            border-radius: 12px;
+            padding:       2rem;
+        }
+
+        .rights-col.allowed { border-color: rgba(76,175,80,0.2); }
+        .rights-col.not-allowed { border-color: rgba(255,68,68,0.15); }
+
+        .rights-col h3 {
+            font-size:     1rem;
+            font-weight:   700;
+            margin-bottom: 1.25rem;
+            display:       flex;
+            align-items:   center;
+            gap:           0.5rem;
+        }
+
+        .rights-list { list-style: none; }
+
+        .rights-list li {
+            display:     flex;
+            align-items: flex-start;
+            gap:         0.6rem;
+            font-size:   0.84rem;
+            color:       var(--text-secondary);
+            padding:     0.35rem 0;
+            line-height: 1.55;
+        }
+
+        .rights-list li .ri {
+            font-size:   0.85rem;
+            flex-shrink: 0;
+            margin-top:  0.1rem;
+        }
+
+        /* ── FAQ ── */
+        .faq-section { background: var(--bg-secondary); }
+
+        .faq-grid {
+            display:               grid;
+            grid-template-columns: 1fr 1fr;
+            gap:                   1.25rem;
+        }
+
+        .faq-item {
+            background:    var(--bg-card);
+            border:        1px solid var(--border);
+            border-radius: 10px;
+            padding:       1.5rem;
+            transition:    border-color 0.2s;
+        }
+
+        .faq-item:hover { border-color: rgba(26,188,156,0.2); }
+
+        .faq-item h4 {
+            font-size:     0.95rem;
+            font-weight:   700;
+            margin-bottom: 0.5rem;
+        }
+
+        .faq-item p {
+            font-size:   0.85rem;
+            color:       var(--text-secondary);
+            line-height: 1.7;
+        }
+
+        /* ── CTA STRIP ── */
+        .cta-strip {
+            padding:    5rem 2rem;
+            text-align: center;
+            background: linear-gradient(135deg,
+                            rgba(26,188,156,0.06) 0%,
+                            rgba(52,152,219,0.06) 100%);
+            border-top:    1px solid rgba(26,188,156,0.12);
+            border-bottom: 1px solid rgba(26,188,156,0.12);
+        }
+
+        .cta-strip-inner { max-width: 680px; margin: 0 auto; }
+
+        .cta-strip h2 {
+            font-size:     clamp(1.5rem, 3vw, 2rem);
+            font-weight:   800;
+            margin-bottom: 0.75rem;
+        }
+
+        .cta-strip p {
+            color:         var(--text-secondary);
+            font-size:     1rem;
+            margin-bottom: 2rem;
+            line-height:   1.75;
+        }
+
+        .cta-strip-actions {
+            display:         flex;
+            gap:             1rem;
+            justify-content: center;
+            flex-wrap:       wrap;
+        }
+
+        /* ── FOOTER ── */
+        footer {
+            padding:    4rem 2rem 3rem;
+            border-top: 1px solid var(--border);
+        }
+
+        .footer-inner { max-width: 1100px; margin: 0 auto; }
+
+        .footer-grid {
+            display:               grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap:                   2rem;
+            margin-bottom:         2.5rem;
+        }
+
+        .footer-logo {
+            font-size:       1.2rem;
+            font-weight:     700;
+            color:           var(--gold);
+            text-decoration: none;
+            display:         block;
+            margin-bottom:   0.5rem;
+        }
+
+        .footer-logo span { color: var(--text-primary); }
+
+        .footer-brand p {
+            font-size:   0.82rem;
+            color:       var(--text-muted);
+            line-height: 1.65;
+            max-width:   280px;
+        }
+
+        .footer-col h4 {
+            font-size:      0.72rem;
+            font-weight:    700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color:          var(--text-secondary);
+            margin-bottom:  0.85rem;
+        }
+
+        .footer-col a {
+            display:         block;
+            color:           var(--text-muted);
+            text-decoration: none;
+            font-size:       0.85rem;
+            padding:         0.25rem 0;
+            transition:      color 0.2s;
+        }
+
+        .footer-col a:hover { color: var(--gold); }
+
+        .footer-bottom {
+            border-top:      1px solid var(--border);
+            padding-top:     1.5rem;
+            display:         flex;
+            justify-content: space-between;
+            align-items:     center;
+            flex-wrap:       wrap;
+            gap:             0.75rem;
+        }
+
+        .footer-copy {
+            color:     var(--text-muted);
+            font-size: 0.8rem;
+        }
+
+        /* ── ANIMATIONS ── */
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(16px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        .anim { animation: fadeUp 0.6s ease both; }
+        .anim-1 { animation-delay: 0.1s; }
+        .anim-2 { animation-delay: 0.2s; }
+        .anim-3 { animation-delay: 0.3s; }
+        .anim-4 { animation-delay: 0.4s; }
+
+        /* ── RESPONSIVE ── */
+        @media (max-width: 1000px) {
+            .delivery-grid { grid-template-columns: 1fr 1fr; }
+            .chars-grid    { grid-template-columns: 1fr 1fr; }
+            .use-grid      { grid-template-columns: 1fr; }
+            .rights-grid   { grid-template-columns: 1fr; }
+            .footer-grid   { grid-template-columns: 1fr 1fr; }
+        }
+
+        @media (max-width: 650px) {
+            .nav-links {
+                display:        none;
+                position:       absolute;
+                top:            64px;
+                left:           0;
+                right:          0;
+                background:     rgba(10,10,15,0.98);
+                flex-direction: column;
+                padding:        1.5rem 2rem;
+                gap:            1rem;
+                border-bottom:  1px solid var(--border);
+            }
+
+            .nav-links.open { display: flex; }
+            .nav-toggle     { display: block; }
+
+            .delivery-grid { grid-template-columns: 1fr; }
+            .chars-grid    { grid-template-columns: 1fr; }
+            .faq-grid      { grid-template-columns: 1fr; }
+            .footer-grid   { grid-template-columns: 1fr; }
+            .footer-bottom { flex-direction: column; text-align: center; }
+            .hero-actions  { flex-direction: column; align-items: center; }
+            .cta-strip-actions { flex-direction: column; align-items: center; }
+            .hero-price-block  { flex-direction: column; align-items: center; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ── NAV ── -->
+<nav>
+    <div class="nav-inner">
+        <a href="index.html" class="nav-logo">⚔️ Character<span>Craft</span></a>
+        <button class="nav-toggle"
+                onclick="document.querySelector('.nav-links').classList.toggle('open')"
+                aria-label="Menu">☰</button>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="store.html">Store</a></li>
+            <li><a href="license.html" class="active">Server License</a></li>
+            <li><a href="retainer.html">Retainer</a></li>
+            <li><a href="free.html">Free Pack</a></li>
+            <li><a href="free.html" class="nav-cta">Get Free Pack</a></li>
+        </ul>
+    </div>
+</nav>
+
+<!-- ── HERO ── -->
+<section class="hero">
+    <div class="hero-inner">
+
+        <div class="hero-eyebrow anim">
+            🌐 Server License
+        </div>
+
+        <h1 class="anim anim-1">
+            Five Characters.<br>
+            <span class="teal">One World. Commercial Rights.</span>
+        </h1>
+
+        <p class="hero-sub anim anim-2">
+            The Server License is built for Minecraft RPG servers that are
+            serious about player experience. Five complete character packs,
+            a shared world lore system, NPC relationship mapping,
+            API cost optimization, and full commercial use rights.
+            One payment. Yours forever.
+        </p>
+
+        <div class="hero-price-block anim anim-3">
+            <span class="hero-price">$24.99</span>
+            <div class="hero-price-detail">
+                <span class="orig">Regular price $34.99</span>
+                <span class="save">Save 28% — Launch Pricing</span>
+                <span class="note">One-time crypto payment · No subscription</span>
+            </div>
+        </div>
+
+        <div class="hero-actions anim anim-4">
+            <a href="pay-server-license.html" class="btn-primary">
+                🌐 Get Server License →
+            </a>
+            <a href="store.html" class="btn-secondary">
+                ← Compare All Products
+            </a>
+        </div>
+
+        <div class="hero-badges anim anim-4">
+            <div class="hero-badge">
+                <span class="dot"></span> 5 full character packs
+            </div>
+            <div class="hero-badge">
+                <span class="dot"></span> Commercial use rights
+            </div>
+            <div class="hero-badge">
+                <span class="dot"></span> Delivered within 4 hours
+            </div>
+            <div class="hero-badge">
+                <span class="dot"></span> Same-day support
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<!-- ── WHAT YOU GET ── -->
+<section class="section whats-in-section">
+    <div class="section-inner">
+        <div class="section-label">Everything Included</div>
+        <h2 class="section-title">What the Server License Delivers</h2>
+        <p class="section-desc">
+            Every file you need to run five AI NPCs on a production server —
+            from character personality to world lore to API cost management.
+            Nothing left to figure out.
+        </p>
+
+        <div class="delivery-grid">
+
+            <div class="delivery-card">
+                <span class="delivery-icon">⚔️</span>
+                <h3>Five Complete Character Packs</h3>
+                <p>
+                    Your choice of five characters from the current roster.
+                    Every pack includes the full personality system prompt,
+                    memory bank, optimized config, edge case responses,
+                    and installation guide — identical to buying each
+                    individually.
+                </p>
+                <div class="delivery-files">
+                    <div class="delivery-file">
+                        <span class="delivery-file-icon">📄</span>
+                        personality_[name].txt × 5
+                    </div>
+                    <div class="delivery-file">
+                        <span class="delivery-file-icon">🧠</span>
+                        memories_[name].json × 5
+                    </div>
+                    <div class="delivery-file">
+                        <span class="delivery-file-icon">⚙️</span>
+                        config_[name].yml × 5
+                    </div>
+                    <div class="delivery-file">
+                        <span class="delivery-file-icon">🛡️</span>
+                        edge_cases_[name].txt × 5
+                    </div>
+                    <div class="delivery-file">
+                        <span class="delivery-file-icon">📋</span>
+                        install_guide_[name].pdf × 5
+                    </div>
+                </div>
+            </div>
+
+            <div class="delivery-card">
+                <span class="delivery-icon">🌍</span>
+                <h3>Complete World Lore System</h3>
+                <p>
+                    A master lore document that all five characters share.
+                    Every character references the same history, the same
+                    factions, the same pivotal events — from their own
+                    angle. No contradictions. No isolation between NPCs.
+                </p>
+                <div class="delivery-files">
+                    <div class="delivery-file">
+                        <span class="delivery-file-icon">📖</span>
+                        world_lore_master.pdf
+                    </div>
+                    <div class="delivery-file">
+                        <span class="delivery-file-icon">📅</span>
+                        world_timeline.pdf
+                    </div>
+                    <div class="delivery-file">
+                        <span class="delivery-file-icon">🏛️</span>
+                        factions_and_powers.pdf
+                    </div>
+                    <div class="delivery-file">
+                        <span class="delivery-file-icon">🗺️</span>
+                        location_reference.pdf
+                    </div>
+                </div>
+            </div>
+
+            <div class="delivery-card">
+                <span class="delivery-icon">🔗</span>
+                <h3>NPC Relationship Map</h3>
+                <p>
+                    A full relationship document showing how every character
+                    in your pack knows — or knows of — every other character.
+                    Debts, grudges, alliances, and history. Players asking
+                    one NPC about another get a real, specific answer.
+                </p>
+                <div class="delivery-files">
+                    <div class="delivery-file">
+                        <span class="delivery-file-icon">🗺️</span>
+                        npc_relationship_map.pdf
+                    </div>
+                    <div class="delivery-file">
+                        <span class="delivery-file-icon">🔗</span>
+                        cross_reference_memories.json
+                    </div>
+                    <div class="delivery-file">
+                        <span class="delivery-file-icon">📝</span>
+                        inter_npc_dialogue_notes.txt
+                    </div>
+                </div>
+            </div>
+
+            <div class="delivery-card">
+                <span class="delivery-icon">💰</span>
+                <h3>API Cost Optimization Report</h3>
+                <p>
+                    Running five AI NPCs on a busy server gets expensive
+                    if configs are not tuned. Your report covers token
+                    budget analysis, memory retrieval frequency settings,
+                    model tier recommendations, and estimated monthly cost
+                    at your server's player count.
+                </p>
+                <div class="delivery-files">
+                    <div class="delivery-file">
+                        <span class="delivery-file-icon">📊</span>
+                        api_cost_report.pdf
+                    </div>
+                    <div class="delivery-file">
+                        <span class="delivery-file-icon">⚙️</span>
+                        cost_optimized_configs × 5
+                    </div>
+                    <div class="delivery-file">
+                        <span class="delivery-file-icon">📈</span>
+                        usage_estimate_calculator.xlsx
+                    </div>
+                </div>
+            </div>
+
+            <div class="delivery-card">
+                <span class="delivery-icon">⚖️</span>
+                <h3>Commercial Use Rights</h3>
+                <p>
+                    Individual packs are personal use only. The Server
+                    License grants full commercial rights — use the
+                    characters on public servers, monetized networks,
+                    and paid access worlds. No attribution required.
+                    No royalties. No expiry.
+                </p>
+                <div class="delivery-files">
+                    <div class="delivery-file">
+                        <span class="delivery-file-icon">📜</span>
+                        commercial_license.pdf
+                    </div>
+                    <div class="delivery-file">
+                        <span class="delivery-file-icon">✅</span>
+                        Covers all 5 characters
+                    </div>
+                    <div class="delivery-file">
+                        <span class="delivery-file-icon">♾️</span>
+                        No expiry date
+                    </div>
+                </div>
+            </div>
+
+            <div class="delivery-card">
+                <span class="delivery-icon">🎙️</span>
+                <h3>Setup Consultation</h3>
+                <p>
+                    A 30-minute Discord session with the person who
+                    built the characters. Walk through install, config,
+                    memory setup, and any edge cases specific to your
+                    server's world. Scheduled within 48 hours of delivery.
+                </p>
+                <div class="delivery-files">
+                    <div class="delivery-file">
+                        <span class="delivery-file-icon">💬</span>
+                        Discord voice or text session
+                    </div>
+                    <div class="delivery-file">
+                        <span class="delivery-file-icon">📋</span>
+                        Pre-session setup checklist
+                    </div>
+                    <div class="delivery-file">
+                        <span class="delivery-file-icon">📝</span>
+                        Post-session config notes
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- ── CHARACTER SELECTION ── -->
+<section class="section chars-section">
+    <div class="section-inner">
+        <div class="section-label">Your Five Characters</div>
+        <h2 class="section-title">Choose Any Five from the Roster</h2>
+        <p class="section-desc">
+            Pick five characters when you place your order.
+            Available characters are ready for immediate delivery.
+            Coming soon characters will be delivered as they launch —
+            with no additional charge.
+        </p>
+
+        <div class="chars-note">
+            <span class="chars-note-icon">💡</span>
+            <p>
+                <strong>Don't see enough characters yet?</strong>
+                The roster is expanding. If you purchase the Server License
+                with fewer than five characters currently available,
+                your remaining slots are locked in at no extra cost
+                and fulfilled as new characters launch.
+                You will never pay more than $24.99 total.
+            </p>
+        </div>
+
+        <div class="chars-grid">
+
+            <div class="char-card available">
+                <span class="char-status status-live">Available</span>
+                <div class="char-card-header">
+                    <span class="char-emoji">⚔️</span>
+                    <div>
+                        <div class="char-name">Aldric</div>
+                        <div class="char-role">Grizzled Gate Captain</div>
+                    </div>
+                </div>
+                <div class="char-memories">
+                    <span class="char-mem-dot"></span>
+                    25 hand-crafted memories · 31 years of service
+                </div>
+            </div>
+
+            <div class="char-card available">
+                <span class="char-status status-live">Available</span>
+                <div class="char-card-header">
+                    <span class="char-emoji">💰</span>
+                    <div>
+                        <div class="char-name">Dravek</div>
+                        <div class="char-role">Corrupt Merchant</div>
+                    </div>
+                </div>
+                <div class="char-memories">
+                    <span class="char-mem-dot"></span>
+                    25 hand-crafted memories · knows everyone's price
+                </div>
+            </div>
+
+            <div class="char-card coming">
+                <span class="char-status status-soon">Coming Soon</span>
+                <div class="char-card-header">
+                    <span class="char-emoji">🧙</span>
+                    <div>
+                        <div class="char-name">Character 3</div>
+                        <div class="char-role">Slot reserved for you</div>
+                    </div>
+                </div>
+                <div class="char-memories">
+                    <span class="char-mem-dot"></span>
+                    Fulfilled at no extra cost when live
+                </div>
+            </div>
+
+            <div class="char-card coming">
+                <span class="char-status status-soon">Coming Soon</span>
+                <div class="char-card-header">
+                    <span class="char-emoji">🏹</span>
+                    <div>
+                        <div class="char-name">Character 4</div>
+                        <div class="char-role">Slot reserved for you</div>
+                    </div>
+                </div>
+                <div class="char-memories">
+                    <span class="char-mem-dot"></span>
+                    Fulfilled at no extra cost when live
+                </div>
+            </div>
+
+            <div class="char-card coming">
+                <span class="char-status status-soon">Coming Soon</span>
+                <div class="char-card-header">
+                    <span class="char-emoji">⚗️</span>
+                    <div>
+                        <div class="char-name">Character 5</div>
+                        <div class="char-role">Slot reserved for you</div>
+                    </div>
+                </div>
+                <div class="char-memories">
+                    <span class="char-mem-dot"></span>
+                    Fulfilled at no extra cost when live
+                </div>
+            </div>
+
+            <div class="char-card"
+                 style="background:rgba(26,188,156,0.03);
+                        border-color:rgba(26,188,156,0.15);
+                        display:flex;align-items:center;
+                        justify-content:center;text-align:center;
+                        padding:2rem;">
+                <div>
+                    <div style="font-size:1.5rem;margin-bottom:0.5rem;">➕</div>
+                    <div style="font-size:0.85rem;font-weight:700;
+                                color:var(--teal);margin-bottom:0.3rem;">
+                        More Coming
+                    </div>
+                    <div style="font-size:0.75rem;color:var(--text-muted);">
+                        Roster expanding regularly.
+                        License holders get priority notification.
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- ── HOW IT WORKS ── -->
+<section class="section how-section">
+    <div class="section-inner">
+        <div class="section-label">Process</div>
+        <h2 class="section-title">From Payment to Live NPCs</h2>
+        <p class="section-desc">
+            Every step from crypto payment to your NPCs running
+            in-game. Clear, fast, and supported by the person who built them.
+        </p>
+
+        <div class="timeline">
+
+            <div class="timeline-item">
+                <div class="timeline-dot">💳</div>
+                <h3>Step 1 — Pay with Crypto</h3>
+                <p>
+                    Visit the payment page and send $24.99 in your chosen
+                    coin — SOL, USDT, LTC, TRX, ETH, BTC, DOGE, or 8 others.
+                    Payment goes directly to our wallet with no third-party
+                    processor. You send us your email and Discord handle
+                    with the transaction.
+                </p>
+                <div class="timeline-time">⚡ Instant on your end</div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-dot">🔗</div>
+                <h3>Step 2 — On-Chain Confirmation</h3>
+                <p>
+                    Once your transaction confirms on the blockchain —
+                    usually within 2–20 minutes depending on the coin —
+                    we verify it directly. No processor, no delay,
+                    no hold. The moment it confirms, we begin packaging
+                    your delivery.
+                </p>
+                <div class="timeline-time">⏱ Typically 2–20 minutes</div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-dot">📦</div>
+                <h3>Step 3 — We Package Your Delivery</h3>
+                <p>
+                    We assemble your five character packs, the shared
+                    world lore system, the NPC relationship map, the API
+                    cost optimization report, and your commercial license
+                    into a single organized download folder. Every file
+                    labelled and ready to use.
+                </p>
+                <div class="timeline-time">⏱ Within 4 hours of confirmation</div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-dot">📬</div>
+                <h3>Step 4 — Delivery via Email or Discord</h3>
+                <p>
+                    You receive a download link via email and Discord DM.
+                    The folder structure mirrors your plugin's expected
+                    directory layout so you are not hunting for where things go.
+                </p>
+                <div class="timeline-time">⏱ Within 4 hours of confirmation</div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-dot">🎙️</div>
+                <h3>Step 5 — Setup Consultation</h3>
+                <p>
+                    We schedule your 30-minute Discord session within 48 hours.
+                    Walk through install, config, memory setup, and any
+                    server-specific edge cases. Post-session config notes
+                    sent within 24 hours of the call.
+                </p>
+                <div class="timeline-time">⏱ Within 48 hours of delivery</div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-dot">🟢</div>
+                <h3>Step 6 — Your NPCs Are Live</h3>
+                <p>
+                    With the install guide and a fresh consultation,
+                    most servers are fully live within 24 hours of
+                    receiving the files. Same-day support from this point
+                    forward — if something breaks, we fix it.
+                </p>
+                <div class="timeline-time">🟢 Go live within 24 hours</div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- ── COMPARISON TABLE ── -->
+<section class="section compare-section">
+    <div class="section-inner">
+        <div class="section-label">How It Stacks Up</div>
+        <h2 class="section-title">Server License vs. Individual Packs</h2>
+        <p class="section-desc">
+            Everything the individual packs offer — plus the system
+            layer that makes five characters feel like one world.
+        </p>
+
+        <div class="compare-table-wrap">
+            <table class="compare">
+                <thead>
+                    <tr>
+                        <th class="col-feature">Feature</th>
+                        <th>Individual Pack</th>
+                        <th>City Bundle</th>
+                        <th class="col-hl">Server License</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Characters included</td>
+                        <td class="cmp-val">1</td>
+                        <td class="cmp-val">2</td>
+                        <td class="cmp-val col-hl">5</td>
+                    </tr>
+                    <tr>
+                        <td>Personality system prompt</td>
+                        <td class="cmp-yes">✓ 600+ words</td>
+                        <td class="cmp-yes">✓ 600+ words each</td>
+                        <td class="cmp-yes col-hl">✓ 600+ words each</td>
+                    </tr>
+                    <tr>
+                        <td>Hand-crafted memories</td>
+                        <td class="cmp-val">25</td>
+                        <td class="cmp-val">50 total</td>
+                        <td class="cmp-val col-hl">25 per character</td>
+                    </tr>
+                    <tr>
+                        <td>Optimized config.yml</td>
+                        <td class="cmp-yes">✓ Advanced</td>
+                        <td class="cmp-yes">✓ Advanced</td>
+                        <td class="cmp-yes col-hl">✓ Cost-optimized</td>
+                    </tr>
+                    <tr>
+                        <td>Edge case responses</td>
+                        <td class="cmp-val">7+</td>
+                        <td class="cmp-val">14+</td>
+                        <td class="cmp-val col-hl">7+ per character</td>
+                    </tr>
+                    <tr>
+                        <td>Shared world lore</td>
+                        <td class="cmp-no">—</td>
+                        <td class="cmp-part">Basic</td>
+                        <td class="cmp-yes col-hl">✓ Full system</td>
+                    </tr>
+                    <tr>
+                        <td>NPC relationship map</td>
+                        <td class="cmp-no">—</td>
+                        <td class="cmp-part">Partial</td>
+                        <td class="cmp-yes col-hl">✓ Full map</td>
+                    </tr>
+                    <tr>
+                        <td>API cost optimization report</td>
+                        <td class="cmp-no">—</td>
+                        <td class="cmp-no">—</td>
+                        <td class="cmp-yes col-hl">✓ Full report</td>
+                    </tr>
+                    <tr>
+                        <td>Commercial use rights</td>
+                        <td class="cmp-no">Personal only</td>
+                        <td class="cmp-no">Personal only</td>
+                        <td class="cmp-yes col-hl">✓ Full commercial</td>
+                    </tr>
+                    <tr>
+                        <td>Setup consultation</td>
+                        <td class="cmp-no">—</td>
+                        <td class="cmp-no">—</td>
+                        <td class="cmp-yes col-hl">✓ 30 minutes</td>
+                    </tr>
+                    <tr>
+                        <td>Support response time</td>
+                        <td class="cmp-val">24 hours</td>
+                        <td class="cmp-val">24 hours</td>
+                        <td class="cmp-yes col-hl">Same day</td>
+                    </tr>
+                    <tr>
+                        <td>Free updates</td>
+                        <td class="cmp-yes">✓ For life</td>
+                        <td class="cmp-yes">✓ For life</td>
+                        <td class="cmp-yes col-hl">✓ For life</td>
+                    </tr>
+                    <tr>
+                        <td>Price</td>
+                        <td class="cmp-val">$4.85–$4.89 each</td>
+                        <td class="cmp-val">$8.47</td>
+                        <td class="cmp-val col-hl"
+                            style="color:var(--teal);font-weight:800;">
+                            $24.99
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+
+<!-- ── USE CASES ── -->
+<section class="section use-section">
+    <div class="section-inner">
+        <div class="section-label">Who It's Built For</div>
+        <h2 class="section-title">The Server License Is Right for You If...</h2>
+        <p class="section-desc">
+            Not every server needs a license. Here is who gets the most from it.
+        </p>
+
+        <div class="use-grid">
+
+            <div class="use-card">
+                <span class="use-icon">🏰</span>
+                <div>
+                    <h3>Public RPG Servers with Paying Players</h3>
+                    <p>
+                        If players pay to access your server — ranks, passes,
+                        donation perks — you are operating commercially.
+                        The Server License covers you. Individual packs do not.
+                        Using paid packs on a monetized server without
+                        commercial rights is a license violation.
+                    </p>
+                </div>
+            </div>
+
+            <div class="use-card">
+                <span class="use-icon">🌐</span>
+                <div>
+                    <h3>Networks Running Multiple Worlds</h3>
+                    <p>
+                        If you operate multiple servers or game modes,
+                        the five characters and shared world system give you
+                        NPCs that can appear consistently across your entire
+                        network — same personality, same history,
+                        different context.
+                    </p>
+                </div>
+            </div>
+
+            <div class="use-card">
+                <span class="use-icon">💰</span>
+                <div>
+                    <h3>Server Owners Watching API Costs</h3>
+                    <p>
+                        Five AI NPCs running at peak hours on default configs
+                        can cost more than you expect. The API cost optimization
+                        report gives you exact settings and model tier
+                        recommendations to keep costs predictable
+                        at your player count.
+                    </p>
+                </div>
+            </div>
+
+            <div class="use-card">
+                <span class="use-icon">🎭</span>
+                <div>
+                    <h3>Servers Building a Persistent Narrative</h3>
+                    <p>
+                        If your server has an ongoing story — wars, political
+                        shifts, character deaths — the shared world system
+                        lets all five NPCs reference and react to the same
+                        events. Players get a living world, not five
+                        isolated chatbots.
+                    </p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- ── RIGHTS SECTION ── -->
+<section class="section rights-section">
+    <div class="section-inner">
+        <div class="section-label">License Terms</div>
+        <h2 class="section-title">What the Commercial Rights Cover</h2>
+        <p class="section-desc">
+            Clear terms. No surprises. The license is yours permanently
+            from the moment of delivery.
+        </p>
+
+        <div class="rights-grid">
+
+            <div class="rights-col allowed">
+                <h3>
+                    <span style="color:var(--green);">✓</span>
+                    What You Can Do
+                </h3>
+                <ul class="rights-list">
+                    <li>
+                        <span class="ri">✓</span>
+                        Use all five characters on any public Minecraft server
+                        you own or operate
+                    </li>
+                    <li>
+                        <span class="ri">✓</span>
+                        Use characters on monetized servers — paid ranks,
+                        donation perks, access passes
+                    </li>
+                    <li>
+                        <span class="ri">✓</span>
+                        Deploy across multiple worlds or game modes on
+                        your network
+                    </li>
+                    <li>
+                        <span class="ri">✓</span>
+                        Modify personality files, memory entries, and configs
+                        to fit your world
+                    </li>
+                    <li>
+                        <span class="ri">✓</span>
+                        Use indefinitely — no renewal, no expiry
+                    </li>
+                    <li>
+                        <span class="ri">✓</span>
+                        Receive all future updates to your characters
+                        at no additional cost
+                    </li>
+                    <li>
+                        <span class="ri">✓</span>
+                        Reference the characters in server lore,
+                        wiki pages, and promotional material
+                    </li>
+                </ul>
+            </div>
+
+            <div class="rights-col not-allowed">
+                <h3>
+                    <span style="color:var(--urgent-red);">✕</span>
+                    What You Cannot Do
+                </h3>
+                <ul class="rights-list">
+                    <li>
+                        <span class="ri" style="color:var(--urgent-red);">✕</span>
+                        Resell, redistribute, or share the character files
+                        with other server owners
+                    </li>
+                    <li>
+                        <span class="ri" style="color:var(--urgent-red);">✕</span>
+                        Claim authorship of the character personalities
+                        or memory systems
+                    </li>
+                    <li>
+                        <span class="ri" style="color:var(--urgent-red);">✕</span>
+                        Use the files to build and sell a competing
+                        NPC pack product
+                    </li>
+                    <li>
+                        <span class="ri" style="color:var(--urgent-red);">✕</span>
+                        Transfer the license to another server owner
+                        without written agreement
+                    </li>
+                    <li>
+                        <span class="ri" style="color:var(--urgent-red);">✕</span>
+                        Use the characters on servers you do not own
+                        or control
+                    </li>
+                    <li>
+                        <span class="ri" style="color:var(--urgent-red);">✕</span>
+                        Strip the files and use personality structures
+                        as templates for unrelated products
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- ── FAQ ── -->
+<section class="section faq-section">
+    <div class="section-inner">
+        <div class="section-label">FAQ</div>
+        <h2 class="section-title">Server License Questions</h2>
+        <p class="section-desc">
+            The most common questions before purchase.
+        </p>
+
+        <div class="faq-grid">
+
+            <div class="faq-item">
+                <h4>Can I choose any five characters from the roster?</h4>
+                <p>
+                    Yes. You pick your five when you place the order.
+                    If fewer than five characters are currently available,
+                    your remaining slots are locked in and fulfilled as
+                    new characters launch — at no additional cost.
+                    You will never pay more than $24.99.
+                </p>
+            </div>
+
+            <div class="faq-item">
+                <h4>How long does delivery take?</h4>
+                <p>
+                    Within 4 hours of blockchain confirmation.
+                    The full package — five character packs, world lore,
+                    relationship map, cost optimization report, and
+                    commercial license — arrives as a single download link
+                    via email and Discord.
+                </p>
+            </div>
+
+            <div class="faq-item">
+                <h4>What if my server is private or whitelisted?</h4>
+                <p>
+                    A private or whitelisted server with no monetization
+                    technically falls under personal use.
+                    You could use individual packs instead.
+                    However, if you plan to monetize eventually,
+                    the license is worth securing now at the current price.
+                </p>
+            </div>
+
+            <div class="faq-item">
+                <h4>Does the license cover future characters I add?</h4>
+                <p>
+                    The license covers the five characters in your pack.
+                    If you want to add more characters later — beyond your
+                    five slots — those are purchased separately at the
+                    standard individual price, with a commercial add-on
+                    available for license holders at a discount.
+                </p>
+            </div>
+
+            <div class="faq-item">
+                <h4>What plugins does the license support?</h4>
+                <p>
+                    Currently SentiencePro and LlamaCraft Bridge.
+                    Every character in the license is delivered with
+                    configs optimized for both.
+                    As new plugins are supported, license holders receive
+                    adapted configs automatically at no cost.
+                </p>
+            </div>
+
+            <div class="faq-item">
+                <h4>What happens in the setup consultation?</h4>
+                <p>
+                    A 30-minute Discord voice or text session with the
+                    character author. We walk through installation,
+                    config tuning for your specific server setup,
+                    memory retrieval settings, and any server-specific
+                    edge cases you want to address. Notes delivered
+                    within 24 hours.
+                </p>
+            </div>
+
+            <div class="faq-item">
+                <h4>Can I modify the character files?</h4>
+                <p>
+                    Yes. The files are yours. Edit personalities,
+                    add or change memories, adjust configs — anything
+                    needed to fit your world. The only restriction is
+                    redistribution or resale of the files themselves.
+                </p>
+            </div>
+
+            <div class="faq-item">
+                <h4>What does "same-day support" mean in practice?</h4>
+                <p>
+                    Server License holders get responses within business
+                    hours on the same calendar day for any issue —
+                    install problems, config questions, character behaviour
+                    that feels off. If we built it and it is broken,
+                    we fix it at no charge.
+                </p>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- ── CTA STRIP ── -->
+<div class="cta-strip">
+    <div class="cta-strip-inner">
+        <h2>🌐 Ready to Build Your World?</h2>
+        <p>
+            Five characters. One shared history. Commercial rights.
+            API cost optimization. Same-day support.
+            Everything a serious Minecraft RPG server needs —
+            one payment, yours forever.
+        </p>
+        <div class="cta-strip-actions">
+            <a href="pay-server-license.html" class="btn-primary">
+                Get Server License — $24.99 →
+            </a>
+            <a href="store.html" class="btn-secondary">
+                ← View All Products
+            </a>
+        </div>
+    </div>
+</div>
+
+<!-- ── FOOTER ── -->
+<footer>
+    <div class="footer-inner">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <a href="index.html" class="footer-logo">
+                    ⚔️ Character<span>Craft</span>
+                </a>
+                <p>Hand-crafted AI NPC personality packs for Minecraft
+                   server owners. Built for SentiencePro and LlamaCraft
+                   Bridge. Your NPCs should have a past — not a script.</p>
+            </div>
+
+            <div class="footer-col">
+                <h4>Products</h4>
+                <a href="free.html">Free Pack</a>
+                <a href="pay-aldric.html">Aldric</a>
+                <a href="pay-dravek.html">Dravek</a>
+                <a href="pay-city-bundle.html">City Bundle</a>
+                <a href="pay-server-license.html">Server License</a>
+                <a href="pay-retainer.html">Monthly Retainer</a>
+            </div>
+
+            <div class="footer-col">
+                <h4>Info</h4>
+                <a href="index.html">Home</a>
+                <a href="store.html">Store</a>
+                <a href="license.html">License Info</a>
+                <a href="retainer.html">Retainer Info</a>
+            </div>
+
+            <div class="footer-col">
+                <h4>Support</h4>
+                <a href="free.html">Free Starter Pack</a>
+                <a href="success.html">Order Status</a>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <div class="footer-copy">
+                © 2025 CharacterCraft. All rights reserved.
+                All cryptocurrency transactions are final.
+            </div>
+            <div class="footer-copy">
+                Supporting SentiencePro · LlamaCraft Bridge
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script>
+(function () {
+    'use strict';
+
+    /* Mobile nav */
+    document.addEventListener('click', function (e) {
+        var nav = document.querySelector('.nav-links');
+        var tog = document.querySelector('.nav-toggle');
+        if (nav && nav.classList.contains('open') &&
+            !nav.contains(e.target) && !tog.contains(e.target)) {
+            nav.classList.remove('open');
+        }
+    });
+
+    /* Scroll reveal */
+    var observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+                entry.target.style.opacity   = '1';
+                entry.target.style.transform = 'translateY(0)';
+            }
+        });
+    }, { threshold: 0.08 });
+
+    document.querySelectorAll(
+        '.delivery-card, .char-card, .timeline-item, ' +
+        '.use-card, .faq-item, .rights-col'
+    ).forEach(function (el) {
+        el.style.opacity    = '0';
+        el.style.transform  = 'translateY(20px)';
+        el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+        observer.observe(el);
+    });
+
+}());
+</script>
+
+</body>
+</html>
