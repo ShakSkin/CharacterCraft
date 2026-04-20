@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Confirmed — CharacterCraft</title>
+    <meta name="robots" content="noindex, nofollow">
+    <style>
+        :root {
+            --gold:          #D4A537;
+            --gold-light:    #F2D06B;
+            --bg-primary:    #0A0A0F;
+            --bg-secondary:  #12121A;
+            --bg-card:       #1A1A25;
+            --bg-hover:      #222233;
+            --text-primary:  #E8E8F0;
+            --text-secondary:#9999AA;
+            --text-muted:    #666677;
+            --border:        #2A2A3A;
+            --green:         #4CAF50;
+            --teal:          #1ABC9C;
+            --amber:         #F39C12;
+        }
+
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family:    'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
+            background:     var(--bg-primary);
+            color:          var(--text-primary);
+            line-height:    1.6;
+            min-height:     100vh;
+            display:        flex;
+            flex-direction: column;
+        }
+
+        /* ── NAV ── */
+        nav {
+            background:     rgba(10,10,15,0.97);
+            backdrop-filter:blur(12px);
+            border-bottom:  1px solid var(--border);
+            padding:        0 2rem;
+        }
+
+        .nav-inner {
+            max-width:       1200px;
+            margin:          0 auto;
+            display:         flex;
+            justify-content: space-between;
+            align-items:     center;
+            height:          64px;
+        }
+
+        .nav-logo {
+            font-size:      1.25rem;
+            font-weight:    700;
+            color:          var(--gold);
+            text-decoration:none;
+        }
+
+        .nav-logo span { color: var(--text-primary); }
+
+        .nav-links {
+            display:    flex;
+            gap:        2rem;
+            list-style: none;
+            align-items:center;
+        }
+
+        .nav-links a {
+            color:          var(--text-secondary);
+            text-decoration:none;
+            font-size:      0.9rem;
+            font-weight:    500;
+            transition:     color 0.2s;
+        }
+
+        .nav-links a:hover { color: var(--gold); }
+
+        .nav-links .nav-cta {
+            background:    var(--gold);
+            color:         #000;
+            padding:       0.5rem 1.25rem;
+            border-radius: 6px;
+            font-weight:   700;
+        }
+
+        .nav-links .nav-cta:hover { background: var(--gold-light); color: #000; }
+
+        /* ── MAIN ── */
+        main {
+            flex:           1;
+            display:        flex;
+            flex-direction: column;
+            align-items:    center;
+            justify-content:center;
+            padding:        4rem 2rem;
+        }
+
+        /* ── SUCCESS CARD ── */
+        .success-card {
+            background:    var(--bg-card);
+            border:        1px solid rgba(76,175,80,0.25);
+            border-radius: 20px;
+            padding:       3.5rem 3rem;
+            max-width:     600px;
+            width:         100%;
+            text-align:    center;
+            position:      relative;
+            overflow:      hidden;
+            animation:     cc-card-in 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+        }
+
+        @keyframes cc-card-in {
+            from { opacity: 0; transform: translateY(24px) scale(0.97); }
+            to   { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        .success-card::before {
+            content:        '';
+            position:       absolute;
+            inset:          0;
+            background:     radial-gradient(
+                                circle at 50% 0%,
+                                rgba(76,175,80,0.06) 0%,
+                                transparent 60%
+                            );
+            pointer-events: none;
+        }
+
+        /* ── CHECKMARK ANIMATION ── */
+        .cc-checkmark-wrap {
+            margin:      0 auto 1.75rem;
+            width:       80px;
+            height:      80px;
+            position:    relative;
+        }
+
+        .cc-checkmark-circle {
+            width:        80px;
+            height:       80px;
+            border-radius:50%;
+            background:   rgba(76,175,80,0.1);
+            border:       2px solid rgba(76,175,80,0.3);
+            display:      flex;
+            align-items:  center;
+            justify-content:center;
+            animation:    cc-circle-pop 0.5s 0.2s cubic-bezier(0.16,1,0.3,1) both;
+        }
+
+        @keyframes cc-circle-pop {
+            from { transform: scale(0); opacity: 0; }
+            to   { transform: scale(1); opacity: 1; }
+        }
+
+        .cc-checkmark {
+            font-size:  2.25rem;
+            animation:  cc-check-pop 0.4s 0.5s cubic-bezier(0.16,1,0.3,1) both;
+        }
+
+        @keyframes cc-check-pop {
+            from { transform: scale(0) rotate(-15deg); opacity: 0; }
+            to   { transform: scale(1) rotate(0); opacity: 1; }
+        }
+
+        /* Pulse ring */
+        .cc-pulse-ring {
+            position:     absolute;
+            inset:        -8px;
+            border-radius:50%;
+            border:       2px solid rgba(76,175,80,0.2);
+            animation:    cc-ring-pulse 2s 0.8s ease-out infinite;
+        }
+
+        @keyframes cc-ring-pulse {
+            0%   { transform: scale(1); opacity: 0.6; }
+            100% { transform: scale(1.4); opacity: 0; }
+        }
+
+        /* ── HEADINGS ── */
+        .success-card h1 {
+            font-size:    1.85rem;
+            font-weight:  800;
+            margin-bottom:0.5rem;
+            animation:    cc-fade-up 0.5s 0.4s ease both;
+        }
+
+        .success-card .success-sub {
+            color:        var(--text-secondary);
+            font-size:    1rem;
+            line-height:  1.7;
+            margin-bottom:2rem;
+            animation:    cc-fade-up 0.5s 0.5s ease both;
+        }
+
+        @keyframes cc-fade-up {
+            from { opacity: 0; transform: translateY(10px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ── ORDER SUMMARY ── */
+        .success-summary {
+            background:    var(--bg-hover);
+            border-radius: 12px;
+            padding:       1.25rem 1.5rem;
+            margin-bottom: 2rem;
+            text-align:    left;
+            animation:     cc-fade-up 0.5s 0.6s ease both;
+        }
+
+        .success-summary .ss-label {
+            font-size:      0.7rem;
+            font-weight:    700;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color:          var(--text-muted);
+            margin-bottom:  0.75rem;
+        }
+
+        .ss-row {
+            display:        flex;
+            justify-content:space-between;
+            align-items:    flex-start;
+            padding:        0.35rem 0;
+            font-size:      0.85rem;
+            border-bottom:  1px solid var(--border);
+        }
+
+        .ss-row:last-child { border-bottom: none; }
+
+        .ss-row .ss-key   { color: var(--text-muted); }
+        .ss-row .ss-val   { color: var(--text-primary); font-weight: 600; text-align: right; max-width: 65%; }
+
+        /* ── WHAT HAPPENS NEXT ── */
+        .success-next {
+            text-align:    left;
+            margin-bottom: 2rem;
+            animation:     cc-fade-up 0.5s 0.7s ease both;
+        }
+
+        .success-next h3 {
+            font-size:    0.8rem;
+            font-weight:  700;
+            color:        var(--text-muted);
+            letter-spacing:1.5px;
+            text-transform:uppercase;
+            margin-bottom:0.75rem;
+        }
+
+        .next-steps {
+            list-style: none;
+            display:    flex;
+            flex-direction:column;
+            gap:        0.6rem;
+        }
+
+        .next-steps li {
+            display:    flex;
+            align-items:flex-start;
+            gap:        0.75rem;
+            font-size:  0.88rem;
+            color:      var(--text-secondary);
+            line-height:1.5;
+        }
+
+        .next-step-num {
+            display:        inline-flex;
+            align-items:    center;
+            justify-content:center;
+            width:          22px;
+            height:         22px;
+            border-radius:  50%;
+            background:     rgba(76,175,80,0.1);
+            border:         1px solid rgba(76,175,80,0.2);
+            color:          var(--green);
+            font-size:      0.7rem;
+            font-weight:    800;
+            flex-shrink:    0;
+            margin-top:     0.1rem;
+        }
+
+        /* ── ACTION BUTTONS ── */
+        .success-actions {
+            display:        flex;
+            gap:            0.75rem;
+            justify-content:center;
+            flex-wrap:      wrap;
+            animation:      cc-fade-up 0.5s 0.8s ease both;
+        }
+
+        .btn-primary {
+            display:        inline-flex;
+            align-items:    center;
+            gap:            0.4rem;
+            padding:        0.75rem 2rem;
+            background:     var(--gold);
+            color:          #000;
+            border-radius:  8px;
+            font-size:      0.9rem;
+            font-weight:    700;
+            text-decoration:none;
+            transition:     all 0.2s;
+        }
+
+        .btn-primary:hover {
+            background: var(--gold-light);
+            transform:  translateY(-1px);
+            box-shadow: 0 6px 20px rgba(212,165,55,0.25);
+        }
+
+        .btn-secondary {
+            display:        inline-flex;
+            align-items:    center;
+            gap:            0.4rem;
+            padding:        0.75rem 1.5rem;
+            background:     transparent;
+            color:          var(--text-secondary);
+            border:         1px solid var(--border);
+            border-radius:  8px;
+            font-size:      0.9rem;
+            font-weight:    600;
+            text-decoration:none;
+            transition:     all 0.2s;
+        }
+
+        .btn-secondary:hover {
+            border-color:var(--gold);
+            color:       var(--gold);
+            transform:   translateY(-1px);
+        }
+
+        /* ── REFERENCE NUMBER ── */
+        .success-ref {
+            margin-top:  2rem;
+            font-size:   0.72rem;
+            color:       var(--text-muted);
+            line-height: 1.6;
+            animation:   cc-fade-up 0.5s 0.9s ease both;
+        }
+
+        .success-ref .ref-code {
+            font-family: 'Consolas', 'Monaco', monospace;
+            background:  var(--bg-hover);
+            padding:     0.15rem 0.5rem;
+            border-radius:4px;
+            color:       var(--text-secondary);
+            font-size:   0.75rem;
+        }
+
+        /* ── CONFETTI ── */
+        .cc-confetti {
+            position:       fixed;
+            inset:          0;
+            pointer-events: none;
+            z-index:        999;
+            overflow:       hidden;
+        }
+
+        .cc-confetti-piece {
+            position:  absolute;
+            width:     8px;
+            height:    8px;
+            top:       -10px;
+            animation: cc-confetti-fall linear forwards;
+        }
+
+        @keyframes cc-confetti-fall {
+            0%   { transform: translateY(0) rotate(0deg);   opacity: 1; }
+            100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+        }
+
+        /* ── FOOTER ── */
+        footer {
+            padding:    2rem;
+            border-top: 1px solid var(--border);
+            text-align: center;
+        }
+
+        footer p {
+            color:    var(--text-muted);
+            font-size:0.8rem;
+        }
+
+        /* ── RESPONSIVE ── */
+        @media (max-width: 600px) {
+            .success-card    { padding: 2.5rem 1.5rem; }
+            .success-actions { flex-direction: column; align-items: center; }
+            .nav-links       { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ── NAV ── -->
+<nav>
+    <div class="nav-inner">
+        <a href="/index.html" class="nav-logo">⚔️ Character<span>Craft</span></a>
+        <ul class="nav-links">
+            <li><a href="/index.html">Home</a></li>
+            <li><a href="/store.html">Store</a></li>
+            <li><a href="/free.html">Free Pack</a></li>
+            <li><a href="/store.html" class="nav-cta">Browse All</a></li>
+        </ul>
+    </div>
+</nav>
+
+<!-- ── CONFETTI CANVAS ── -->
+<div class="cc-confetti" id="cc-confetti"></div>
+
+<!-- ── MAIN ── -->
+<main>
+    <div class="success-card">
+
+        <!-- Animated checkmark -->
+        <div class="cc-checkmark-wrap">
+            <div class="cc-checkmark-circle">
+                <span class="cc-checkmark">✓</span>
+            </div>
+            <div class="cc-pulse-ring"></div>
+        </div>
+
+        <h1>Payment Confirmed</h1>
+        <p class="success-sub">
+            Your transaction has been verified on the blockchain.
+            We've received your order and your pack is being prepared.
+        </p>
+
+        <!-- Order summary — populated by JS from sessionStorage -->
+        <div class="success-summary" id="success-summary">
+            <div class="ss-label">Order Details</div>
+
+            <div class="ss-row">
+                <span class="ss-key">Product</span>
+                <span class="ss-val" id="ss-product">—</span>
+            </div>
+            <div class="ss-row">
+                <span class="ss-key">Amount Paid</span>
+                <span class="ss-val" id="ss-amount">—</span>
+            </div>
+            <div class="ss-row">
+                <span class="ss-key">Coin</span>
+                <span class="ss-val" id="ss-coin">—</span>
+            </div>
+            <div class="ss-row">
+                <span class="ss-key">Deliver To</span>
+                <span class="ss-val" id="ss-contact">—</span>
+            </div>
+            <div class="ss-row">
+                <span class="ss-key">Status</span>
+                <span class="ss-val" style="color:var(--green);">
+                    ✓ Verified on chain
+                </span>
+            </div>
+        </div>
+
+        <!-- What happens next -->
+        <div class="success-next">
+            <h3>What Happens Next</h3>
+            <ol class="next-steps" id="next-steps">
+                <!-- Populated by JS based on product type -->
+            </ol>
+        </div>
+
+        <!-- Actions -->
+        <div class="success-actions">
+            <a href="/store.html" class="btn-primary">
+                ⚔️ Browse More Characters
+            </a>
+            <a href="/index.html" class="btn-secondary">
+                ← Back to Home
+            </a>
+        </div>
+
+        <!-- Reference -->
+        <div class="success-ref" id="success-ref">
+            Keep this page open until you receive your delivery.<br>
+            Reference:
+            <span class="ref-code" id="ref-code">—</span>
+        </div>
+
+    </div>
+</main>
+
+<!-- ── FOOTER ── -->
+<footer>
+    <p>© 2025 CharacterCraft. All rights reserved.
+       If you have not received your pack within the expected time,
+       contact us via Discord or email with your transaction reference.</p>
+</footer>
+
+<script>
+(function () {
+    'use strict';
+
+    /* ── POPULATE ORDER DETAILS FROM SESSION ──────────────
+       payment.js stores verified order data in sessionStorage
+       under CC.session.KEY = 'cc_order_session'
+       We read it here to show the customer their order details.
+    ─────────────────────────────────────────────────────── */
+
+    var SESSION_KEY = 'cc_order_session';
+    var CC_CONFIG_PRODUCTS = {
+        'aldric':         'Aldric — Grizzled Gate Captain',
+        'dravek':         'Dravek — Corrupt Merchant',
+        'city-bundle':    'City Bundle — Aldric + Dravek',
+        'server-license': 'Server License — 5 Characters',
+        'retainer':       'Monthly Retainer — First Month'
+    };
+
+    var DELIVERY_TIMES = {
+        'aldric':         '2 hours',
+        'dravek':         '2 hours',
+        'city-bundle':    '2 hours',
+        'server-license': '4 hours',
+        'retainer':       '24 hours'
+    };
+
+    var NEXT_STEPS = {
+        'aldric': [
+            'Your Aldric pack files are being prepared.',
+            'We will deliver to your provided contact within 2 hours of this confirmation.',
+            'Check your email or Discord for the delivery message.',
+            'Reply to the delivery message if you need install help — support is included.'
+        ],
+        'dravek': [
+            'Your Dravek pack files are being prepared.',
+            'We will deliver to your provided contact within 2 hours of this confirmation.',
+            'Check your email or Discord for the delivery message.',
+            'Reply to the delivery message if you need install help — support is included.'
+        ],
+        'city-bundle': [
+            'Both Aldric and Dravek packs are being prepared, along with the shared world lore document.',
+            'We will deliver everything to your provided contact within 2 hours.',
+            'Check your email or Discord for the delivery message.',
+            'Priority support is included — reply to the delivery message for any install help.'
+        ],
+        'server-license': [
+            'All 5 character packs, world lore system, and relationship map are being prepared.',
+            'We will deliver everything to your provided contact within 4 hours.',
+            'Your 1-hour async setup consultation will be scheduled within 24 hours of delivery.',
+            'Check your email or Discord for the delivery message.'
+        ],
+        'retainer': [
+            'Your retainer profile is being created.',
+            'Your first character will be delivered within 24 hours to your provided contact.',
+            'We will reach out via your provided contact to confirm your character brief.',
+            'Unlimited revisions start immediately — contact us anytime for changes.'
+        ]
+    };
+
+    function loadOrderDetails() {
+        var raw = sessionStorage.getItem(SESSION_KEY);
+        var session = null;
+
+        try { session = raw ? JSON.parse(raw) : null; }
+        catch (e) { session = null; }
+
+        var productKey = session ? session.product : null;
+
+        /* Product */
+        var productLabel = productKey
+            ? (CC_CONFIG_PRODUCTS[productKey] || productKey)
+            : 'CharacterCraft Purchase';
+        document.getElementById('ss-product').textContent = productLabel;
+
+        /* Amount */
+        if (session && session.exactAmount) {
+            document.getElementById('ss-amount').textContent =
+                '$' + parseFloat(session.exactAmount).toFixed(5) + ' USD';
+        } else {
+            document.getElementById('ss-amount').textContent = 'Confirmed';
+        }
+
+        /* Coin */
+        document.getElementById('ss-coin').textContent =
+            (session && session.coin) ? session.coin : '—';
+
+        /* Contact — read from DOM state since it's not stored in session */
+        /* The page controller stores it on submitOrder — we recover via URL param fallback */
+        var contact = getUrlParam('contact') || '(provided at checkout)';
+        document.getElementById('ss-contact').textContent = contact;
+
+        /* Reference code */
+        var ref = generateRef(session);
+        document.getElementById('ref-code').textContent = ref;
+
+        /* Next steps */
+        var steps = NEXT_STEPS[productKey] || [
+            'Your order is being processed.',
+            'We will deliver to your provided contact within the expected timeframe.',
+            'Check your email or Discord for the delivery message.'
+        ];
+
+        var deliveryTime = DELIVERY_TIMES[productKey] || '2–4 hours';
+        var ol = document.getElementById('next-steps');
+        ol.innerHTML = '';
+
+        steps.forEach(function (step, i) {
+            var li  = document.createElement('li');
+            var num = document.createElement('span');
+            num.className   = 'next-step-num';
+            num.textContent = (i + 1).toString();
+            var txt = document.createElement('span');
+            txt.textContent = step;
+            li.appendChild(num);
+            li.appendChild(txt);
+            ol.appendChild(li);
+        });
+
+        /* Delivery time note */
+        var refEl = document.getElementById('success-ref');
+        refEl.innerHTML =
+            'Expected delivery: <strong style="color:var(--text-primary);">' +
+            'within ' + deliveryTime + '</strong> of this confirmation.<br>' +
+            'Reference: <span class="ref-code">' + ref + '</span>';
+    }
+
+    function generateRef(session) {
+        var ts  = session ? session.createdAt : Date.now();
+        var prod = session ? (session.product || 'order') : 'order';
+        var part1 = prod.substring(0, 3).toUpperCase();
+        var part2 = Math.abs(ts).toString(36).toUpperCase().slice(-6);
+        var part3 = Math.floor(Math.random() * 900 + 100).toString();
+        return 'CC-' + part1 + '-' + part2 + '-' + part3;
+    }
+
+    function getUrlParam(key) {
+        try {
+            var params = new URLSearchParams(window.location.search);
+            return params.get(key) || null;
+        } catch (e) {
+            return null;
+        }
+    }
+
+    /* ── CONFETTI ─────────────────────────────────────── */
+    function launchConfetti() {
+        var container = document.getElementById('cc-confetti');
+        var colors = [
+            '#D4A537', '#4CAF50', '#1ABC9C',
+            '#9B59B6', '#3498DB', '#F39C12',
+            '#E8E8F0', '#F2D06B'
+        ];
+        var count = 80;
+
+        for (var i = 0; i < count; i++) {
+            (function (i) {
+                setTimeout(function () {
+                    var piece = document.createElement('div');
+                    piece.className = 'cc-confetti-piece';
+
+                    var color  = colors[Math.floor(Math.random() * colors.length)];
+                    var left   = Math.random() * 100;
+                    var size   = Math.random() * 6 + 4;
+                    var dur    = Math.random() * 2 + 2;
+                    var delay  = Math.random() * 1.5;
+                    var shape  = Math.random() > 0.5
+                        ? '50%'
+                        : Math.random() > 0.5 ? '2px' : '0';
+
+                    piece.style.cssText =
+                        'left:' + left + '%;' +
+                        'width:' + size + 'px;' +
+                        'height:' + size + 'px;' +
+                        'background:' + color + ';' +
+                        'border-radius:' + shape + ';' +
+                        'animation-duration:' + dur + 's;' +
+                        'animation-delay:' + delay + 's;';
+
+                    container.appendChild(piece);
+
+                    /* Remove after animation */
+                    setTimeout(function () {
+                        if (piece.parentNode) piece.parentNode.removeChild(piece);
+                    }, (dur + delay + 0.5) * 1000);
+
+                }, i * 20);
+            }(i));
+        }
+    }
+
+    /* ── INIT ─────────────────────────────────────────── */
+    loadOrderDetails();
+    launchConfetti();
+
+    /* Clear session after reading — order is done */
+    setTimeout(function () {
+        try { sessionStorage.removeItem('cc_order_session'); }
+        catch (e) {}
+    }, 3000);
+
+}());
+</script>
+
+</body>
+</html>
