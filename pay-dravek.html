@@ -1,0 +1,1006 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buy Dravek — CharacterCraft</title>
+    <meta name="description" content="Purchase the Dravek character pack. Corrupt Merchant with full ethics code, 25 memories, negotiation config. $4.85 launch price.">
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="stylesheet" href="/assets/css/payment.css">
+    <style>
+        /* ── PAGE ACCENT: GREEN (Merchant) ── */
+        :root {
+            --cc-accent:      #4CAF50;
+            --cc-accent-light:#6FCF73;
+            --cc-accent-rgb:  76, 175, 80;
+        }
+
+        .cc-product-banner {
+            background: linear-gradient(135deg, #0a1a0a 0%, #051505 100%);
+            border:     1px solid rgba(100,180,100,0.15);
+        }
+    </style>
+</head>
+<body>
+
+<!-- ── URGENCY STRIP ── -->
+<div class="cc-urgency-strip">
+    🔥 LAUNCH WEEK — 30% OFF ·
+    <span id="cc-stock-strip">19</span> licenses left ·
+    Sale ends <span class="cc-strip-timer" id="cc-strip-timer">00:00:00</span>
+</div>
+
+<!-- ── NAV ── -->
+<nav class="cc-nav">
+    <div class="cc-nav-inner">
+        <a href="/index.html" class="cc-nav-logo">⚔️ Character<span>Craft</span></a>
+        <button
+            class="cc-nav-toggle"
+            onclick="document.querySelector('.cc-nav-links').classList.toggle('cc-open')"
+            aria-label="Menu">☰</button>
+        <ul class="cc-nav-links">
+            <li><a href="/index.html">Home</a></li>
+            <li><a href="/store.html">Store</a></li>
+            <li><a href="/free.html">Free Pack</a></li>
+            <li><a href="/custom.html">Custom Orders</a></li>
+            <li><a href="/store.html" class="cc-nav-cta">Browse All</a></li>
+        </ul>
+    </div>
+</nav>
+
+<!-- ── BREADCRUMB ── -->
+<div class="cc-breadcrumb">
+    <a href="/index.html">Home</a>
+    <span class="cc-sep">›</span>
+    <a href="/store.html">Store</a>
+    <span class="cc-sep">›</span>
+    <span class="cc-here">Dravek — Corrupt Merchant</span>
+</div>
+
+<!-- ── MAIN LAYOUT ── -->
+<div class="cc-pay-layout">
+
+    <!-- ══ LEFT: PRODUCT INFO ══ -->
+    <div class="cc-product-info">
+
+        <div class="cc-product-banner">
+            <span class="cc-launch-badge">30% Off</span>
+            <span class="cc-p-icon">💰</span>
+            <h1>Dravek</h1>
+            <div class="cc-p-role">Corrupt Merchant — Knows Everyone's Price</div>
+        </div>
+
+        <div class="cc-product-quote">
+            "Everything has a price, friend. The trick is knowing
+            who's paying it — and making sure it isn't you."
+        </div>
+
+        <div class="cc-features-label">What's Included</div>
+        <ul class="cc-feature-list">
+            <li>600+ word personality with full ethics code</li>
+            <li>25 hand-crafted memories including contacts</li>
+            <li>Merchant-optimized config with negotiation logic</li>
+            <li>Bribery and information-trading response patterns</li>
+            <li>Knowledge boundaries — what he'll sell vs. keep</li>
+            <li>7+ edge case responses pre-built</li>
+            <li>Drop-in installation guide</li>
+            <li>Personal support included</li>
+            <li>Free updates for life</li>
+        </ul>
+
+        <div class="cc-price-box">
+            <div>
+                <div class="cc-price-label">Launch Week Price</div>
+                <div class="cc-price-value">$4.85</div>
+                <div class="cc-price-original">Regular: $6.99</div>
+            </div>
+            <div class="cc-price-note">
+                One-time payment<br>
+                Crypto only<br>
+                Delivered within 2hr
+            </div>
+        </div>
+
+        <div class="cc-stock-counter">
+            <span class="cc-stock-dot"></span>
+            Only <strong id="cc-stock-card">19</strong> licenses at this price
+        </div>
+
+    </div>
+    <!-- ══ END LEFT ══ -->
+
+    <!-- ══ RIGHT: PAYMENT PANEL ══ -->
+    <div class="cc-payment-panel" style="position:relative;">
+
+        <!-- Expired overlay -->
+        <div class="cc-expired-overlay" id="cc-expired-overlay">
+            <div class="cc-expired-icon">⏰</div>
+            <div class="cc-expired-title">Order Expired</div>
+            <div class="cc-expired-desc">
+                Your 30-minute order window has closed.<br>
+                Refresh to start a new order.
+            </div>
+            <button class="cc-refresh-btn" onclick="location.reload()">
+                Start New Order
+            </button>
+        </div>
+
+        <div class="cc-payment-header">
+            <h2>Complete Your Purchase</h2>
+            <p>Select a coin · Get live price · Send · Verify · Done</p>
+        </div>
+
+        <div class="cc-payment-body">
+
+            <!-- Order expiry countdown -->
+            <div class="cc-expiry-bar" id="cc-expiry-bar">
+                <span class="cc-expiry-label">⏱ Order expires in</span>
+                <span class="cc-expiry-time" id="cc-expiry-time">30:00</span>
+            </div>
+
+            <!-- Step indicator -->
+            <div class="cc-pay-steps">
+                <div class="cc-pay-step cc-active" id="cc-step-1">
+                    <div class="cc-step-dot">1</div>
+                    <span class="cc-step-label">Select Coin</span>
+                </div>
+                <div class="cc-pay-step" id="cc-step-2">
+                    <div class="cc-step-dot">2</div>
+                    <span class="cc-step-label">Your Details</span>
+                </div>
+                <div class="cc-pay-step" id="cc-step-3">
+                    <div class="cc-step-dot">3</div>
+                    <span class="cc-step-label">Verify</span>
+                </div>
+                <div class="cc-pay-step" id="cc-step-4">
+                    <div class="cc-step-dot">4</div>
+                    <span class="cc-step-label">Done</span>
+                </div>
+            </div>
+
+            <!-- Address load error -->
+            <div class="cc-address-error" id="cc-address-error">
+                ⚠ Could not load wallet addresses. Please refresh the page.
+                <button onclick="CCPage.loadAddresses()"
+                    style="margin-left:0.5rem;background:none;border:none;
+                           color:var(--cc-red);cursor:pointer;font-weight:700;
+                           text-decoration:underline;">
+                    Retry
+                </button>
+            </div>
+
+            <!-- ── STEP 1: COIN SELECTION ── -->
+            <div id="cc-step1-panel">
+
+                <span class="cc-section-label">Select Payment Coin</span>
+
+                <div class="cc-coin-grid" id="cc-coin-grid">
+                    <div class="cc-coin-grid-loader">
+                        <div class="cc-spinner"
+                             style="border-top-color:#4CAF50;"></div>
+                        Loading wallets…
+                    </div>
+                </div>
+
+                <!-- Address panel -->
+                <div class="cc-address-panel" id="cc-address-panel">
+
+                    <!-- Live price -->
+                    <div class="cc-live-price" id="cc-live-price">
+                        <div class="cc-live-price-left">
+                            <div class="cc-lp-label">Send Exactly</div>
+                            <div class="cc-lp-amount" id="cc-lp-amount">—</div>
+                            <div class="cc-lp-usd" id="cc-lp-usd">
+                                ≈ $4.85589 USD
+                            </div>
+                        </div>
+                        <div class="cc-live-price-right">
+                            <div class="cc-price-refresh-badge">
+                                <span class="cc-price-refresh-dot"></span>
+                                Live Price
+                            </div>
+                            <span class="cc-price-last-updated"
+                                  id="cc-price-updated">Updating…</span>
+                        </div>
+                    </div>
+
+                    <!-- Wallet address -->
+                    <span class="cc-address-label">
+                        Send to this address
+                        (<span id="cc-coin-name-label">—</span>):
+                    </span>
+                    <div class="cc-address-box">
+                        <div class="cc-address-text"
+                             id="cc-wallet-address">—</div>
+                        <button class="cc-copy-btn"
+                                onclick="CCPage.copyAddress(this)">
+                            Copy
+                        </button>
+                    </div>
+
+                    <!-- Memo -->
+                    <div class="cc-memo-box" id="cc-memo-box">
+                        <span class="cc-memo-label"
+                              id="cc-memo-label">Memo</span>
+                        <span class="cc-memo-value"
+                              id="cc-memo-value">—</span>
+                        <button class="cc-copy-btn"
+                                onclick="CCPage.copyMemo(this)">
+                            Copy
+                        </button>
+                    </div>
+
+                    <!-- Network info -->
+                    <div class="cc-network-info">
+                        <div class="cc-info-row">
+                            <span class="cc-info-label">Network</span>
+                            <span class="cc-info-value"
+                                  id="cc-network-name">—</span>
+                        </div>
+                        <div class="cc-info-row">
+                            <span class="cc-info-label">Min. Deposit</span>
+                            <span class="cc-info-value"
+                                  id="cc-min-deposit">—</span>
+                        </div>
+                        <div class="cc-info-row">
+                            <span class="cc-info-label">
+                                Confirmations Required
+                            </span>
+                            <span class="cc-info-value"
+                                  id="cc-confirmations">—</span>
+                        </div>
+                    </div>
+
+                    <!-- Warning -->
+                    <div class="cc-pay-warning">
+                        <strong>⚠ Important:</strong> Send only
+                        <strong id="cc-warn-coin">—</strong> on the
+                        <strong id="cc-warn-network">—</strong> network.
+                        Sending other assets or using the wrong network
+                        results in permanent loss of funds.
+                    </div>
+
+                    <!-- Tip -->
+                    <div class="cc-info-box cc-info-box-green">
+                        💡 <strong>Tip:</strong> Use
+                        <strong>SOL, TRX, LTC or DOGE</strong> for lowest
+                        fees on small amounts.
+                    </div>
+
+                    <button class="cc-verify-btn" id="cc-proceed-btn"
+                            onclick="CCPage.proceedToForm()">
+                        Continue to Your Details →
+                    </button>
+
+                </div>
+            </div>
+            <!-- end step1 -->
+
+            <!-- ── STEP 2: CONTACT FORM ── -->
+            <div class="cc-form-section" id="cc-step2-panel">
+                <h3>Your Delivery Details</h3>
+                <p class="cc-form-desc">
+                    We need your contact so we can deliver Dravek once
+                    your payment confirms on chain.
+                </p>
+
+                <input type="text" name="_honey" tabindex="-1"
+                       style="display:none" id="cc-honey"
+                       autocomplete="off">
+
+                <div class="cc-form-group">
+                    <label for="cc-contact">
+                        Email or Discord
+                        <span class="cc-required">*</span>
+                    </label>
+                    <input type="text" id="cc-contact"
+                           placeholder="email@example.com or YourName#1234"
+                           autocomplete="off">
+                    <div class="cc-form-hint">
+                        This is where we send your character pack files.
+                    </div>
+                </div>
+
+                <div class="cc-form-group">
+                    <label for="cc-notes">
+                        Notes
+                        <span class="cc-optional">(optional)</span>
+                    </label>
+                    <textarea id="cc-notes"
+                        placeholder="Anything we should know?"></textarea>
+                </div>
+
+                <button class="cc-verify-btn"
+                        onclick="CCPage.proceedToVerify()">
+                    Continue to Payment Verification →
+                </button>
+
+                <button onclick="CCPage.backToCoins()"
+                    style="display:block;width:100%;margin-top:0.65rem;
+                           background:none;border:none;
+                           color:var(--cc-text-muted);font-size:0.8rem;
+                           cursor:pointer;padding:0.4rem;">
+                    ← Back to coin selection
+                </button>
+            </div>
+            <!-- end step2 -->
+
+            <!-- ── STEP 3: VERIFY PAYMENT ── -->
+            <div class="cc-form-section" id="cc-step3-panel">
+                <h3>Verify Your Payment</h3>
+                <p class="cc-form-desc">
+                    After sending, paste your transaction hash below.
+                    We check the blockchain in real time.
+                </p>
+
+                <div class="cc-info-box-verify">
+                    <h4>🔒 What We Verify</h4>
+                    <ul>
+                        <li>Transaction exists on chain</li>
+                        <li>Sent to the correct address</li>
+                        <li>Amount matches your order</li>
+                        <li>Required confirmations reached</li>
+                        <li>Transaction hash not previously used</li>
+                    </ul>
+                </div>
+
+                <!-- Order summary -->
+                <div class="cc-network-info" style="margin-bottom:1rem;">
+                    <div class="cc-info-row">
+                        <span class="cc-info-label">Product</span>
+                        <span class="cc-info-value">
+                            Dravek — Corrupt Merchant
+                        </span>
+                    </div>
+                    <div class="cc-info-row">
+                        <span class="cc-info-label">Coin</span>
+                        <span class="cc-info-value"
+                              id="cc-summary-coin">—</span>
+                    </div>
+                    <div class="cc-info-row">
+                        <span class="cc-info-label">Amount to Send</span>
+                        <span class="cc-info-value"
+                              id="cc-summary-amount">—</span>
+                    </div>
+                    <div class="cc-info-row">
+                        <span class="cc-info-label">Send To</span>
+                        <span class="cc-info-value cc-address-text"
+                              id="cc-summary-address"
+                              style="font-size:0.7rem;max-width:200px;
+                                     overflow:hidden;
+                                     text-overflow:ellipsis;">—</span>
+                    </div>
+                </div>
+
+                <div class="cc-form-group">
+                    <label for="cc-tx-hash">
+                        Transaction Hash / ID
+                        <span class="cc-required">*</span>
+                    </label>
+                    <div class="cc-tx-wrap">
+                        <input type="text" id="cc-tx-hash"
+                               placeholder="Paste your transaction hash here"
+                               autocomplete="off"
+                               oninput="CCPage.onTxHashInput(this)">
+                        <span class="cc-tx-status" id="cc-tx-status"></span>
+                    </div>
+                    <div class="cc-form-hint">
+                        Found in your wallet's transaction history after
+                        sending. Also called TX ID or Transaction ID.
+                    </div>
+                </div>
+
+                <button class="cc-verify-btn" id="cc-verify-btn"
+                        onclick="CCPage.verifyPayment()">
+                    🔍 Verify Payment
+                </button>
+
+                <div class="cc-poll-status" id="cc-poll-status">
+                    <div class="cc-poll-spinner"></div>
+                    <span id="cc-poll-text">
+                        Checking blockchain…
+                    </span>
+                </div>
+
+                <div class="cc-verify-result" id="cc-verify-result">
+                    <div class="cc-result-title"
+                         id="cc-result-title"></div>
+                    <div class="cc-result-detail"
+                         id="cc-result-detail"></div>
+                </div>
+
+                <p class="cc-confirm-note" style="margin-top:1rem;">
+                    BTC may take 10–60 min to confirm.
+                    SOL, TRX, XLM confirm in seconds.<br>
+                    <strong>Do not close this tab</strong> while
+                    verification is in progress.
+                </p>
+
+                <button onclick="CCPage.backToForm()"
+                    style="display:block;width:100%;margin-top:0.65rem;
+                           background:none;border:none;
+                           color:var(--cc-text-muted);font-size:0.8rem;
+                           cursor:pointer;padding:0.4rem;">
+                    ← Back to your details
+                </button>
+            </div>
+            <!-- end step3 -->
+
+        </div>
+    </div>
+    <!-- ══ END RIGHT ══ -->
+
+</div>
+
+<!-- ── UPSELL ── -->
+<div class="cc-upsell-bar">
+    <div class="cc-upsell-card">
+        <div class="cc-upsell-text">
+            <div class="cc-upsell-label">Better Value</div>
+            <h4>🏰 Add Aldric — City Bundle</h4>
+            <p>Dravek and Aldric share 20 years of history. Get both with
+               shared world lore, 50 total memories, and cross-reference
+               memory system.</p>
+        </div>
+        <div class="cc-upsell-action">
+            <div class="cc-upsell-price">$8.47</div>
+            <div class="cc-upsell-original">$13.98</div>
+            <a href="/pay-city-bundle.html" class="cc-upsell-btn">
+                Upgrade to Bundle →
+            </a>
+        </div>
+    </div>
+</div>
+
+<!-- ── TRUST ── -->
+<div class="cc-trust-bar">
+    <div class="cc-trust-grid">
+        <div class="cc-trust-item">
+            <div class="cc-trust-icon">🔗</div>
+            <h4>On-Chain Verified</h4>
+            <p>Every payment checked directly on the blockchain.
+               No third-party processor. No manual confirmation needed.</p>
+        </div>
+        <div class="cc-trust-item">
+            <div class="cc-trust-icon">⚡</div>
+            <h4>Fast Delivery</h4>
+            <p>Pack delivered within 2 hours of blockchain confirmation
+               to your provided contact.</p>
+        </div>
+        <div class="cc-trust-item">
+            <div class="cc-trust-icon">💬</div>
+            <h4>Personal Support</h4>
+            <p>Help with install, config, and tuning included
+               with every pack.</p>
+        </div>
+    </div>
+</div>
+
+<!-- ── FOOTER ── -->
+<footer class="cc-footer">
+    <div class="cc-footer-links">
+        <a href="/index.html">Home</a>
+        <a href="/store.html">Store</a>
+        <a href="/free.html">Free Pack</a>
+        <a href="/custom.html">Custom Orders</a>
+    </div>
+    <p class="cc-footer-copy">
+        © 2025 CharacterCraft. All rights reserved.
+        All cryptocurrency transactions are final.
+    </p>
+</footer>
+
+<!-- ── SCRIPTS ── -->
+<script src="/assets/js/payment.js"></script>
+<script>
+var CCPage = (function () {
+    'use strict';
+
+    var PRODUCT_KEY = 'dravek';
+    var CC = window.CharacterCraft;
+
+    /* ── SALE COUNTDOWN ─────────────────────────────── */
+    var SALE_KEY      = 'cc_sale_end_v3';
+    var SALE_DURATION = 72 * 60 * 60 * 1000;
+
+    function getSaleEnd() {
+        var s = localStorage.getItem(SALE_KEY);
+        if (s) { var e = parseInt(s, 10); if (e > Date.now()) return e; }
+        var n = Date.now() + SALE_DURATION;
+        localStorage.setItem(SALE_KEY, n.toString());
+        return n;
+    }
+
+    var saleEnd = getSaleEnd();
+
+    function tickSale() {
+        var r = saleEnd - Date.now();
+        if (r <= 0) {
+            saleEnd = Date.now() + SALE_DURATION;
+            localStorage.setItem(SALE_KEY, saleEnd.toString());
+            r = SALE_DURATION;
+        }
+        var t  = Math.floor(r / 1000);
+        var h  = CC._pad(Math.floor(t / 3600));
+        var m  = CC._pad(Math.floor((t % 3600) / 60));
+        var s  = CC._pad(t % 60);
+        var el = document.getElementById('cc-strip-timer');
+        if (el) el.textContent = h + ':' + m + ':' + s;
+    }
+
+    tickSale();
+    setInterval(tickSale, 1000);
+
+    /* ── STOCK ──────────────────────────────────────── */
+    var STOCK_KEY = 'cc_stock_v3';
+
+    var stock = (function () {
+        var r = localStorage.getItem(STOCK_KEY);
+        if (r) {
+            try {
+                var d = JSON.parse(r);
+                if (d.saleEnd === saleEnd) return d;
+            } catch (e) {}
+        }
+        var i = {
+            saleEnd:  saleEnd,
+            aldric:   23, dravek:  19, bundle:  12,
+            license:   7, retainer: 5
+        };
+        localStorage.setItem(STOCK_KEY, JSON.stringify(i));
+        return i;
+    })();
+
+    (function renderStock() {
+        var strip = document.getElementById('cc-stock-strip');
+        var card  = document.getElementById('cc-stock-card');
+        if (strip) strip.textContent = stock.dravek;
+        if (card)  card.textContent  = stock.dravek;
+    })();
+
+    /* ── ORDER INIT ─────────────────────────────────── */
+    var order = CC.initOrder(PRODUCT_KEY);
+
+    /* ── EXPIRY TIMER ───────────────────────────────── */
+    CC.expiry.start(
+        order.createdAt,
+        function onTick(display, remaining) {
+            var el = document.getElementById('cc-expiry-time');
+            if (el) el.textContent = display;
+            var bar = document.getElementById('cc-expiry-bar');
+            if (bar) {
+                if (remaining < 5 * 60 * 1000) {
+                    bar.classList.add('cc-expiry-urgent');
+                } else {
+                    bar.classList.remove('cc-expiry-urgent');
+                }
+            }
+        },
+        function onExpire() {
+            var overlay = document.getElementById('cc-expired-overlay');
+            if (overlay) overlay.classList.add('cc-visible');
+        }
+    );
+
+    /* ── LOAD ADDRESSES ─────────────────────────────── */
+    function loadAddresses() {
+        CC.loadAddresses()
+            .then(function () { renderCoinGrid(); })
+            .catch(function () {
+                var err = document.getElementById('cc-address-error');
+                if (err) err.classList.add('cc-visible');
+                var grid = document.getElementById('cc-coin-grid');
+                if (grid) grid.innerHTML =
+                    '<div class="cc-coin-grid-loader"' +
+                    ' style="color:var(--cc-red);">' +
+                    '⚠ Failed to load wallets. Please refresh.' +
+                    '</div>';
+            });
+    }
+
+    function renderCoinGrid() {
+        var grid    = document.getElementById('cc-coin-grid');
+        var coins   = CC.config.coins;
+        var tickers = Object.keys(coins);
+        var html    = '';
+
+        tickers.forEach(function (ticker) {
+            var coin    = coins[ticker];
+            var address = CC.getAddress(ticker);
+            var disabled = !address
+                ? 'style="opacity:0.4;cursor:not-allowed;"' +
+                  ' title="Address unavailable"'
+                : '';
+
+            html +=
+                '<button class="cc-coin-btn"' +
+                ' id="cc-coin-btn-' + ticker + '"' +
+                ' onclick="CCPage.selectCoin(\'' + ticker + '\')"' +
+                ' ' + disabled + '>' +
+                '<span class="cc-coin-icon">' + coin.icon + '</span>' +
+                '<span class="cc-coin-name">' + ticker + '</span>' +
+                '</button>';
+        });
+
+        grid.innerHTML = html;
+
+        CC.fetchPrices(tickers).then(function () {
+            if (CC.state.selectedCoin) {
+                updatePriceDisplay(CC.state.selectedCoin);
+            }
+        });
+
+        if (CC.state.priceTimer) clearInterval(CC.state.priceTimer);
+        CC.state.priceTimer = setInterval(function () {
+            CC.fetchPrices(Object.keys(coins)).then(function () {
+                if (CC.state.selectedCoin) {
+                    updatePriceDisplay(CC.state.selectedCoin);
+                }
+            });
+        }, CC.config.priceRefreshMs);
+    }
+
+    /* ── SELECT COIN ────────────────────────────────── */
+    function selectCoin(ticker) {
+        var address = CC.getAddress(ticker);
+        if (!address) return;
+
+        CC.state.selectedCoin = ticker;
+        var coin = CC.config.coins[ticker];
+
+        document.querySelectorAll('.cc-coin-btn').forEach(function (b) {
+            b.classList.remove('cc-selected');
+        });
+        var btn = document.getElementById('cc-coin-btn-' + ticker);
+        if (btn) btn.classList.add('cc-selected');
+
+        document.getElementById('cc-coin-name-label').textContent =
+            coin.name + ' (' + ticker + ')';
+        document.getElementById('cc-wallet-address').textContent = address;
+        document.getElementById('cc-network-name').textContent   =
+            coin.networkFull;
+        document.getElementById('cc-min-deposit').textContent    =
+            coin.minDeposit;
+        document.getElementById('cc-confirmations').textContent  =
+            coin.confirmations +
+            ' confirmation' + (coin.confirmations !== 1 ? 's' : '');
+        document.getElementById('cc-warn-coin').textContent    = coin.name;
+        document.getElementById('cc-warn-network').textContent = coin.network;
+
+        var memoBox = document.getElementById('cc-memo-box');
+        if (coin.memo) {
+            document.getElementById('cc-memo-label').textContent =
+                coin.memoLabel || 'Memo';
+            document.getElementById('cc-memo-value').textContent = coin.memo;
+            memoBox.classList.add('cc-visible');
+        } else {
+            memoBox.classList.remove('cc-visible');
+        }
+
+        updatePriceDisplay(ticker);
+        document.getElementById('cc-address-panel').classList.add('cc-visible');
+        setStep(1);
+    }
+
+    function updatePriceDisplay(ticker) {
+        var cryptoAmount = CC.getCryptoAmount(ticker, order.exactAmount);
+        CC.state.cryptoAmount = cryptoAmount;
+
+        var amountEl  = document.getElementById('cc-lp-amount');
+        var usdEl     = document.getElementById('cc-lp-usd');
+        var updatedEl = document.getElementById('cc-price-updated');
+
+        if (cryptoAmount !== null) {
+            amountEl.textContent  = CC.formatCrypto(cryptoAmount, ticker);
+            usdEl.textContent     = '≈ ' + CC.formatUSD(order.exactAmount) +
+                                    ' USD';
+            updatedEl.textContent = 'Updated ' +
+                                    new Date().toLocaleTimeString();
+        } else {
+            amountEl.textContent  = 'Loading…';
+            usdEl.textContent     = '≈ ' + CC.formatUSD(order.exactAmount) +
+                                    ' USD';
+            updatedEl.textContent = 'Fetching price…';
+        }
+    }
+
+    /* ── STEP NAVIGATION ────────────────────────────── */
+    function setStep(completedUpTo) {
+        for (var i = 1; i <= 4; i++) {
+            var el = document.getElementById('cc-step-' + i);
+            if (!el) continue;
+            el.classList.remove('cc-active', 'cc-completed');
+            if (i < completedUpTo + 1) el.classList.add('cc-completed');
+            if (i === completedUpTo + 1) el.classList.add('cc-active');
+        }
+    }
+
+    function showPanel(panelId) {
+        var panels = [
+            'cc-step1-panel',
+            'cc-step2-panel',
+            'cc-step3-panel'
+        ];
+        panels.forEach(function (id) {
+            var el = document.getElementById(id);
+            if (!el) return;
+            if (id === panelId) {
+                el.classList.add('cc-visible');
+                el.style.display = 'block';
+            } else {
+                el.classList.remove('cc-visible');
+                el.style.display = 'none';
+            }
+        });
+    }
+
+    /* ── PROCEED FUNCTIONS ──────────────────────────── */
+    function proceedToForm() {
+        if (!CC.state.selectedCoin) {
+            alert('Please select a coin first.');
+            return;
+        }
+        if (!CC.state.cryptoAmount) {
+            alert('Price is still loading. Please wait a moment.');
+            return;
+        }
+        setStep(2);
+        showPanel('cc-step2-panel');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function backToCoins() {
+        setStep(1);
+        showPanel('cc-step1-panel');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function proceedToVerify() {
+        var honey = document.getElementById('cc-honey');
+        if (honey && honey.value !== '') return;
+
+        var contact = document.getElementById('cc-contact').value.trim();
+        if (!contact) {
+            document.getElementById('cc-contact')
+                .classList.add('cc-input-error');
+            document.getElementById('cc-contact').focus();
+            return;
+        }
+        document.getElementById('cc-contact')
+            .classList.remove('cc-input-error');
+
+        var ticker = CC.state.selectedCoin;
+        var coin   = CC.config.coins[ticker];
+
+        document.getElementById('cc-summary-coin').textContent =
+            coin.name + ' (' + ticker + ')';
+        document.getElementById('cc-summary-amount').textContent =
+            CC.formatCrypto(CC.state.cryptoAmount, ticker) +
+            ' (' + CC.formatUSD(order.exactAmount) + ')';
+        document.getElementById('cc-summary-address').textContent =
+            CC.getAddress(ticker);
+
+        setStep(3);
+        showPanel('cc-step3-panel');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function backToForm() {
+        CC.poll.stop();
+        clearVerifyResult();
+        setStep(2);
+        showPanel('cc-step2-panel');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    /* ── TX HASH INPUT ──────────────────────────────── */
+    function onTxHashInput(input) {
+        var val    = input.value.trim();
+        var ticker = CC.state.selectedCoin;
+        var status = document.getElementById('cc-tx-status');
+
+        if (!val || !ticker) {
+            status.textContent = '';
+            status.className   = 'cc-tx-status';
+            return;
+        }
+
+        var valid = CC.verify._validateHashFormat(val, ticker);
+        status.textContent = valid ? '✓' : '✗';
+        status.className   = 'cc-tx-status ' +
+                             (valid ? 'cc-tx-valid' : 'cc-tx-invalid');
+    }
+
+    /* ── VERIFY PAYMENT ─────────────────────────────── */
+    function verifyPayment() {
+        var honey = document.getElementById('cc-honey');
+        if (honey && honey.value !== '') return;
+
+        var txHash = document.getElementById('cc-tx-hash').value.trim();
+        if (!txHash) {
+            document.getElementById('cc-tx-hash').focus();
+            return;
+        }
+
+        var ticker = CC.state.selectedCoin;
+        if (!ticker) return;
+
+        var btn = document.getElementById('cc-verify-btn');
+        btn.disabled = true;
+        btn.innerHTML = '<div class="cc-spinner"></div> Verifying…';
+        btn.classList.add('cc-loading-btn');
+
+        clearVerifyResult();
+
+        var pollEl = document.getElementById('cc-poll-status');
+        pollEl.classList.add('cc-visible');
+        document.getElementById('cc-poll-text').textContent =
+            'Checking ' + ticker + ' blockchain…';
+
+        CC.verify.run(txHash, ticker)
+            .then(function (result) {
+                pollEl.classList.remove('cc-visible');
+
+                if (result.verified) {
+                    onVerified(result);
+                } else if (result.pending) {
+                    showResult('pending',
+                        '⏳ Not Confirmed Yet',
+                        result.message +
+                        ' Checking automatically every 15 seconds…');
+                    pollEl.classList.add('cc-visible');
+
+                    CC.poll.start(
+                        txHash, ticker,
+                        function onPollResult(r) {
+                            document.getElementById('cc-poll-text')
+                                .textContent =
+                                'Attempt ' + CC.poll._attempts +
+                                ' of ' + CC.poll.MAX +
+                                ' — ' + ticker + ' blockchain…';
+                            if (r.verified) {
+                                pollEl.classList.remove('cc-visible');
+                                onVerified(r);
+                            } else if (!r.pending) {
+                                pollEl.classList.remove('cc-visible');
+                                showResult('error',
+                                    '❌ Verification Failed', r.message);
+                                unlockBtn();
+                            }
+                        },
+                        function onMaxReached() {
+                            pollEl.classList.remove('cc-visible');
+                            showResult('error', '⏱ Timed Out',
+                                'Could not confirm after ' +
+                                CC.poll.MAX + ' attempts. ' +
+                                'Please try again in a few minutes or ' +
+                                'contact support with your TX hash.');
+                            unlockBtn();
+                        }
+                    );
+                } else {
+                    showResult('error', '❌ Verification Failed',
+                        result.message);
+                    unlockBtn();
+                }
+            })
+            .catch(function (err) {
+                pollEl.classList.remove('cc-visible');
+                var msg = err.message ||
+                    'An unexpected error occurred. Please try again.';
+
+                if (err.code === 'RATE_LIMITED') {
+                    showResult('error', '🚫 Rate Limited', msg);
+                } else if (err.code === 'EXPIRED') {
+                    showResult('error', '⏰ Order Expired', msg);
+                } else {
+                    showResult('error', '❌ Error', msg);
+                }
+                unlockBtn();
+            });
+    }
+
+    /* ── ON VERIFIED ────────────────────────────────── */
+    function onVerified(result) {
+        showResult('ok',
+            '✅ Payment Verified',
+            'Confirmed ' + result.confirmations + ' block(s). ' +
+            'Amount: ' +
+            CC.formatCrypto(result.receivedCrypto, CC.state.selectedCoin) +
+            '. Submitting your order…');
+
+        setStep(4);
+
+        var formData = {
+            contact: document.getElementById('cc-contact').value.trim(),
+            notes:   document.getElementById('cc-notes').value.trim()
+        };
+
+        CC.submitOrder(result, formData)
+            .then(function () {
+                CC.session.clear();
+                CC.expiry.stop();
+                CC.poll.stop();
+                window.location.href = CC.config.successUrl;
+            })
+            .catch(function (err) {
+                showResult('error', '⚠ Submission Error',
+                    err.message +
+                    ' Your payment WAS verified. Please contact support ' +
+                    'with TX: ' + result.txHash);
+                unlockBtn();
+            });
+    }
+
+    /* ── UI HELPERS ─────────────────────────────────── */
+    function showResult(type, title, detail) {
+        var el       = document.getElementById('cc-verify-result');
+        var titleEl  = document.getElementById('cc-result-title');
+        var detailEl = document.getElementById('cc-result-detail');
+        el.className         = 'cc-verify-result cc-visible cc-result-' + type;
+        titleEl.textContent  = title;
+        detailEl.textContent = detail;
+    }
+
+    function clearVerifyResult() {
+        var el     = document.getElementById('cc-verify-result');
+        el.className   = 'cc-verify-result';
+        el.textContent = '';
+    }
+
+    function unlockBtn() {
+        var btn       = document.getElementById('cc-verify-btn');
+        btn.disabled  = false;
+        btn.innerHTML = '🔍 Verify Payment';
+        btn.classList.remove('cc-loading-btn');
+    }
+
+    function copyAddress(btn) {
+        var text = document.getElementById('cc-wallet-address').textContent;
+        CC.copyToClipboard(text, btn, 'Copy');
+    }
+
+    function copyMemo(btn) {
+        var text = document.getElementById('cc-memo-value').textContent;
+        CC.copyToClipboard(text, btn, 'Copy');
+    }
+
+    /* ── INIT ───────────────────────────────────────── */
+    function init() {
+        showPanel('cc-step1-panel');
+        document.getElementById('cc-step1-panel').style.display = 'block';
+        document.getElementById('cc-step2-panel').style.display = 'none';
+        document.getElementById('cc-step3-panel').style.display = 'none';
+
+        loadAddresses();
+
+        document.addEventListener('click', function (e) {
+            var nav = document.querySelector('.cc-nav-links');
+            var tog = document.querySelector('.cc-nav-toggle');
+            if (nav && nav.classList.contains('cc-open') &&
+                !nav.contains(e.target) && !tog.contains(e.target)) {
+                nav.classList.remove('cc-open');
+            }
+        });
+    }
+
+    init();
+
+    return {
+        selectCoin:      selectCoin,
+        proceedToForm:   proceedToForm,
+        proceedToVerify: proceedToVerify,
+        backToCoins:     backToCoins,
+        backToForm:      backToForm,
+        verifyPayment:   verifyPayment,
+        onTxHashInput:   onTxHashInput,
+        copyAddress:     copyAddress,
+        copyMemo:        copyMemo,
+        loadAddresses:   loadAddresses
+    };
+
+}());
+</script>
+
+</body>
+</html>
