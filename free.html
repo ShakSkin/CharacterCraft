@@ -1,0 +1,1371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Free NPC Pack — CharacterCraft</title>
+    <meta name="description" content="Download The Ghostwriter free starter NPC pack. Complete personality, 15 memories, optimized config, install guide. No payment required.">
+    <meta property="og:title" content="Free NPC Pack — CharacterCraft">
+    <meta property="og:description" content="Get The Ghostwriter free. Full personality, 15 memories, config, install guide. Enter your email and we send the download link instantly.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://shakskin.github.io/CharacterCraft/free.html">
+    <base href="https://shakskin.github.io/CharacterCraft/">
+    <style>
+        :root {
+            --gold:          #D4A537;
+            --gold-light:    #F2D06B;
+            --bg-primary:    #0A0A0F;
+            --bg-secondary:  #12121A;
+            --bg-card:       #1A1A25;
+            --bg-hover:      #222233;
+            --text-primary:  #E8E8F0;
+            --text-secondary:#9999AA;
+            --text-muted:    #666677;
+            --border:        #2A2A3A;
+            --green:         #4CAF50;
+            --green-light:   #5dca61;
+            --red:           #E74C3C;
+            --urgent-red:    #FF4444;
+            --purple:        #9B59B6;
+            --teal:          #1ABC9C;
+            --amber:         #F39C12;
+        }
+
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family:  'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
+            background:   var(--bg-primary);
+            color:        var(--text-primary);
+            line-height:  1.6;
+            overflow-x:   hidden;
+        }
+
+        /* ── NAV ── */
+        nav {
+            position:        sticky;
+            top:             0;
+            z-index:         1000;
+            background:      rgba(10,10,15,0.97);
+            backdrop-filter: blur(12px);
+            border-bottom:   1px solid var(--border);
+            padding:         0 2rem;
+        }
+
+        .nav-inner {
+            max-width:       1200px;
+            margin:          0 auto;
+            display:         flex;
+            justify-content: space-between;
+            align-items:     center;
+            height:          64px;
+        }
+
+        .nav-logo {
+            font-size:       1.25rem;
+            font-weight:     700;
+            color:           var(--gold);
+            text-decoration: none;
+        }
+
+        .nav-logo span { color: var(--text-primary); }
+
+        .nav-links {
+            display:     flex;
+            gap:         2rem;
+            list-style:  none;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color:           var(--text-secondary);
+            text-decoration: none;
+            font-size:       0.9rem;
+            font-weight:     500;
+            transition:      color 0.2s;
+        }
+
+        .nav-links a:hover  { color: var(--gold); }
+        .nav-links a.active { color: var(--green); }
+
+        .nav-links .nav-cta {
+            background:    var(--gold);
+            color:         #000;
+            padding:       0.5rem 1.25rem;
+            border-radius: 6px;
+            font-weight:   700;
+        }
+
+        .nav-links .nav-cta:hover { background: var(--gold-light); }
+
+        .nav-toggle {
+            display:    none;
+            background: none;
+            border:     none;
+            color:      var(--text-primary);
+            font-size:  1.5rem;
+            cursor:     pointer;
+        }
+
+        /* ── BREADCRUMB ── */
+        .breadcrumb {
+            max-width: 1100px;
+            margin:    0 auto;
+            padding:   1.5rem 2rem 0;
+        }
+
+        .breadcrumb a {
+            color:           var(--text-muted);
+            text-decoration: none;
+            font-size:       0.8rem;
+            transition:      color 0.2s;
+        }
+
+        .breadcrumb a:hover { color: var(--gold); }
+        .breadcrumb .sep    { color: var(--text-muted); margin: 0 0.5rem; font-size: 0.75rem; }
+        .breadcrumb .here   { color: var(--text-secondary); font-size: 0.8rem; }
+
+        /* ── MAIN LAYOUT ── */
+        .free-layout {
+            max-width:             1100px;
+            margin:                0 auto;
+            padding:               2rem 2rem 5rem;
+            display:               grid;
+            grid-template-columns: 1fr 1fr;
+            gap:                   3rem;
+            align-items:           start;
+        }
+
+        /* ── LEFT: PACK INFO ── */
+        .pack-info { position: sticky; top: 5rem; }
+
+        /* Pack banner */
+        .pack-banner {
+            background:    linear-gradient(135deg, #051a05 0%, #020f02 100%);
+            border:        1px solid rgba(76,175,80,0.2);
+            border-radius: 14px;
+            padding:       3rem 2rem;
+            text-align:    center;
+            margin-bottom: 2rem;
+            position:      relative;
+            overflow:      hidden;
+        }
+
+        .pack-banner::before {
+            content:        '';
+            position:       absolute;
+            inset:          0;
+            background:     radial-gradient(circle at 50% 20%,
+                                rgba(76,175,80,0.07) 0%,
+                                transparent 60%);
+            pointer-events: none;
+        }
+
+        .pack-free-badge {
+            position:       absolute;
+            top:            1rem;
+            right:          1rem;
+            background:     var(--green);
+            color:          #000;
+            font-size:      0.62rem;
+            font-weight:    800;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            padding:        0.25rem 0.65rem;
+            border-radius:  50px;
+            z-index:        1;
+        }
+
+        .pack-icon {
+            font-size:     3.5rem;
+            margin-bottom: 1rem;
+            display:       block;
+            position:      relative;
+            z-index:       1;
+        }
+
+        .pack-banner h1 {
+            font-size:     1.75rem;
+            font-weight:   800;
+            margin-bottom: 0.25rem;
+            position:      relative;
+            z-index:       1;
+        }
+
+        .pack-role {
+            color:    var(--text-secondary);
+            font-size:0.95rem;
+            position: relative;
+            z-index:  1;
+        }
+
+        /* Pack quote */
+        .pack-quote {
+            color:         var(--text-secondary);
+            font-style:    italic;
+            font-size:     0.95rem;
+            line-height:   1.7;
+            padding:       1.25rem 1.5rem;
+            border-left:   3px solid rgba(76,175,80,0.3);
+            background:    rgba(76,175,80,0.03);
+            border-radius: 0 10px 10px 0;
+            margin-bottom: 2rem;
+        }
+
+        /* What's in the pack */
+        .pack-contents-label {
+            font-size:      0.8rem;
+            font-weight:    700;
+            color:          var(--text-muted);
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            margin-bottom:  0.75rem;
+        }
+
+        .pack-contents {
+            list-style:    none;
+            margin-bottom: 2rem;
+        }
+
+        .pack-contents li {
+            font-size:   0.9rem;
+            color:       var(--text-secondary);
+            padding:     0.4rem 0;
+            display:     flex;
+            align-items: flex-start;
+            gap:         0.6rem;
+        }
+
+        .pack-contents li::before {
+            content:     '✓';
+            color:       var(--green);
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        /* Upsell card */
+        .pack-upsell {
+            background:    var(--bg-card);
+            border:        1px solid rgba(212,165,55,0.2);
+            border-radius: 12px;
+            padding:       1.25rem 1.5rem;
+        }
+
+        .pack-upsell .upsell-label {
+            font-size:      0.7rem;
+            font-weight:    700;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color:          var(--gold);
+            margin-bottom:  0.4rem;
+        }
+
+        .pack-upsell h4 {
+            font-size:     0.95rem;
+            font-weight:   700;
+            margin-bottom: 0.35rem;
+        }
+
+        .pack-upsell p {
+            font-size:     0.82rem;
+            color:         var(--text-secondary);
+            margin-bottom: 0.85rem;
+            line-height:   1.55;
+        }
+
+        .upsell-row {
+            display:     flex;
+            align-items: center;
+            gap:         1rem;
+        }
+
+        .upsell-price {
+            font-size:   1.15rem;
+            font-weight: 800;
+            color:       var(--gold);
+        }
+
+        .upsell-orig {
+            font-size:       0.78rem;
+            color:           var(--text-muted);
+            text-decoration: line-through;
+        }
+
+        .upsell-btn {
+            margin-left:     auto;
+            display:         inline-block;
+            padding:         0.5rem 1.25rem;
+            background:      var(--gold);
+            color:           #000;
+            border-radius:   6px;
+            font-size:       0.82rem;
+            font-weight:     700;
+            text-decoration: none;
+            transition:      all 0.2s;
+        }
+
+        .upsell-btn:hover {
+            background: var(--gold-light);
+            transform:  translateY(-1px);
+        }
+
+        /* ── RIGHT: FORM PANEL ── */
+        .form-panel {
+            background:    var(--bg-card);
+            border:        1px solid rgba(76,175,80,0.2);
+            border-radius: 14px;
+            overflow:      hidden;
+        }
+
+        .form-header {
+            padding:      1.5rem 2rem;
+            border-bottom:1px solid var(--border);
+            background:   rgba(76,175,80,0.04);
+        }
+
+        .form-header h2 {
+            font-size:     1.15rem;
+            font-weight:   700;
+            margin-bottom: 0.25rem;
+            color:         var(--green);
+        }
+
+        .form-header p {
+            color:    var(--text-muted);
+            font-size:0.8rem;
+        }
+
+        .form-body { padding: 2rem; }
+
+        /* What you get quick list */
+        .quick-list {
+            list-style:    none;
+            margin-bottom: 1.75rem;
+            display:       grid;
+            grid-template-columns: 1fr 1fr;
+            gap:           0.4rem 1rem;
+        }
+
+        .quick-list li {
+            font-size:   0.8rem;
+            color:       var(--text-secondary);
+            display:     flex;
+            align-items: center;
+            gap:         0.4rem;
+        }
+
+        .quick-list li::before {
+            content:     '✓';
+            color:       var(--green);
+            font-weight: 700;
+            font-size:   0.72rem;
+            flex-shrink: 0;
+        }
+
+        /* Form states */
+        .form-state {
+            display: none;
+        }
+
+        .form-state.active { display: block; }
+
+        /* Form groups */
+        .fg { margin-bottom: 1rem; }
+
+        .fg label {
+            display:       block;
+            font-size:     0.82rem;
+            font-weight:   600;
+            margin-bottom: 0.35rem;
+            color:         var(--text-secondary);
+        }
+
+        .fg .req { color: var(--urgent-red); }
+
+        .fg input,
+        .fg select {
+            width:         100%;
+            padding:       0.75rem 0.9rem;
+            background:    var(--bg-primary);
+            border:        1px solid var(--border);
+            border-radius: 8px;
+            color:         var(--text-primary);
+            font-size:     0.9rem;
+            font-family:   inherit;
+            outline:       none;
+            transition:    border-color 0.2s;
+        }
+
+        .fg input:focus,
+        .fg select:focus { border-color: var(--green); }
+
+        .fg input.error { border-color: var(--red); }
+
+        .fg select option { background: var(--bg-card); }
+
+        .fg-hint {
+            font-size:  0.72rem;
+            color:      var(--text-muted);
+            margin-top: 0.3rem;
+            line-height:1.5;
+        }
+
+        /* Privacy note */
+        .privacy-note {
+            display:     flex;
+            align-items: flex-start;
+            gap:         0.6rem;
+            font-size:   0.75rem;
+            color:       var(--text-muted);
+            line-height: 1.55;
+            margin-bottom:1.5rem;
+            padding:     0.85rem 1rem;
+            background:  var(--bg-hover);
+            border-radius:8px;
+        }
+
+        .privacy-note .lock { flex-shrink: 0; font-size: 0.9rem; }
+
+        /* Submit button */
+        .submit-btn {
+            display:         flex;
+            align-items:     center;
+            justify-content: center;
+            gap:             0.5rem;
+            width:           100%;
+            padding:         0.9rem 1.5rem;
+            background:      var(--green);
+            color:           #000;
+            border:          none;
+            border-radius:   8px;
+            font-size:       1rem;
+            font-weight:     700;
+            cursor:          pointer;
+            transition:      all 0.2s;
+        }
+
+        .submit-btn:hover:not(:disabled) {
+            background: var(--green-light);
+            transform:  translateY(-1px);
+            box-shadow: 0 6px 20px rgba(76,175,80,0.25);
+        }
+
+        .submit-btn:disabled {
+            opacity: 0.5;
+            cursor:  not-allowed;
+        }
+
+        /* Spinner */
+        .spinner {
+            width:        16px;
+            height:       16px;
+            border:       2px solid rgba(0,0,0,0.3);
+            border-top:   2px solid #000;
+            border-radius:50%;
+            animation:    spin 0.7s linear infinite;
+            display:      inline-block;
+        }
+
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        /* Error message */
+        .form-error {
+            display:       none;
+            background:    rgba(231,76,60,0.07);
+            border:        1px solid rgba(231,76,60,0.2);
+            border-radius: 8px;
+            padding:       0.85rem 1rem;
+            font-size:     0.82rem;
+            color:         var(--red);
+            margin-top:    0.75rem;
+            line-height:   1.55;
+        }
+
+        .form-error.visible { display: block; }
+
+        /* ── SUCCESS STATE ── */
+        .success-state {
+            text-align: center;
+            padding:    1rem 0;
+        }
+
+        .success-check {
+            width:           72px;
+            height:          72px;
+            border-radius:   50%;
+            background:      rgba(76,175,80,0.1);
+            border:          2px solid rgba(76,175,80,0.3);
+            display:         flex;
+            align-items:     center;
+            justify-content: center;
+            font-size:       2rem;
+            margin:          0 auto 1.25rem;
+            animation:       popIn 0.5s cubic-bezier(0.16,1,0.3,1) both;
+        }
+
+        @keyframes popIn {
+            from { transform: scale(0); opacity: 0; }
+            to   { transform: scale(1); opacity: 1; }
+        }
+
+        .success-state h3 {
+            font-size:     1.25rem;
+            font-weight:   800;
+            margin-bottom: 0.5rem;
+            color:         var(--green);
+        }
+
+        .success-state p {
+            color:         var(--text-secondary);
+            font-size:     0.9rem;
+            line-height:   1.7;
+            margin-bottom: 0.5rem;
+        }
+
+        .success-email-display {
+            display:       inline-block;
+            background:    var(--bg-hover);
+            border:        1px solid var(--border);
+            border-radius: 6px;
+            padding:       0.3rem 0.85rem;
+            font-family:   'Consolas', monospace;
+            font-size:     0.85rem;
+            color:         var(--green);
+            margin:        0.5rem 0 1.25rem;
+        }
+
+        .success-next-steps {
+            background:    var(--bg-hover);
+            border-radius: 10px;
+            padding:       1.25rem;
+            text-align:    left;
+            margin-bottom: 1.5rem;
+        }
+
+        .success-next-steps h4 {
+            font-size:     0.78rem;
+            font-weight:   700;
+            color:         var(--text-muted);
+            letter-spacing:1px;
+            text-transform:uppercase;
+            margin-bottom: 0.75rem;
+        }
+
+        .success-next-steps ol {
+            padding-left: 1.25rem;
+        }
+
+        .success-next-steps li {
+            font-size:   0.85rem;
+            color:       var(--text-secondary);
+            padding:     0.25rem 0;
+            line-height: 1.55;
+        }
+
+        .success-browse-btn {
+            display:         inline-flex;
+            align-items:     center;
+            gap:             0.5rem;
+            padding:         0.75rem 2rem;
+            background:      var(--gold);
+            color:           #000;
+            border-radius:   8px;
+            font-size:       0.9rem;
+            font-weight:     700;
+            text-decoration: none;
+            transition:      all 0.2s;
+        }
+
+        .success-browse-btn:hover {
+            background: var(--gold-light);
+            transform:  translateY(-1px);
+        }
+
+        /* ── SOCIAL PROOF ── */
+        .social-row {
+            display:         flex;
+            align-items:     center;
+            justify-content: center;
+            gap:             1.5rem;
+            margin-top:      1.25rem;
+            padding-top:     1.25rem;
+            border-top:      1px solid var(--border);
+            flex-wrap:       wrap;
+        }
+
+        .social-stat {
+            text-align: center;
+        }
+
+        .social-stat .stat-num {
+            font-size:   1.15rem;
+            font-weight: 800;
+            color:       var(--green);
+            display:     block;
+        }
+
+        .social-stat .stat-label {
+            font-size:  0.72rem;
+            color:      var(--text-muted);
+            font-weight:600;
+        }
+
+        /* ── BELOW FOLD — HOW IT WORKS ── */
+        .how-section {
+            background: var(--bg-secondary);
+            padding:    4rem 2rem;
+        }
+
+        .how-inner { max-width: 1100px; margin: 0 auto; }
+
+        .how-inner .section-label {
+            display:        block;
+            color:          var(--green);
+            font-size:      0.75rem;
+            font-weight:    700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom:  0.75rem;
+        }
+
+        .how-inner h2 {
+            font-size:     1.75rem;
+            font-weight:   700;
+            margin-bottom: 0.75rem;
+        }
+
+        .how-inner p {
+            color:         var(--text-secondary);
+            font-size:     0.95rem;
+            max-width:     580px;
+            margin-bottom: 2.5rem;
+            line-height:   1.7;
+        }
+
+        .how-steps-grid {
+            display:               grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap:                   1.5rem;
+        }
+
+        .how-step-card {
+            background:    var(--bg-card);
+            border:        1px solid var(--border);
+            border-radius: 12px;
+            padding:       1.5rem;
+            text-align:    center;
+            transition:    border-color 0.2s;
+        }
+
+        .how-step-card:hover { border-color: rgba(76,175,80,0.3); }
+
+        .step-num {
+            display:         inline-flex;
+            align-items:     center;
+            justify-content: center;
+            width:           40px;
+            height:          40px;
+            border-radius:   50%;
+            background:      rgba(76,175,80,0.1);
+            border:          1px solid rgba(76,175,80,0.2);
+            color:           var(--green);
+            font-size:       1rem;
+            font-weight:     800;
+            margin:          0 auto 0.85rem;
+        }
+
+        .how-step-card h4 {
+            font-size:     0.9rem;
+            font-weight:   700;
+            margin-bottom: 0.4rem;
+        }
+
+        .how-step-card p {
+            font-size:   0.8rem;
+            color:       var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        /* ── WHAT'S INSIDE SECTION ── */
+        .inside-section {
+            background: var(--bg-primary);
+            padding:    4rem 2rem;
+        }
+
+        .inside-inner { max-width: 1100px; margin: 0 auto; }
+
+        .inside-inner .section-label {
+            display:        block;
+            color:          var(--green);
+            font-size:      0.75rem;
+            font-weight:    700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom:  0.75rem;
+        }
+
+        .inside-inner h2 {
+            font-size:     1.75rem;
+            font-weight:   700;
+            margin-bottom: 0.75rem;
+        }
+
+        .inside-inner > p {
+            color:         var(--text-secondary);
+            font-size:     0.95rem;
+            max-width:     580px;
+            margin-bottom: 2.5rem;
+            line-height:   1.7;
+        }
+
+        .inside-grid {
+            display:               grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap:                   1.25rem;
+        }
+
+        .inside-card {
+            background:    var(--bg-card);
+            border:        1px solid var(--border);
+            border-radius: 12px;
+            padding:       1.75rem;
+            transition:    border-color 0.2s;
+        }
+
+        .inside-card:hover { border-color: rgba(76,175,80,0.25); }
+
+        .inside-icon {
+            font-size:     1.75rem;
+            margin-bottom: 0.75rem;
+            display:       block;
+        }
+
+        .inside-card h3 {
+            font-size:     0.95rem;
+            font-weight:   700;
+            margin-bottom: 0.4rem;
+        }
+
+        .inside-card p {
+            font-size:   0.83rem;
+            color:       var(--text-secondary);
+            line-height: 1.65;
+        }
+
+        .inside-tag {
+            display:       inline-block;
+            margin-top:    0.75rem;
+            background:    rgba(76,175,80,0.08);
+            border:        1px solid rgba(76,175,80,0.15);
+            color:         var(--green);
+            font-size:     0.68rem;
+            font-weight:   700;
+            padding:       0.2rem 0.6rem;
+            border-radius: 50px;
+        }
+
+        /* ── FOOTER ── */
+        footer {
+            padding:    3rem 2rem;
+            border-top: 1px solid var(--border);
+            text-align: center;
+        }
+
+        .footer-links {
+            display:         flex;
+            justify-content: center;
+            gap:             2rem;
+            margin-bottom:   1.25rem;
+            flex-wrap:       wrap;
+        }
+
+        .footer-links a {
+            color:           var(--text-secondary);
+            text-decoration: none;
+            font-size:       0.88rem;
+            transition:      color 0.2s;
+        }
+
+        .footer-links a:hover { color: var(--gold); }
+
+        .footer-copy {
+            color:    var(--text-muted);
+            font-size:0.8rem;
+        }
+
+        /* ── RESPONSIVE ── */
+        @media (max-width: 900px) {
+            .free-layout        { grid-template-columns: 1fr; }
+            .pack-info          { position: static; }
+            .how-steps-grid     { grid-template-columns: 1fr 1fr; }
+            .inside-grid        { grid-template-columns: 1fr 1fr; }
+            .quick-list         { grid-template-columns: 1fr; }
+        }
+
+        @media (max-width: 650px) {
+            .nav-links {
+                display:        none;
+                position:       absolute;
+                top:            64px;
+                left:           0;
+                right:          0;
+                background:     rgba(10,10,15,0.98);
+                flex-direction: column;
+                padding:        1.5rem 2rem;
+                gap:            1rem;
+                border-bottom:  1px solid var(--border);
+            }
+
+            .nav-links.open { display: flex; }
+            .nav-toggle     { display: block; }
+
+            .how-steps-grid { grid-template-columns: 1fr; }
+            .inside-grid    { grid-template-columns: 1fr; }
+            .social-row     { gap: 1rem; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ── NAV ── -->
+<nav>
+    <div class="nav-inner">
+        <a href="index.html" class="nav-logo">⚔️ Character<span>Craft</span></a>
+        <button class="nav-toggle"
+                onclick="document.querySelector('.nav-links').classList.toggle('open')"
+                aria-label="Menu">☰</button>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="index.html#store">Store</a></li>
+            <li><a href="license.html">Server License</a></li>
+            <li><a href="retainer.html">Retainer</a></li>
+            <li><a href="free.html" class="active">Free Pack</a></li>
+            <li><a href="index.html#store" class="nav-cta">Browse All</a></li>
+        </ul>
+    </div>
+</nav>
+
+<!-- ── BREADCRUMB ── -->
+<div class="breadcrumb">
+    <a href="index.html">Home</a>
+    <span class="sep">›</span>
+    <span class="here">Free Pack — The Ghostwriter</span>
+</div>
+
+<!-- ── MAIN LAYOUT ── -->
+<div class="free-layout">
+
+    <!-- ══ LEFT: PACK INFO ══ -->
+    <div class="pack-info">
+
+        <div class="pack-banner">
+            <span class="pack-free-badge">100% Free</span>
+            <span class="pack-icon">🛡️</span>
+            <h1>The Ghostwriter</h1>
+            <div class="pack-role">
+                Starter Guard NPC — Complete Pack
+            </div>
+        </div>
+
+        <div class="pack-quote">
+            "I have stood at this gate longer than most men have
+            been alive. I know every face that passes through.
+            I remember the ones that do not come back."
+        </div>
+
+        <div class="pack-contents-label">What's In the Pack</div>
+        <ul class="pack-contents">
+            <li>600+ word deep personality system prompt</li>
+            <li>15 hand-crafted memory entries</li>
+            <li>Optimized config.yml for SentiencePro</li>
+            <li>LlamaCraft Bridge compatible config</li>
+            <li>7 edge case responses pre-built</li>
+            <li>Step-by-step installation guide</li>
+            <li>Upsell guide — upgrade path to Aldric</li>
+            <li>No payment. No card. Just your email.</li>
+        </ul>
+
+        <!-- Upsell -->
+        <div class="pack-upsell">
+            <div class="upsell-label">Want More?</div>
+            <h4>⚔️ Upgrade to Aldric — Full Gate Captain</h4>
+            <p>25 memories, 600+ word personality with emotional
+               depth, advanced negotiation logic, and a full 31-year
+               backstory. The Ghostwriter is the intro.
+               Aldric is the character.</p>
+            <div class="upsell-row">
+                <span class="upsell-price">$4.89</span>
+                <span class="upsell-orig">$6.99</span>
+                <a href="pay-aldric.html" class="upsell-btn">
+                    Get Aldric →
+                </a>
+            </div>
+        </div>
+
+    </div>
+    <!-- ══ END LEFT ══ -->
+
+    <!-- ══ RIGHT: FORM PANEL ══ -->
+    <div class="form-panel">
+
+        <div class="form-header">
+            <h2>🎁 Get Your Free Pack</h2>
+            <p>Enter your details — we email the download link instantly.</p>
+        </div>
+
+        <div class="form-body">
+
+            <!-- Quick feature list -->
+            <ul class="quick-list">
+                <li>Full personality prompt</li>
+                <li>15 hand-crafted memories</li>
+                <li>Optimized config.yml</li>
+                <li>Install guide included</li>
+                <li>SentiencePro ready</li>
+                <li>LlamaCraft ready</li>
+                <li>Edge case responses</li>
+                <li>Free forever</li>
+            </ul>
+
+            <!-- ── FORM STATE ── -->
+            <div class="form-state active" id="state-form">
+
+                <!-- Honeypot -->
+                <input type="text" id="honey" tabindex="-1"
+                       style="display:none" autocomplete="off">
+
+                <div class="fg">
+                    <label for="f-name">
+                        Your Name <span class="req">*</span>
+                    </label>
+                    <input type="text" id="f-name"
+                           placeholder="What should we call you?"
+                           autocomplete="given-name">
+                </div>
+
+                <div class="fg">
+                    <label for="f-email">
+                        Email Address <span class="req">*</span>
+                    </label>
+                    <input type="email" id="f-email"
+                           placeholder="your@email.com"
+                           autocomplete="email">
+                    <div class="fg-hint">
+                        The download link is sent here instantly.
+                        Check your spam folder if you do not see it
+                        within 2 minutes.
+                    </div>
+                </div>
+
+                <div class="fg">
+                    <label for="f-plugin">
+                        Which Plugin Are You Using?
+                        <span style="color:var(--text-muted);
+                                     font-weight:400;
+                                     font-size:0.75rem;">
+                            (optional)
+                        </span>
+                    </label>
+                    <select id="f-plugin">
+                        <option value="">Select your plugin…</option>
+                        <option value="SentiencePro">SentiencePro</option>
+                        <option value="LlamaCraft Bridge">LlamaCraft Bridge</option>
+                        <option value="Citizens + Denizen">Citizens + Denizen</option>
+                        <option value="TalkativeNPC">TalkativeNPC</option>
+                        <option value="Other">Other</option>
+                        <option value="Not sure yet">Not sure yet</option>
+                    </select>
+                </div>
+
+                <div class="fg">
+                    <label for="f-server">
+                        Server Size
+                        <span style="color:var(--text-muted);
+                                     font-weight:400;
+                                     font-size:0.75rem;">
+                            (optional)
+                        </span>
+                    </label>
+                    <select id="f-server">
+                        <option value="">Select approximate size…</option>
+                        <option value="Just me / testing">Just me / testing</option>
+                        <option value="1–10 players">1–10 players</option>
+                        <option value="10–50 players">10–50 players</option>
+                        <option value="50–200 players">50–200 players</option>
+                        <option value="200+ players">200+ players</option>
+                    </select>
+                </div>
+
+                <div class="privacy-note">
+                    <span class="lock">🔒</span>
+                    <span>
+                        Your email is used only to send your download
+                        link and occasional CharacterCraft updates.
+                        No spam. No sharing. Unsubscribe anytime.
+                    </span>
+                </div>
+
+                <button class="submit-btn" id="submit-btn"
+                        onclick="FreePage.submit()">
+                    🎁 Send Me the Free Pack
+                </button>
+
+                <div class="form-error" id="form-error"></div>
+
+                <!-- Social proof -->
+                <div class="social-row">
+                    <div class="social-stat">
+                        <span class="stat-num">100%</span>
+                        <span class="stat-label">Free Forever</span>
+                    </div>
+                    <div class="social-stat">
+                        <span class="stat-num">2 min</span>
+                        <span class="stat-label">Avg Delivery Time</span>
+                    </div>
+                    <div class="social-stat">
+                        <span class="stat-num">No Card</span>
+                        <span class="stat-label">Required</span>
+                    </div>
+                </div>
+
+            </div>
+            <!-- end form state -->
+
+            <!-- ── SUCCESS STATE ── -->
+            <div class="form-state" id="state-success">
+                <div class="success-state">
+
+                    <div class="success-check">✓</div>
+
+                    <h3>Check Your Inbox!</h3>
+                    <p>We've sent The Ghostwriter pack to:</p>
+                    <div class="success-email-display"
+                         id="success-email-display">—</div>
+
+                    <p style="margin-bottom:1.5rem;">
+                        The email contains your download link for
+                        <strong>THE GHOSTWRITER.zip</strong> —
+                        everything you need to get your first
+                        AI NPC live.
+                    </p>
+
+                    <div class="success-next-steps">
+                        <h4>After You Download</h4>
+                        <ol>
+                            <li>Unzip the file — you will find the
+                                personality file, memory bank,
+                                config.yml, and install guide.</li>
+                            <li>Follow the install guide —
+                                takes under 10 minutes.</li>
+                            <li>Your guard NPC is live and in character.</li>
+                            <li>Want more depth? Upgrade to Aldric —
+                                25 memories, full emotional range,
+                                31-year backstory.</li>
+                        </ol>
+                    </div>
+
+                    <a href="pay-aldric.html"
+                       class="success-browse-btn">
+                        ⚔️ Upgrade to Aldric — $4.89 →
+                    </a>
+
+                    <p style="margin-top:1rem;font-size:0.75rem;
+                               color:var(--text-muted);">
+                        No email? Check your spam folder.
+                        Still nothing after 5 minutes?
+                        Contact us on Discord.
+                    </p>
+
+                </div>
+            </div>
+            <!-- end success state -->
+
+        </div>
+    </div>
+    <!-- ══ END RIGHT ══ -->
+
+</div>
+
+<!-- ── HOW IT WORKS ── -->
+<div class="how-section">
+    <div class="how-inner">
+        <span class="section-label">After Download</span>
+        <h2>From Download to Live NPC in 4 Steps</h2>
+        <p>The Ghostwriter installs like any other SentiencePro or
+           LlamaCraft character. The install guide walks you through
+           every step.</p>
+
+        <div class="how-steps-grid">
+            <div class="how-step-card">
+                <div class="step-num">1</div>
+                <h4>Download the Zip</h4>
+                <p>Click the link in your email.
+                   Save THE GHOSTWRITER.zip somewhere
+                   you can find it.</p>
+            </div>
+            <div class="how-step-card">
+                <div class="step-num">2</div>
+                <h4>Unzip the Files</h4>
+                <p>Inside you will find the personality file,
+                   memory bank, config.yml, and install guide.
+                   Open the guide first.</p>
+            </div>
+            <div class="how-step-card">
+                <div class="step-num">3</div>
+                <h4>Follow the Guide</h4>
+                <p>Copy files into your plugin folder.
+                   Paste your OpenAI or Ollama key.
+                   Restart the server.</p>
+            </div>
+            <div class="how-step-card">
+                <div class="step-num">4</div>
+                <h4>Talk to Your Guard</h4>
+                <p>Walk up to your NPC and say hello.
+                   He will remember. He will respond.
+                   He has been here a long time.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ── WHAT'S INSIDE ── -->
+<div class="inside-section">
+    <div class="inside-inner">
+        <span class="section-label">Pack Contents</span>
+        <h2>Everything Inside the Free Pack</h2>
+        <p>The Ghostwriter is not a demo. It is a complete,
+           deployable NPC pack — the same quality as the paid
+           characters, just with fewer memories and a shorter
+           backstory.</p>
+
+        <div class="inside-grid">
+
+            <div class="inside-card">
+                <span class="inside-icon">🧠</span>
+                <h3>Personality System Prompt</h3>
+                <p>600+ words defining exactly who The Ghostwriter is.
+                   His voice, his manner, his world view, his loyalties,
+                   and his limits. Not a template — a character.</p>
+                <span class="inside-tag">600+ words</span>
+            </div>
+
+            <div class="inside-card">
+                <span class="inside-icon">📖</span>
+                <h3>15 Hand-Crafted Memories</h3>
+                <p>Specific events from his past. The gate he has
+                   guarded, the faces he remembers, the things he
+                   has seen. Written by hand — not generated.</p>
+                <span class="inside-tag">15 memories</span>
+            </div>
+
+            <div class="inside-card">
+                <span class="inside-icon">⚙️</span>
+                <h3>Optimized config.yml</h3>
+                <p>Temperature, token budget, memory retrieval count,
+                   and history length — all tuned for a guard NPC.
+                   Works out of the box without adjustment.</p>
+                <span class="inside-tag">Pre-tuned</span>
+            </div>
+
+            <div class="inside-card">
+                <span class="inside-icon">🛡️</span>
+                <h3>Edge Case Responses</h3>
+                <p>7 pre-built responses for common awkward questions.
+                   Players will test your NPC. These responses hold
+                   up under pressure.</p>
+                <span class="inside-tag">7 responses</span>
+            </div>
+
+            <div class="inside-card">
+                <span class="inside-icon">📋</span>
+                <h3>Installation Guide</h3>
+                <p>Step-by-step instructions for SentiencePro and
+                   LlamaCraft Bridge. Screenshots included.
+                   Under 10 minutes from download to live.</p>
+                <span class="inside-tag">Step-by-step</span>
+            </div>
+
+            <div class="inside-card">
+                <span class="inside-icon">⬆️</span>
+                <h3>Upgrade Path</h3>
+                <p>A guide showing exactly what Aldric adds over
+                   The Ghostwriter — so you know what you are
+                   getting before you decide to upgrade.</p>
+                <span class="inside-tag">Included</span>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- ── FOOTER ── -->
+<footer>
+    <div class="footer-links">
+        <a href="index.html">Home</a>
+        <a href="index.html#store">Store</a>
+        <a href="pay-aldric.html">Get Aldric</a>
+        <a href="license.html">Server License</a>
+        <a href="retainer.html">Monthly Retainer</a>
+    </div>
+    <p class="footer-copy">
+        © 2025 CharacterCraft. All rights reserved.
+        The Ghostwriter is free forever — no strings.
+    </p>
+</footer>
+
+<script>
+var FreePage = (function () {
+    'use strict';
+
+    /* ── CONFIG ─────────────────────────────────────── */
+    var APPS_SCRIPT_URL =
+        'https://script.google.com/macros/s/' +
+        'AKfycbyRco0jnIzxmXeExWBMIHoUKZxdG0nQkHETeGzBuhfSFiaOq-1N10H0yE--PyhIzHIrrA' +
+        '/exec';
+
+    /* ── HELPERS ─────────────────────────────────────── */
+    function showError(msg) {
+        var el = document.getElementById('form-error');
+        el.textContent = msg;
+        el.classList.add('visible');
+    }
+
+    function hideError() {
+        var el = document.getElementById('form-error');
+        el.textContent = '';
+        el.classList.remove('visible');
+    }
+
+    function setLoading(loading) {
+        var btn = document.getElementById('submit-btn');
+        btn.disabled  = loading;
+        btn.innerHTML = loading
+            ? '<div class="spinner"></div> Sending…'
+            : '🎁 Send Me the Free Pack';
+    }
+
+    function showSuccess(email) {
+        document.getElementById('state-form').classList.remove('active');
+        document.getElementById('state-success').classList.add('active');
+        document.getElementById('success-email-display').textContent = email;
+
+        /* Scroll to top of panel */
+        var panel = document.querySelector('.form-panel');
+        if (panel) panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    function isValidEmail(email) {
+        return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    }
+
+    /* ── SUBMIT ─────────────────────────────────────── */
+    function submit() {
+
+        /* Honeypot check */
+        var honey = document.getElementById('honey');
+        if (honey && honey.value !== '') return;
+
+        hideError();
+
+        var name   = document.getElementById('f-name').value.trim();
+        var email  = document.getElementById('f-email').value.trim();
+        var plugin = document.getElementById('f-plugin').value;
+        var server = document.getElementById('f-server').value;
+
+        /* Validate */
+        if (!name) {
+            document.getElementById('f-name').classList.add('error');
+            document.getElementById('f-name').focus();
+            showError('Please enter your name.');
+            return;
+        }
+
+        document.getElementById('f-name').classList.remove('error');
+
+        if (!email || !isValidEmail(email)) {
+            document.getElementById('f-email').classList.add('error');
+            document.getElementById('f-email').focus();
+            showError('Please enter a valid email address.');
+            return;
+        }
+
+        document.getElementById('f-email').classList.remove('error');
+
+        /* Submit */
+        setLoading(true);
+
+        var payload =
+            'source=free_pack_form' +
+            '&name='        + encodeURIComponent(name) +
+            '&email='       + encodeURIComponent(email) +
+            '&plugin='      + encodeURIComponent(plugin) +
+            '&server_size=' + encodeURIComponent(server) +
+            '&submitted_at='+ encodeURIComponent(new Date().toISOString());
+
+        fetch(APPS_SCRIPT_URL, {
+            method:  'POST',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body:    payload
+        })
+        .then(function (res) { return res.text(); })
+        .then(function (text) {
+            var result;
+            try { result = JSON.parse(text); }
+            catch (e) { result = { status: 'OK' }; }
+
+            setLoading(false);
+
+            if (result.error === 'ALREADY_SUBSCRIBED') {
+                /* Still show success — they already have the pack */
+                showSuccess(email);
+                return;
+            }
+
+            if (result.error) {
+                showError(
+                    'Something went wrong: ' + result.error +
+                    '. Please try again or contact us on Discord.'
+                );
+                return;
+            }
+
+            showSuccess(email);
+        })
+        .catch(function (err) {
+            setLoading(false);
+            showError(
+                'Could not connect to the server. ' +
+                'Please check your connection and try again.'
+            );
+            console.error('Free pack submit error:', err);
+        });
+    }
+
+    /* ── ENTER KEY SUPPORT ──────────────────────────── */
+    document.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter') {
+            var active = document.getElementById('state-form');
+            if (active && active.classList.contains('active')) {
+                submit();
+            }
+        }
+    });
+
+    /* ── MOBILE NAV ─────────────────────────────────── */
+    document.addEventListener('click', function (e) {
+        var nav = document.querySelector('.nav-links');
+        var tog = document.querySelector('.nav-toggle');
+        if (nav && nav.classList.contains('open') &&
+            !nav.contains(e.target) && !tog.contains(e.target)) {
+            nav.classList.remove('open');
+        }
+    });
+
+    return { submit: submit };
+
+}());
+</script>
+
+</body>
+</html>
