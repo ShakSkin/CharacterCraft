@@ -19,7 +19,7 @@
     CC.config = {
 
         // ── Apps Script URL ──────────────────────────────
-        appsScriptUrl: 'https://script.google.com/macros/s/AKfycbwWp83QEMpN2BWhCZwSNzkmhUN7Tnpji-N8Gej9qt_gxAeX_mqTYx-Xv6vNfM19CG8I/exec',
+        appsScriptUrl: 'https://script.google.com/macros/s/AKfycbyRco0jnIzxmXeExWBMIHoUKZxdG0nQkHETeGzBuhfSFiaOq-1N10H0yE--PyhIzHIrrA/exec',
 
         // ── Redirect after successful payment ───────────
         successUrl: '/success.html',
