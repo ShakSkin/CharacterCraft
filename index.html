@@ -1,0 +1,1439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CharacterCraft — AI NPC Packs for Minecraft Servers</title>
+    <meta name="description" content="Hand-crafted AI NPC personality packs for Minecraft servers. Deep personalities, real memories, optimized configs. Your NPCs should have a past — not a script.">
+    <meta property="og:title" content="CharacterCraft — AI NPC Packs for Minecraft Servers">
+    <meta property="og:description" content="Your NPCs should have a past — not a script. Hand-crafted personalities, memories, and configs for SentiencePro and LlamaCraft Bridge.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://shakskin.github.io/CharacterCraft/">
+    <link rel="canonical" href="https://shakskin.github.io/CharacterCraft/">
+    <base href="https://shakskin.github.io/CharacterCraft/">
+    <style>
+        :root {
+            --gold:          #D4A537;
+            --gold-light:    #F2D06B;
+            --bg-primary:    #0A0A0F;
+            --bg-secondary:  #12121A;
+            --bg-card:       #1A1A25;
+            --bg-hover:      #222233;
+            --text-primary:  #E8E8F0;
+            --text-secondary:#9999AA;
+            --text-muted:    #666677;
+            --border:        #2A2A3A;
+            --green:         #4CAF50;
+            --red:           #E74C3C;
+            --urgent-red:    #FF4444;
+            --purple:        #9B59B6;
+            --teal:          #1ABC9C;
+            --amber:         #F39C12;
+            --blue:          #3498DB;
+        }
+
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family:  'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
+            background:   var(--bg-primary);
+            color:        var(--text-primary);
+            line-height:  1.6;
+            overflow-x:   hidden;
+        }
+
+        /* ── NAV ── */
+        nav {
+            position:        sticky;
+            top:             0;
+            z-index:         1000;
+            background:      rgba(10,10,15,0.97);
+            backdrop-filter: blur(12px);
+            border-bottom:   1px solid var(--border);
+            padding:         0 2rem;
+        }
+
+        .nav-inner {
+            max-width:       1200px;
+            margin:          0 auto;
+            display:         flex;
+            justify-content: space-between;
+            align-items:     center;
+            height:          64px;
+        }
+
+        .nav-logo {
+            font-size:       1.25rem;
+            font-weight:     700;
+            color:           var(--gold);
+            text-decoration: none;
+            letter-spacing:  -0.3px;
+        }
+
+        .nav-logo span { color: var(--text-primary); }
+
+        .nav-links {
+            display:     flex;
+            gap:         2rem;
+            list-style:  none;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color:           var(--text-secondary);
+            text-decoration: none;
+            font-size:       0.9rem;
+            font-weight:     500;
+            transition:      color 0.2s;
+        }
+
+        .nav-links a:hover { color: var(--gold); }
+
+        .nav-links .nav-cta {
+            background:    var(--gold);
+            color:         #000;
+            padding:       0.5rem 1.25rem;
+            border-radius: 6px;
+            font-weight:   700;
+            transition:    background 0.2s;
+        }
+
+        .nav-links .nav-cta:hover { background: var(--gold-light); }
+
+        .nav-toggle {
+            display:    none;
+            background: none;
+            border:     none;
+            color:      var(--text-primary);
+            font-size:  1.5rem;
+            cursor:     pointer;
+        }
+
+        /* ── HERO ── */
+        .hero {
+            min-height:      92vh;
+            display:         flex;
+            align-items:     center;
+            justify-content: center;
+            text-align:      center;
+            padding:         6rem 2rem 4rem;
+            position:        relative;
+            overflow:        hidden;
+        }
+
+        .hero::before {
+            content:    '';
+            position:   absolute;
+            inset:      0;
+            background: radial-gradient(ellipse at 50% 0%,
+                            rgba(212,165,55,0.08) 0%,
+                            transparent 60%);
+            pointer-events: none;
+        }
+
+        .hero::after {
+            content:    '';
+            position:   absolute;
+            bottom:     0;
+            left:       0;
+            right:      0;
+            height:     200px;
+            background: linear-gradient(transparent, var(--bg-primary));
+            pointer-events: none;
+        }
+
+        .hero-inner {
+            max-width: 820px;
+            position:  relative;
+            z-index:   1;
+        }
+
+        .hero-eyebrow {
+            display:        inline-flex;
+            align-items:    center;
+            gap:            0.5rem;
+            background:     rgba(212,165,55,0.08);
+            border:         1px solid rgba(212,165,55,0.2);
+            color:          var(--gold);
+            font-size:      0.78rem;
+            font-weight:    700;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            padding:        0.35rem 1rem;
+            border-radius:  50px;
+            margin-bottom:  1.5rem;
+            animation:      fadeUp 0.6s ease both;
+        }
+
+        .hero h1 {
+            font-size:     clamp(2.25rem, 6vw, 4rem);
+            font-weight:   800;
+            line-height:   1.1;
+            margin-bottom: 1.5rem;
+            letter-spacing:-1px;
+            animation:     fadeUp 0.6s 0.1s ease both;
+        }
+
+        .hero h1 .gold { color: var(--gold); }
+
+        .hero-sub {
+            font-size:     1.1rem;
+            color:         var(--text-secondary);
+            max-width:     620px;
+            margin:        0 auto 2.5rem;
+            line-height:   1.75;
+            animation:     fadeUp 0.6s 0.2s ease both;
+        }
+
+        .hero-actions {
+            display:         flex;
+            gap:             1rem;
+            justify-content: center;
+            flex-wrap:       wrap;
+            margin-bottom:   3rem;
+            animation:       fadeUp 0.6s 0.3s ease both;
+        }
+
+        .btn-hero-primary {
+            display:         inline-flex;
+            align-items:     center;
+            gap:             0.5rem;
+            padding:         1rem 2.5rem;
+            background:      var(--gold);
+            color:           #000;
+            border-radius:   10px;
+            font-size:       1rem;
+            font-weight:     700;
+            text-decoration: none;
+            transition:      all 0.2s;
+        }
+
+        .btn-hero-primary:hover {
+            background:  var(--gold-light);
+            transform:   translateY(-2px);
+            box-shadow:  0 8px 30px rgba(212,165,55,0.3);
+        }
+
+        .btn-hero-secondary {
+            display:         inline-flex;
+            align-items:     center;
+            gap:             0.5rem;
+            padding:         1rem 2rem;
+            background:      transparent;
+            color:           var(--text-primary);
+            border:          1px solid var(--border);
+            border-radius:   10px;
+            font-size:       1rem;
+            font-weight:     600;
+            text-decoration: none;
+            transition:      all 0.2s;
+        }
+
+        .btn-hero-secondary:hover {
+            border-color: var(--gold);
+            color:        var(--gold);
+            transform:    translateY(-2px);
+        }
+
+        /* Plugin support badges */
+        .hero-plugins {
+            display:         flex;
+            align-items:     center;
+            justify-content: center;
+            gap:             0.75rem;
+            flex-wrap:       wrap;
+            animation:       fadeUp 0.6s 0.4s ease both;
+        }
+
+        .hero-plugins .plugin-label {
+            font-size:  0.78rem;
+            color:      var(--text-muted);
+            font-weight:600;
+        }
+
+        .plugin-badge {
+            display:        inline-flex;
+            align-items:    center;
+            gap:            0.35rem;
+            background:     var(--bg-card);
+            border:         1px solid var(--border);
+            color:          var(--text-secondary);
+            font-size:      0.72rem;
+            font-weight:    600;
+            padding:        0.3rem 0.75rem;
+            border-radius:  50px;
+        }
+
+        .plugin-badge.active {
+            background:   rgba(76,175,80,0.08);
+            border-color: rgba(76,175,80,0.2);
+            color:        var(--green);
+        }
+
+        .plugin-badge.soon {
+            background:   rgba(102,102,119,0.08);
+            border-color: rgba(102,102,119,0.2);
+            color:        var(--text-muted);
+            font-style:   italic;
+        }
+
+        /* ── SECTIONS ── */
+        .section {
+            padding: 5rem 2rem;
+        }
+
+        .section-inner {
+            max-width: 1100px;
+            margin:    0 auto;
+        }
+
+        .section-label {
+            display:        inline-block;
+            color:          var(--gold);
+            font-size:      0.75rem;
+            font-weight:    700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom:  0.75rem;
+        }
+
+        .section-title {
+            font-size:     clamp(1.5rem, 3vw, 2.2rem);
+            font-weight:   700;
+            margin-bottom: 1rem;
+            line-height:   1.2;
+        }
+
+        .section-desc {
+            color:         var(--text-secondary);
+            font-size:     1rem;
+            max-width:     640px;
+            margin-bottom: 3rem;
+            line-height:   1.7;
+        }
+
+        /* ── HOW IT WORKS ── */
+        .how-section { background: var(--bg-secondary); }
+
+        .how-grid {
+            display:               grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap:                   2rem;
+            position:              relative;
+        }
+
+        .how-grid::before {
+            content:    '';
+            position:   absolute;
+            top:        32px;
+            left:       calc(16.67% + 20px);
+            right:      calc(16.67% + 20px);
+            height:     2px;
+            background: linear-gradient(90deg,
+                            var(--gold),
+                            rgba(212,165,55,0.15));
+        }
+
+        .how-step { text-align: center; position: relative; }
+
+        .how-num {
+            display:         inline-flex;
+            align-items:     center;
+            justify-content: center;
+            width:           64px;
+            height:          64px;
+            border-radius:   50%;
+            background:      rgba(212,165,55,0.08);
+            border:          2px solid rgba(212,165,55,0.25);
+            color:           var(--gold);
+            font-size:       1.5rem;
+            font-weight:     800;
+            margin:          0 auto 1.25rem;
+            position:        relative;
+            z-index:         1;
+        }
+
+        .how-step h3 {
+            font-size:     1rem;
+            font-weight:   700;
+            margin-bottom: 0.5rem;
+        }
+
+        .how-step p {
+            font-size:  0.88rem;
+            color:      var(--text-secondary);
+            line-height:1.65;
+        }
+
+        /* ── PRODUCT CARDS ── */
+        .products-section { background: var(--bg-primary); }
+
+        .products-grid {
+            display:               grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap:                   1.25rem;
+        }
+
+        .product-card {
+            background:    var(--bg-card);
+            border:        1px solid var(--border);
+            border-radius: 14px;
+            padding:       1.75rem;
+            display:       flex;
+            flex-direction:column;
+            transition:    all 0.25s;
+            position:      relative;
+            overflow:      hidden;
+            text-decoration:none;
+            color:         inherit;
+        }
+
+        .product-card:hover {
+            border-color: rgba(212,165,55,0.3);
+            transform:    translateY(-4px);
+            box-shadow:   0 12px 40px rgba(0,0,0,0.3);
+        }
+
+        .product-card::before {
+            content:        '';
+            position:       absolute;
+            inset:          0;
+            background:     radial-gradient(circle at 50% 0%,
+                                rgba(212,165,55,0.04) 0%,
+                                transparent 60%);
+            pointer-events: none;
+        }
+
+        /* Card accent colours */
+        .card-gold   { --card-accent: #D4A537; --card-rgb: 212,165,55; }
+        .card-green  { --card-accent: #4CAF50; --card-rgb: 76,175,80; }
+        .card-purple { --card-accent: #9B59B6; --card-rgb: 155,89,182; }
+        .card-teal   { --card-accent: #1ABC9C; --card-rgb: 26,188,156; }
+        .card-amber  { --card-accent: #F39C12; --card-rgb: 243,156,18; }
+        .card-blue   { --card-accent: #3498DB; --card-rgb: 52,152,219; }
+
+        .product-card[class*="card-"]:hover {
+            border-color: rgba(var(--card-rgb), 0.35);
+        }
+
+        .product-card[class*="card-"]::before {
+            background: radial-gradient(circle at 50% 0%,
+                            rgba(var(--card-rgb), 0.05) 0%,
+                            transparent 60%);
+        }
+
+        .card-badge {
+            position:      absolute;
+            top:           1rem;
+            right:         1rem;
+            font-size:     0.6rem;
+            font-weight:   800;
+            letter-spacing:1.5px;
+            text-transform:uppercase;
+            padding:       0.2rem 0.6rem;
+            border-radius: 50px;
+            z-index:       1;
+        }
+
+        .badge-sale  { background: var(--urgent-red); color: #fff; }
+        .badge-free  { background: var(--green); color: #fff; }
+        .badge-best  { background: var(--purple); color: #fff; }
+        .badge-pro   { background: var(--teal); color: #000; }
+
+        .card-icon {
+            font-size:     2.5rem;
+            margin-bottom: 1rem;
+            display:       block;
+            position:      relative;
+            z-index:       1;
+        }
+
+        .card-name {
+            font-size:     1.1rem;
+            font-weight:   800;
+            margin-bottom: 0.2rem;
+            position:      relative;
+            z-index:       1;
+        }
+
+        .card-role {
+            font-size:     0.78rem;
+            color:         var(--text-muted);
+            margin-bottom: 1rem;
+            position:      relative;
+            z-index:       1;
+        }
+
+        .card-features {
+            list-style:    none;
+            margin-bottom: 1.5rem;
+            flex:          1;
+        }
+
+        .card-features li {
+            font-size:   0.82rem;
+            color:       var(--text-secondary);
+            padding:     0.25rem 0;
+            display:     flex;
+            align-items: flex-start;
+            gap:         0.5rem;
+        }
+
+        .card-features li::before {
+            content:     '✓';
+            color:       var(--green);
+            font-weight: 700;
+            flex-shrink: 0;
+            font-size:   0.75rem;
+            margin-top:  0.1rem;
+        }
+
+        .card-price-row {
+            display:     flex;
+            align-items: baseline;
+            gap:         0.5rem;
+            margin-bottom:1rem;
+        }
+
+        .card-price {
+            font-size:   1.5rem;
+            font-weight: 800;
+            color:       var(--card-accent, var(--gold));
+        }
+
+        .card-price-orig {
+            font-size:       0.8rem;
+            color:           var(--text-muted);
+            text-decoration: line-through;
+        }
+
+        .card-price-note {
+            font-size:  0.72rem;
+            color:      var(--text-muted);
+            margin-left:auto;
+        }
+
+        .card-btn {
+            display:         block;
+            text-align:      center;
+            padding:         0.7rem 1.25rem;
+            border-radius:   8px;
+            font-size:       0.88rem;
+            font-weight:     700;
+            text-decoration: none;
+            transition:      all 0.2s;
+            background:      rgba(var(--card-rgb, 212,165,55), 0.1);
+            border:          1px solid rgba(var(--card-rgb, 212,165,55), 0.25);
+            color:           var(--card-accent, var(--gold));
+            position:        relative;
+            z-index:         1;
+        }
+
+        .card-btn:hover {
+            background: rgba(var(--card-rgb, 212,165,55), 0.2);
+            transform:  translateY(-1px);
+        }
+
+        .card-btn.btn-free {
+            background: rgba(76,175,80,0.1);
+            border:     1px solid rgba(76,175,80,0.25);
+            color:      var(--green);
+        }
+
+        .card-btn.btn-free:hover { background: rgba(76,175,80,0.2); }
+
+        /* ── WHY SECTION ── */
+        .why-section { background: var(--bg-secondary); }
+
+        .why-grid {
+            display:               grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap:                   1.25rem;
+        }
+
+        .why-card {
+            background:    var(--bg-card);
+            border:        1px solid var(--border);
+            border-radius: 12px;
+            padding:       2rem;
+            transition:    border-color 0.2s;
+        }
+
+        .why-card:hover { border-color: rgba(212,165,55,0.25); }
+
+        .why-icon {
+            font-size:     1.75rem;
+            margin-bottom: 0.85rem;
+            display:       block;
+        }
+
+        .why-card h3 {
+            font-size:     1rem;
+            font-weight:   700;
+            margin-bottom: 0.5rem;
+        }
+
+        .why-card p {
+            font-size:   0.85rem;
+            color:       var(--text-secondary);
+            line-height: 1.65;
+        }
+
+        /* ── PLUGINS ── */
+        .plugins-section { background: var(--bg-primary); }
+
+        .plugins-grid {
+            display:               grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap:                   1rem;
+        }
+
+        .plugin-card {
+            background:    var(--bg-card);
+            border:        1px solid var(--border);
+            border-radius: 10px;
+            padding:       1.25rem;
+            display:       flex;
+            align-items:   flex-start;
+            gap:           0.85rem;
+        }
+
+        .plugin-card.plugin-active {
+            border-color: rgba(76,175,80,0.25);
+            background:   rgba(76,175,80,0.03);
+        }
+
+        .plugin-card.plugin-soon {
+            opacity: 0.65;
+        }
+
+        .plugin-status-dot {
+            width:        10px;
+            height:       10px;
+            border-radius:50%;
+            flex-shrink:  0;
+            margin-top:   0.35rem;
+        }
+
+        .dot-active { background: var(--green); }
+        .dot-soon   { background: var(--text-muted); }
+
+        .plugin-card h4 {
+            font-size:     0.9rem;
+            font-weight:   700;
+            margin-bottom: 0.2rem;
+        }
+
+        .plugin-card p {
+            font-size:  0.78rem;
+            color:      var(--text-muted);
+            line-height:1.5;
+        }
+
+        .plugin-tag {
+            display:        inline-block;
+            margin-top:     0.4rem;
+            font-size:      0.62rem;
+            font-weight:    700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            padding:        0.15rem 0.5rem;
+            border-radius:  50px;
+        }
+
+        .tag-active {
+            background:   rgba(76,175,80,0.1);
+            color:        var(--green);
+            border:       1px solid rgba(76,175,80,0.2);
+        }
+
+        .tag-soon {
+            background:   rgba(102,102,119,0.1);
+            color:        var(--text-muted);
+            border:       1px solid var(--border);
+        }
+
+        /* ── FAQ ── */
+        .faq-section { background: var(--bg-secondary); }
+
+        .faq-grid {
+            display:               grid;
+            grid-template-columns: 1fr 1fr;
+            gap:                   1.25rem;
+        }
+
+        .faq-item {
+            background:    var(--bg-card);
+            border:        1px solid var(--border);
+            border-radius: 10px;
+            padding:       1.5rem;
+        }
+
+        .faq-item h4 {
+            font-size:     0.95rem;
+            font-weight:   700;
+            margin-bottom: 0.5rem;
+        }
+
+        .faq-item p {
+            font-size:   0.85rem;
+            color:       var(--text-secondary);
+            line-height: 1.65;
+        }
+
+        /* ── FREE STRIP ── */
+        .free-strip {
+            background:    linear-gradient(135deg,
+                               rgba(76,175,80,0.08) 0%,
+                               rgba(26,188,156,0.08) 100%);
+            border-top:    1px solid rgba(76,175,80,0.15);
+            border-bottom: 1px solid rgba(76,175,80,0.15);
+            padding:       3rem 2rem;
+            text-align:    center;
+        }
+
+        .free-strip-inner { max-width: 680px; margin: 0 auto; }
+
+        .free-strip h2 {
+            font-size:     1.75rem;
+            font-weight:   800;
+            margin-bottom: 0.75rem;
+        }
+
+        .free-strip p {
+            color:         var(--text-secondary);
+            font-size:     1rem;
+            margin-bottom: 1.75rem;
+            line-height:   1.7;
+        }
+
+        .btn-free-strip {
+            display:         inline-flex;
+            align-items:     center;
+            gap:             0.5rem;
+            padding:         0.9rem 2.5rem;
+            background:      var(--green);
+            color:           #000;
+            border-radius:   10px;
+            font-size:       1rem;
+            font-weight:     700;
+            text-decoration: none;
+            transition:      all 0.2s;
+        }
+
+        .btn-free-strip:hover {
+            background: #5dca61;
+            transform:  translateY(-2px);
+            box-shadow: 0 8px 25px rgba(76,175,80,0.3);
+        }
+
+        /* ── FOOTER ── */
+        footer {
+            padding:    4rem 2rem 3rem;
+            border-top: 1px solid var(--border);
+        }
+
+        .footer-inner { max-width: 1100px; margin: 0 auto; }
+
+        .footer-grid {
+            display:               grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap:                   2rem;
+            margin-bottom:         2.5rem;
+        }
+
+        .footer-logo {
+            font-size:       1.2rem;
+            font-weight:     700;
+            color:           var(--gold);
+            text-decoration: none;
+            display:         block;
+            margin-bottom:   0.5rem;
+        }
+
+        .footer-logo span { color: var(--text-primary); }
+
+        .footer-brand p {
+            font-size:   0.82rem;
+            color:       var(--text-muted);
+            line-height: 1.65;
+            max-width:   280px;
+        }
+
+        .footer-col h4 {
+            font-size:      0.72rem;
+            font-weight:    700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color:          var(--text-secondary);
+            margin-bottom:  0.85rem;
+        }
+
+        .footer-col a {
+            display:         block;
+            color:           var(--text-muted);
+            text-decoration: none;
+            font-size:       0.85rem;
+            padding:         0.25rem 0;
+            transition:      color 0.2s;
+        }
+
+        .footer-col a:hover { color: var(--gold); }
+
+        .footer-bottom {
+            border-top:  1px solid var(--border);
+            padding-top: 1.5rem;
+            display:     flex;
+            justify-content:space-between;
+            align-items: center;
+            flex-wrap:   wrap;
+            gap:         0.75rem;
+        }
+
+        .footer-copy {
+            color:    var(--text-muted);
+            font-size:0.8rem;
+        }
+
+        /* ── ANIMATIONS ── */
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(16px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ── RESPONSIVE ── */
+        @media (max-width: 1000px) {
+            .products-grid { grid-template-columns: 1fr 1fr; }
+            .why-grid      { grid-template-columns: 1fr 1fr; }
+            .footer-grid   { grid-template-columns: 1fr 1fr; }
+            .how-grid      { grid-template-columns: 1fr; }
+            .how-grid::before { display: none; }
+        }
+
+        @media (max-width: 650px) {
+            .nav-links {
+                display:        none;
+                position:       absolute;
+                top:            64px;
+                left:           0;
+                right:          0;
+                background:     rgba(10,10,15,0.98);
+                flex-direction: column;
+                padding:        1.5rem 2rem;
+                gap:            1rem;
+                border-bottom:  1px solid var(--border);
+            }
+
+            .nav-links.open { display: flex; }
+            .nav-toggle     { display: block; }
+
+            .hero h1       { font-size: 2rem; }
+            .hero-actions  { flex-direction: column; align-items: center; }
+            .products-grid { grid-template-columns: 1fr; }
+            .why-grid      { grid-template-columns: 1fr; }
+            .faq-grid      { grid-template-columns: 1fr; }
+            .footer-grid   { grid-template-columns: 1fr; }
+
+            .footer-bottom {
+                flex-direction: column;
+                text-align:     center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ── NAV ── -->
+<nav>
+    <div class="nav-inner">
+        <a href="index.html" class="nav-logo">⚔️ Character<span>Craft</span></a>
+        <button class="nav-toggle"
+                onclick="document.querySelector('.nav-links').classList.toggle('open')"
+                aria-label="Menu">☰</button>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="store.html">Store</a></li>
+            <li><a href="license.html">Server License</a></li>
+            <li><a href="retainer.html">Retainer</a></li>
+            <li><a href="free.html">Free Pack</a></li>
+            <li><a href="free.html" class="nav-cta">Get Free Pack</a></li>
+        </ul>
+    </div>
+</nav>
+
+<!-- ── HERO ── -->
+<section class="hero">
+    <div class="hero-inner">
+
+        <div class="hero-eyebrow">
+            ⚔️ For Minecraft Server Owners
+        </div>
+
+        <h1>
+            Your NPCs Should Have<br>
+            <span class="gold">a Past. Not a Script.</span>
+        </h1>
+
+        <p class="hero-sub">
+            Hand-crafted AI NPC personality packs built for real servers.
+            Deep backstories, real memories, optimized configs —
+            every character feels like they have lived in your world
+            long before your players arrived.
+        </p>
+
+        <div class="hero-actions">
+            <a href="store.html" class="btn-hero-primary">
+                ⚔️ Browse Characters →
+            </a>
+            <a href="free.html" class="btn-hero-secondary">
+                🎁 Get Free Pack
+            </a>
+        </div>
+
+        <!-- Plugin support -->
+        <div class="hero-plugins">
+            <span class="plugin-label">Works with:</span>
+            <span class="plugin-badge active">✓ SentiencePro</span>
+            <span class="plugin-badge active">✓ LlamaCraft Bridge</span>
+            <span class="plugin-badge soon">+ 7 more coming soon</span>
+        </div>
+
+    </div>
+</section>
+
+<!-- ── HOW IT WORKS ── -->
+<section class="section how-section">
+    <div class="section-inner">
+        <div class="section-label">How It Works</div>
+        <h2 class="section-title">Up and Running in Three Steps</h2>
+        <p class="section-desc">
+            No prompt engineering. No config guessing.
+            Every pack drops straight into your server.
+        </p>
+
+        <div class="how-grid">
+            <div class="how-step">
+                <div class="how-num">1</div>
+                <h3>Choose Your Character</h3>
+                <p>Pick from the roster — individual packs, bundles,
+                   or the Server License for five characters with a
+                   shared world system. Pay once with crypto.</p>
+            </div>
+            <div class="how-step">
+                <div class="how-num">2</div>
+                <h3>We Deliver the Pack</h3>
+                <p>Within 2 hours of payment confirmation you receive
+                   the personality file, memory bank, config.yml,
+                   edge case responses, and install guide.</p>
+            </div>
+            <div class="how-step">
+                <div class="how-num">3</div>
+                <h3>Drop It In and Play</h3>
+                <p>Follow the install guide — usually under 10 minutes.
+                   Your NPC is live, in character, and responding like
+                   someone who has actually lived on your server.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ── PRODUCTS ── -->
+<section class="section products-section" id="store">
+    <div class="section-inner">
+        <div class="section-label">Character Roster</div>
+        <h2 class="section-title">Every Pack. One Price. Yours Forever.</h2>
+        <p class="section-desc">
+            One-time crypto payment. No subscriptions unless you want one.
+            All packs include free updates for life and personal support.
+        </p>
+
+        <div class="products-grid">
+
+            <!-- FREE PACK -->
+            <a href="free.html" class="product-card card-green">
+                <span class="card-badge badge-free">Free</span>
+                <span class="card-icon">🛡️</span>
+                <div class="card-name">The Ghostwriter</div>
+                <div class="card-role">Starter Guard — Your First AI NPC</div>
+                <ul class="card-features">
+                    <li>600+ word personality prompt</li>
+                    <li>15 hand-crafted memories</li>
+                    <li>Basic optimized config</li>
+                    <li>Full installation guide</li>
+                    <li>No payment required</li>
+                </ul>
+                <div class="card-price-row">
+                    <span class="card-price"
+                          style="color:var(--green);">Free</span>
+                </div>
+                <span class="card-btn btn-free">Download Free Pack →</span>
+            </a>
+
+            <!-- ALDRIC -->
+            <a href="pay-aldric.html" class="product-card card-gold">
+                <span class="card-badge badge-sale">30% Off</span>
+                <span class="card-icon">⚔️</span>
+                <div class="card-name">Aldric</div>
+                <div class="card-role">Grizzled Gate Captain — 31 Years of Service</div>
+                <ul class="card-features">
+                    <li>600+ word personality system prompt</li>
+                    <li>25 hand-crafted memories</li>
+                    <li>Advanced config with cost controls</li>
+                    <li>Emotional triggers + refusal patterns</li>
+                    <li>7+ edge case responses</li>
+                </ul>
+                <div class="card-price-row">
+                    <span class="card-price">$4.89</span>
+                    <span class="card-price-orig">$6.99</span>
+                </div>
+                <span class="card-btn">Get Aldric →</span>
+            </a>
+
+            <!-- DRAVEK -->
+            <a href="pay-dravek.html" class="product-card card-green">
+                <span class="card-badge badge-sale">30% Off</span>
+                <span class="card-icon">💰</span>
+                <div class="card-name">Dravek</div>
+                <div class="card-role">Corrupt Merchant — Knows Everyone's Price</div>
+                <ul class="card-features">
+                    <li>600+ word personality with ethics code</li>
+                    <li>25 memories including contacts</li>
+                    <li>Negotiation + bribery logic</li>
+                    <li>Knowledge boundaries defined</li>
+                    <li>7+ edge case responses</li>
+                </ul>
+                <div class="card-price-row">
+                    <span class="card-price">$4.85</span>
+                    <span class="card-price-orig">$6.99</span>
+                </div>
+                <span class="card-btn">Get Dravek →</span>
+            </a>
+
+            <!-- CITY BUNDLE -->
+            <a href="pay-city-bundle.html" class="product-card card-purple">
+                <span class="card-badge badge-best">Best Value</span>
+                <span class="card-icon">🏰</span>
+                <div class="card-name">City Bundle</div>
+                <div class="card-role">Aldric + Dravek — Two Characters. One World.</div>
+                <ul class="card-features">
+                    <li>Both complete character packs</li>
+                    <li>Shared world lore document</li>
+                    <li>Cross-reference memories</li>
+                    <li>50 total hand-crafted memories</li>
+                    <li>Both configs + install guides</li>
+                </ul>
+                <div class="card-price-row">
+                    <span class="card-price"
+                          style="color:var(--purple);">$8.47</span>
+                    <span class="card-price-orig">$13.98</span>
+                    <span class="card-price-note">Save 39%</span>
+                </div>
+                <span class="card-btn"
+                      style="background:rgba(155,89,182,0.1);
+                             border-color:rgba(155,89,182,0.25);
+                             color:var(--purple);">
+                    Get Bundle →
+                </span>
+            </a>
+
+            <!-- SERVER LICENSE -->
+            <a href="pay-server-license.html" class="product-card card-teal">
+                <span class="card-badge badge-pro">Pro</span>
+                <span class="card-icon">🌐</span>
+                <div class="card-name">Server License</div>
+                <div class="card-role">5 Characters · Commercial Rights · Full System</div>
+                <ul class="card-features">
+                    <li>5 full character packs — your choice</li>
+                    <li>Complete world lore system</li>
+                    <li>NPC relationship map</li>
+                    <li>API cost optimization report</li>
+                    <li>Commercial use rights + consultation</li>
+                </ul>
+                <div class="card-price-row">
+                    <span class="card-price"
+                          style="color:var(--teal);">$24.99</span>
+                    <span class="card-price-orig">$34.99</span>
+                </div>
+                <span class="card-btn"
+                      style="background:rgba(26,188,156,0.1);
+                             border-color:rgba(26,188,156,0.25);
+                             color:var(--teal);">
+                    Get License →
+                </span>
+            </a>
+
+            <!-- RETAINER -->
+            <a href="pay-retainer.html" class="product-card card-amber">
+                <span class="card-icon">📅</span>
+                <div class="card-name">Monthly Retainer</div>
+                <div class="card-role">Your NPC Team. Every Month.</div>
+                <ul class="card-features">
+                    <li>1 new character every month</li>
+                    <li>Unlimited revisions — any character</li>
+                    <li>Same-day support (8hr response)</li>
+                    <li>Priority access to new releases</li>
+                    <li>Commercial rights included</li>
+                </ul>
+                <div class="card-price-row">
+                    <span class="card-price"
+                          style="color:var(--amber);">$39</span>
+                    <span class="card-price-note">/month · cancel anytime</span>
+                </div>
+                <span class="card-btn"
+                      style="background:rgba(243,156,18,0.1);
+                             border-color:rgba(243,156,18,0.25);
+                             color:var(--amber);">
+                    Join Retainer →
+                </span>
+            </a>
+
+        </div>
+    </div>
+</section>
+
+<!-- ── FREE STRIP ── -->
+<div class="free-strip">
+    <div class="free-strip-inner">
+        <h2>🎁 Try Before You Buy</h2>
+        <p>
+            Get The Ghostwriter — a complete starter guard NPC —
+            completely free. Full personality, 15 memories, config,
+            and install guide. No payment. No card.
+            Just your email and a download link.
+        </p>
+        <a href="free.html" class="btn-free-strip">
+            Download Free Pack →
+        </a>
+    </div>
+</div>
+
+<!-- ── WHY CHARACTERCRAFT ── -->
+<section class="section why-section">
+    <div class="section-inner">
+        <div class="section-label">Why CharacterCraft</div>
+        <h2 class="section-title">The Difference Is in the Details</h2>
+        <p class="section-desc">
+            Anyone can paste a prompt into ChatGPT and call it an NPC.
+            We build characters that actually hold up under player pressure.
+        </p>
+
+        <div class="why-grid">
+            <div class="why-card">
+                <span class="why-icon">🧠</span>
+                <h3>Real Memory Architecture</h3>
+                <p>Every character ships with 15–25 hand-written memory
+                   entries. Specific events. Specific people. Specific
+                   emotions. Not placeholders — actual backstory that
+                   changes how the NPC responds.</p>
+            </div>
+            <div class="why-card">
+                <span class="why-icon">⚙️</span>
+                <h3>Optimized Configs</h3>
+                <p>Default SentiencePro configs waste tokens and produce
+                   inconsistent responses. Every pack includes tuned
+                   temperature, token budgets, and memory retrieval
+                   settings for that specific character type.</p>
+            </div>
+            <div class="why-card">
+                <span class="why-icon">🛡️</span>
+                <h3>Edge Case Coverage</h3>
+                <p>Players will ask weird things. Every pack includes 7+
+                   pre-built edge case responses — questions the character
+                   should deflect, refuse, or answer in a very specific way.
+                   Tested before delivery.</p>
+            </div>
+            <div class="why-card">
+                <span class="why-icon">🌍</span>
+                <h3>Shared World Systems</h3>
+                <p>Bundle and License packs include a shared world lore
+                   document. Characters reference the same events,
+                   the same history — from their own angle.
+                   No contradictions. No isolation.</p>
+            </div>
+            <div class="why-card">
+                <span class="why-icon">🔗</span>
+                <h3>On-Chain Payment Verification</h3>
+                <p>Every payment is verified directly on the blockchain.
+                   No third-party processor. No held funds.
+                   Crypto goes from you to our wallet on confirmation.
+                   Delivery follows within 2 hours.</p>
+            </div>
+            <div class="why-card">
+                <span class="why-icon">💬</span>
+                <h3>Support That Knows the Files</h3>
+                <p>Help comes from the person who wrote the character.
+                   Not a support ticket. Not a forum. If something
+                   does not work after install, we fix it —
+                   because we built it.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ── PLUGIN SUPPORT ── -->
+<section class="section plugins-section">
+    <div class="section-inner">
+        <div class="section-label">Plugin Compatibility</div>
+        <h2 class="section-title">Where Our Packs Work</h2>
+        <p class="section-desc">
+            Currently supporting the two leading AI NPC frameworks.
+            Expanding to every major platform as packs are adapted.
+        </p>
+
+        <div class="plugins-grid">
+
+            <div class="plugin-card plugin-active">
+                <span class="plugin-status-dot dot-active"></span>
+                <div>
+                    <h4>SentiencePro</h4>
+                    <p>Full support. All packs optimized for SentiencePro's
+                       memory and personality system.</p>
+                    <span class="plugin-tag tag-active">Live</span>
+                </div>
+            </div>
+
+            <div class="plugin-card plugin-active">
+                <span class="plugin-status-dot dot-active"></span>
+                <div>
+                    <h4>LlamaCraft Bridge</h4>
+                    <p>Full support. Configs tuned for LlamaCraft's
+                       local model architecture.</p>
+                    <span class="plugin-tag tag-active">Live</span>
+                </div>
+            </div>
+
+            <div class="plugin-card plugin-soon">
+                <span class="plugin-status-dot dot-soon"></span>
+                <div>
+                    <h4>Citizens + Denizen</h4>
+                    <p>Most widely used NPC framework. Adaptation in progress.</p>
+                    <span class="plugin-tag tag-soon">Coming Soon</span>
+                </div>
+            </div>
+
+            <div class="plugin-card plugin-soon">
+                <span class="plugin-status-dot dot-soon"></span>
+                <div>
+                    <h4>Insentient</h4>
+                    <p>AI-powered NPCs with persistent memory support.</p>
+                    <span class="plugin-tag tag-soon">Coming Soon</span>
+                </div>
+            </div>
+
+            <div class="plugin-card plugin-soon">
+                <span class="plugin-status-dot dot-soon"></span>
+                <div>
+                    <h4>TalkativeNPC</h4>
+                    <p>ChatGPT-powered NPC conversations plugin.</p>
+                    <span class="plugin-tag tag-soon">Coming Soon</span>
+                </div>
+            </div>
+
+            <div class="plugin-card plugin-soon">
+                <span class="plugin-status-dot dot-soon"></span>
+                <div>
+                    <h4>AetherNPC</h4>
+                    <p>AI villager and NPC conversation engine.</p>
+                    <span class="plugin-tag tag-soon">Coming Soon</span>
+                </div>
+            </div>
+
+            <div class="plugin-card plugin-soon">
+                <span class="plugin-status-dot dot-soon"></span>
+                <div>
+                    <h4>NPCEngine</h4>
+                    <p>Custom NPC dialogue and behaviour engine.</p>
+                    <span class="plugin-tag tag-soon">Coming Soon</span>
+                </div>
+            </div>
+
+            <div class="plugin-card plugin-soon">
+                <span class="plugin-status-dot dot-soon"></span>
+                <div>
+                    <h4>MCPets AI</h4>
+                    <p>AI-powered companion and pet NPC system.</p>
+                    <span class="plugin-tag tag-soon">Coming Soon</span>
+                </div>
+            </div>
+
+            <div class="plugin-card plugin-soon">
+                <span class="plugin-status-dot dot-soon"></span>
+                <div>
+                    <h4>Personality AI</h4>
+                    <p>OpenAI-powered NPC personality framework.</p>
+                    <span class="plugin-tag tag-soon">Coming Soon</span>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- ── FAQ ── */
+<section class="section faq-section">
+    <div class="section-inner">
+        <div class="section-label">FAQ</div>
+        <h2 class="section-title">Common Questions</h2>
+        <p class="section-desc">
+            Everything you need to know before your first pack.
+        </p>
+
+        <div class="faq-grid">
+
+            <div class="faq-item">
+                <h4>What exactly do I receive?</h4>
+                <p>Every pack includes a personality system prompt,
+                   memory bank file, optimized config.yml, edge case
+                   response set, and a step-by-step installation guide.
+                   Everything needed to go from zero to live NPC.</p>
+            </div>
+
+            <div class="faq-item">
+                <h4>How long does delivery take?</h4>
+                <p>Individual packs and bundles deliver within 2 hours
+                   of blockchain confirmation. Server License within
+                   4 hours. Retainer first character within 24 hours.
+                   All delivered to your email or Discord.</p>
+            </div>
+
+            <div class="faq-item">
+                <h4>What plugins do you support?</h4>
+                <p>Currently SentiencePro and LlamaCraft Bridge.
+                   Citizens + Denizen, Insentient, TalkativeNPC,
+                   AetherNPC, NPCEngine, MCPets AI, and Personality AI
+                   are in adaptation — coming soon.</p>
+            </div>
+
+            <div class="faq-item">
+                <h4>Why crypto only?</h4>
+                <p>Crypto payments are verified directly on the blockchain
+                   — no processor, no chargebacks, no held funds.
+                   Payment goes straight to our wallet on confirmation.
+                   We support 15 coins including SOL, TRX, LTC, and USDT.</p>
+            </div>
+
+            <div class="faq-item">
+                <h4>Can I modify the character files?</h4>
+                <p>Yes. The files are yours. Edit the personality,
+                   add memories, adjust the config — all fine for
+                   personal use. Commercial use rights require the
+                   Server License or Retainer tier.</p>
+            </div>
+
+            <div class="faq-item">
+                <h4>What if something does not work after install?</h4>
+                <p>Contact us via Discord or email. We respond within
+                   24 hours for standard packs, same day for Server
+                   License and Retainer. If we built it and it is broken,
+                   we fix it — no charge.</p>
+            </div>
+
+            <div class="faq-item">
+                <h4>Do the characters work together?</h4>
+                <p>Bundle and License packs include cross-reference
+                   memories — Aldric and Dravek know each other,
+                   reference the same events, and respond consistently
+                   when players ask one about the other.</p>
+            </div>
+
+            <div class="faq-item">
+                <h4>Is the free pack actually useful?</h4>
+                <p>Yes. The Ghostwriter is a complete starter guard NPC
+                   with a full personality prompt, 15 memories, a working
+                   config, and an install guide. It is the same quality
+                   as the paid packs — just shorter and without the
+                   advanced features.</p>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+    <div class="footer-inner">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <a href="index.html" class="footer-logo">
+                    ⚔️ Character<span>Craft</span>
+                </a>
+                <p>Hand-crafted AI NPC personality packs for Minecraft
+                   server owners. Built for SentiencePro and LlamaCraft
+                   Bridge. Your NPCs should have a past — not a script.</p>
+            </div>
+
+            <div class="footer-col">
+                <h4>Products</h4>
+                <a href="free.html">Free Pack</a>
+                <a href="pay-aldric.html">Aldric</a>
+                <a href="pay-dravek.html">Dravek</a>
+                <a href="pay-city-bundle.html">City Bundle</a>
+                <a href="pay-server-license.html">Server License</a>
+                <a href="pay-retainer.html">Monthly Retainer</a>
+            </div>
+
+            <div class="footer-col">
+                <h4>Info</h4>
+                <a href="index.html">Home</a>
+                <a href="license.html">License Info</a>
+                <a href="retainer.html">Retainer Info</a>
+            </div>
+
+            <div class="footer-col">
+                <h4>Support</h4>
+                <a href="free.html">Free Starter Pack</a>
+                <a href="success.html">Order Status</a>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <div class="footer-copy">
+                © 2025 CharacterCraft. All rights reserved.
+                All cryptocurrency transactions are final.
+            </div>
+            <div class="footer-copy">
+                Supporting SentiencePro · LlamaCraft Bridge
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script>
+(function () {
+    'use strict';
+
+    /* Mobile nav */
+    document.addEventListener('click', function (e) {
+        var nav = document.querySelector('.nav-links');
+        var tog = document.querySelector('.nav-toggle');
+        if (nav && nav.classList.contains('open') &&
+            !nav.contains(e.target) && !tog.contains(e.target)) {
+            nav.classList.remove('open');
+        }
+    });
+
+    /* Scroll reveal */
+    var observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+                entry.target.style.opacity  = '1';
+                entry.target.style.transform = 'translateY(0)';
+            }
+        });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll(
+        '.how-step, .product-card, .why-card, .faq-item, .plugin-card'
+    ).forEach(function (el) {
+        el.style.opacity    = '0';
+        el.style.transform  = 'translateY(20px)';
+        el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+        observer.observe(el);
+    });
+
+}());
+</script>
+
+</body>
+</html>
