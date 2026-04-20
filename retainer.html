@@ -1,0 +1,2225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Monthly Retainer — CharacterCraft AI NPC Packs</title>
+    <meta name="description" content="The CharacterCraft Monthly Retainer. One new AI NPC character every month, unlimited revisions, same-day support, and commercial rights. Cancel any time.">
+    <meta property="og:title" content="Monthly Retainer — CharacterCraft AI NPC Packs">
+    <meta property="og:description" content="One new character every month. Unlimited revisions. Same-day support. Commercial rights. Your NPC roster grows while you run your server.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://shakskin.github.io/CharacterCraft/retainer.html">
+    <link rel="canonical" href="https://shakskin.github.io/CharacterCraft/retainer.html">
+    <base href="https://shakskin.github.io/CharacterCraft/">
+    <style>
+        :root {
+            --gold:          #D4A537;
+            --gold-light:    #F2D06B;
+            --bg-primary:    #0A0A0F;
+            --bg-secondary:  #12121A;
+            --bg-card:       #1A1A25;
+            --bg-hover:      #222233;
+            --text-primary:  #E8E8F0;
+            --text-secondary:#9999AA;
+            --text-muted:    #666677;
+            --border:        #2A2A3A;
+            --green:         #4CAF50;
+            --urgent-red:    #FF4444;
+            --purple:        #9B59B6;
+            --teal:          #1ABC9C;
+            --amber:         #F39C12;
+            --blue:          #3498DB;
+        }
+
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family:  'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
+            background:   var(--bg-primary);
+            color:        var(--text-primary);
+            line-height:  1.6;
+            overflow-x:   hidden;
+        }
+
+        /* ── NAV ── */
+        nav {
+            position:        sticky;
+            top:             0;
+            z-index:         1000;
+            background:      rgba(10,10,15,0.97);
+            backdrop-filter: blur(12px);
+            border-bottom:   1px solid var(--border);
+            padding:         0 2rem;
+        }
+
+        .nav-inner {
+            max-width:       1200px;
+            margin:          0 auto;
+            display:         flex;
+            justify-content: space-between;
+            align-items:     center;
+            height:          64px;
+        }
+
+        .nav-logo {
+            font-size:       1.25rem;
+            font-weight:     700;
+            color:           var(--gold);
+            text-decoration: none;
+            letter-spacing:  -0.3px;
+        }
+
+        .nav-logo span { color: var(--text-primary); }
+
+        .nav-links {
+            display:     flex;
+            gap:         2rem;
+            list-style:  none;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color:           var(--text-secondary);
+            text-decoration: none;
+            font-size:       0.9rem;
+            font-weight:     500;
+            transition:      color 0.2s;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active { color: var(--gold); }
+
+        .nav-links .nav-cta {
+            background:    var(--gold);
+            color:         #000;
+            padding:       0.5rem 1.25rem;
+            border-radius: 6px;
+            font-weight:   700;
+            transition:    background 0.2s;
+        }
+
+        .nav-links .nav-cta:hover { background: var(--gold-light); color: #000; }
+
+        .nav-toggle {
+            display:    none;
+            background: none;
+            border:     none;
+            color:      var(--text-primary);
+            font-size:  1.5rem;
+            cursor:     pointer;
+        }
+
+        /* ── HERO ── */
+        .hero {
+            padding:    6rem 2rem 4rem;
+            text-align: center;
+            position:   relative;
+            overflow:   hidden;
+        }
+
+        .hero::before {
+            content:        '';
+            position:       absolute;
+            inset:          0;
+            background:     radial-gradient(ellipse at 50% 0%,
+                                rgba(243,156,18,0.08) 0%,
+                                transparent 65%);
+            pointer-events: none;
+        }
+
+        .hero::after {
+            content:        '';
+            position:       absolute;
+            bottom:         0;
+            left:           0;
+            right:          0;
+            height:         160px;
+            background:     linear-gradient(transparent, var(--bg-primary));
+            pointer-events: none;
+        }
+
+        .hero-inner {
+            max-width: 820px;
+            margin:    0 auto;
+            position:  relative;
+            z-index:   1;
+        }
+
+        .hero-eyebrow {
+            display:        inline-flex;
+            align-items:    center;
+            gap:            0.5rem;
+            background:     rgba(243,156,18,0.08);
+            border:         1px solid rgba(243,156,18,0.2);
+            color:          var(--amber);
+            font-size:      0.75rem;
+            font-weight:    700;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            padding:        0.35rem 1rem;
+            border-radius:  50px;
+            margin-bottom:  1.5rem;
+        }
+
+        .hero h1 {
+            font-size:     clamp(2.25rem, 5.5vw, 3.5rem);
+            font-weight:   800;
+            line-height:   1.1;
+            margin-bottom: 1.25rem;
+            letter-spacing:-0.75px;
+        }
+
+        .hero h1 .amber { color: var(--amber); }
+
+        .hero-sub {
+            font-size:     1.05rem;
+            color:         var(--text-secondary);
+            max-width:     640px;
+            margin:        0 auto 2.5rem;
+            line-height:   1.8;
+        }
+
+        /* Price block */
+        .hero-price-block {
+            display:         inline-flex;
+            align-items:     center;
+            gap:             1.5rem;
+            background:      rgba(243,156,18,0.05);
+            border:          1px solid rgba(243,156,18,0.18);
+            border-radius:   14px;
+            padding:         1.25rem 2rem;
+            margin-bottom:   2rem;
+            flex-wrap:       wrap;
+            justify-content: center;
+        }
+
+        .hero-price {
+            font-size:   2.75rem;
+            font-weight: 800;
+            color:       var(--amber);
+            line-height: 1;
+        }
+
+        .hero-price-period {
+            font-size:  1rem;
+            font-weight:600;
+            color:      var(--text-muted);
+        }
+
+        .hero-price-divider {
+            width:      1px;
+            height:     48px;
+            background: var(--border);
+        }
+
+        .hero-price-perks { text-align: left; }
+
+        .hero-price-perks .perk {
+            display:     flex;
+            align-items: center;
+            gap:         0.4rem;
+            font-size:   0.82rem;
+            color:       var(--text-secondary);
+            padding:     0.15rem 0;
+        }
+
+        .hero-price-perks .perk .perk-dot {
+            width:        6px;
+            height:       6px;
+            border-radius:50%;
+            background:   var(--amber);
+            flex-shrink:  0;
+        }
+
+        .hero-actions {
+            display:         flex;
+            gap:             1rem;
+            justify-content: center;
+            flex-wrap:       wrap;
+            margin-bottom:   2rem;
+        }
+
+        .btn-primary {
+            display:         inline-flex;
+            align-items:     center;
+            gap:             0.5rem;
+            padding:         1rem 2.5rem;
+            background:      var(--amber);
+            color:           #000;
+            border-radius:   10px;
+            font-size:       1rem;
+            font-weight:     700;
+            text-decoration: none;
+            transition:      all 0.2s;
+        }
+
+        .btn-primary:hover {
+            filter:    brightness(1.1);
+            transform: translateY(-2px);
+            box-shadow:0 8px 30px rgba(243,156,18,0.3);
+        }
+
+        .btn-secondary {
+            display:         inline-flex;
+            align-items:     center;
+            gap:             0.5rem;
+            padding:         1rem 2rem;
+            background:      transparent;
+            color:           var(--text-primary);
+            border:          1px solid var(--border);
+            border-radius:   10px;
+            font-size:       1rem;
+            font-weight:     600;
+            text-decoration: none;
+            transition:      all 0.2s;
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--amber);
+            color:        var(--amber);
+            transform:    translateY(-2px);
+        }
+
+        /* Hero badges */
+        .hero-badges {
+            display:         flex;
+            align-items:     center;
+            justify-content: center;
+            gap:             1.25rem;
+            flex-wrap:       wrap;
+        }
+
+        .hero-badge {
+            display:     flex;
+            align-items: center;
+            gap:         0.35rem;
+            font-size:   0.78rem;
+            color:       var(--text-muted);
+            font-weight: 600;
+        }
+
+        .hero-badge .dot {
+            width:        7px;
+            height:       7px;
+            border-radius:50%;
+            background:   var(--amber);
+            flex-shrink:  0;
+        }
+
+        /* ── SECTIONS ── */
+        .section { padding: 5rem 2rem; }
+
+        .section-inner {
+            max-width: 1100px;
+            margin:    0 auto;
+        }
+
+        .section-label {
+            display:        inline-block;
+            color:          var(--amber);
+            font-size:      0.72rem;
+            font-weight:    700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom:  0.6rem;
+        }
+
+        .section-title {
+            font-size:     clamp(1.5rem, 3vw, 2.1rem);
+            font-weight:   700;
+            margin-bottom: 0.85rem;
+            line-height:   1.2;
+        }
+
+        .section-desc {
+            color:         var(--text-secondary);
+            font-size:     1rem;
+            max-width:     640px;
+            margin-bottom: 3rem;
+            line-height:   1.75;
+        }
+
+        /* ── WHAT YOU GET ── */
+        .whats-in-section { background: var(--bg-secondary); }
+
+        .features-grid {
+            display:               grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap:                   1.25rem;
+        }
+
+        .feature-card {
+            background:    var(--bg-card);
+            border:        1px solid var(--border);
+            border-radius: 12px;
+            padding:       1.75rem;
+            transition:    border-color 0.2s, transform 0.2s;
+        }
+
+        .feature-card:hover {
+            border-color: rgba(243,156,18,0.25);
+            transform:    translateY(-3px);
+        }
+
+        .feature-icon {
+            font-size:     2rem;
+            margin-bottom: 0.85rem;
+            display:       block;
+        }
+
+        .feature-card h3 {
+            font-size:     1rem;
+            font-weight:   700;
+            margin-bottom: 0.4rem;
+        }
+
+        .feature-card p {
+            font-size:   0.84rem;
+            color:       var(--text-secondary);
+            line-height: 1.65;
+        }
+
+        .feature-tag {
+            display:        inline-block;
+            margin-top:     0.75rem;
+            font-size:      0.65rem;
+            font-weight:    700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            padding:        0.18rem 0.55rem;
+            border-radius:  50px;
+            background:     rgba(243,156,18,0.08);
+            color:          var(--amber);
+            border:         1px solid rgba(243,156,18,0.18);
+        }
+
+        /* ── HOW IT WORKS ── */
+        .how-section { background: var(--bg-primary); }
+
+        /* Month-by-month timeline */
+        .month-timeline {
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+            position: relative;
+        }
+
+        .month-timeline::before {
+            content:    '';
+            position:   absolute;
+            left:       27px;
+            top:        28px;
+            bottom:     28px;
+            width:      2px;
+            background: linear-gradient(to bottom,
+                            var(--amber),
+                            rgba(243,156,18,0.1));
+        }
+
+        .month-row {
+            display:      flex;
+            gap:          1.5rem;
+            align-items:  flex-start;
+            padding:      0 0 2rem 0;
+            position:     relative;
+        }
+
+        .month-row:last-child { padding-bottom: 0; }
+
+        .month-num {
+            width:           56px;
+            height:          56px;
+            border-radius:   50%;
+            background:      rgba(243,156,18,0.08);
+            border:          2px solid rgba(243,156,18,0.25);
+            display:         flex;
+            align-items:     center;
+            justify-content: center;
+            font-size:       0.75rem;
+            font-weight:     800;
+            color:           var(--amber);
+            flex-shrink:     0;
+            position:        relative;
+            z-index:         1;
+            letter-spacing:  0.5px;
+        }
+
+        .month-content {
+            flex:       1;
+            padding-top:0.6rem;
+        }
+
+        .month-content h3 {
+            font-size:     1rem;
+            font-weight:   700;
+            margin-bottom: 0.35rem;
+        }
+
+        .month-content p {
+            font-size:   0.86rem;
+            color:       var(--text-secondary);
+            line-height: 1.7;
+            max-width:   680px;
+        }
+
+        .month-deliverables {
+            display:    flex;
+            gap:        0.5rem;
+            flex-wrap:  wrap;
+            margin-top: 0.65rem;
+        }
+
+        .month-chip {
+            display:       flex;
+            align-items:   center;
+            gap:           0.3rem;
+            background:    var(--bg-secondary);
+            border:        1px solid var(--border);
+            border-radius: 50px;
+            padding:       0.22rem 0.65rem;
+            font-size:     0.72rem;
+            color:         var(--text-muted);
+            font-weight:   600;
+        }
+
+        /* ── REVISION SYSTEM ── */
+        .revisions-section { background: var(--bg-secondary); }
+
+        .revision-layout {
+            display:               grid;
+            grid-template-columns: 1fr 1fr;
+            gap:                   2rem;
+            align-items:           start;
+        }
+
+        .revision-left h2 {
+            font-size:     clamp(1.4rem, 2.5vw, 1.9rem);
+            font-weight:   700;
+            margin-bottom: 1rem;
+            line-height:   1.25;
+        }
+
+        .revision-left p {
+            font-size:   0.9rem;
+            color:       var(--text-secondary);
+            line-height: 1.75;
+            margin-bottom:1rem;
+        }
+
+        .revision-examples {
+            display:       flex;
+            flex-direction:column;
+            gap:           0.6rem;
+            margin-top:    1.25rem;
+        }
+
+        .revision-ex {
+            background:    var(--bg-card);
+            border:        1px solid var(--border);
+            border-radius: 8px;
+            padding:       0.85rem 1rem;
+            font-size:     0.84rem;
+            color:         var(--text-secondary);
+            display:       flex;
+            align-items:   flex-start;
+            gap:           0.6rem;
+            line-height:   1.55;
+        }
+
+        .revision-ex-icon { flex-shrink: 0; font-size: 0.9rem; }
+
+        .revision-right {
+            background:    var(--bg-card);
+            border:        1px solid rgba(243,156,18,0.18);
+            border-radius: 14px;
+            padding:       2rem;
+        }
+
+        .revision-right h3 {
+            font-size:     1rem;
+            font-weight:   700;
+            margin-bottom: 1.25rem;
+            color:         var(--amber);
+        }
+
+        .revision-limit-row {
+            display:         flex;
+            justify-content: space-between;
+            align-items:     center;
+            padding:         0.65rem 0;
+            border-bottom:   1px solid var(--border);
+            font-size:       0.84rem;
+        }
+
+        .revision-limit-row:last-child { border-bottom: none; }
+
+        .revision-limit-label { color: var(--text-secondary); }
+
+        .revision-limit-val {
+            font-weight: 700;
+            color:       var(--amber);
+        }
+
+        .revision-limit-val.unlimited {
+            color:      var(--green);
+            font-size:  0.9rem;
+        }
+
+        /* ── SUPPORT SECTION ── */
+        .support-section { background: var(--bg-primary); }
+
+        .support-grid {
+            display:               grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap:                   1.25rem;
+        }
+
+        .support-card {
+            background:    var(--bg-card);
+            border:        1px solid var(--border);
+            border-radius: 12px;
+            padding:       1.75rem;
+            text-align:    center;
+            transition:    border-color 0.2s, transform 0.2s;
+        }
+
+        .support-card:hover {
+            border-color: rgba(243,156,18,0.25);
+            transform:    translateY(-3px);
+        }
+
+        .support-icon {
+            font-size:     2.25rem;
+            margin-bottom: 0.85rem;
+            display:       block;
+        }
+
+        .support-card h3 {
+            font-size:     1rem;
+            font-weight:   700;
+            margin-bottom: 0.4rem;
+        }
+
+        .support-card p {
+            font-size:   0.84rem;
+            color:       var(--text-secondary);
+            line-height: 1.65;
+        }
+
+        .support-sla {
+            display:        inline-block;
+            margin-top:     0.75rem;
+            font-size:      0.72rem;
+            font-weight:    700;
+            letter-spacing: 0.5px;
+            color:          var(--green);
+            background:     rgba(76,175,80,0.08);
+            border:         1px solid rgba(76,175,80,0.18);
+            padding:        0.2rem 0.6rem;
+            border-radius:  50px;
+        }
+
+        /* ── COMPARISON TABLE ── */
+        .compare-section { background: var(--bg-secondary); }
+
+        .compare-table-wrap {
+            overflow-x:    auto;
+            border-radius: 12px;
+            border:        1px solid var(--border);
+        }
+
+        table.compare {
+            width:           100%;
+            border-collapse: collapse;
+            min-width:       680px;
+        }
+
+        table.compare thead tr {
+            background:    var(--bg-card);
+            border-bottom: 1px solid var(--border);
+        }
+
+        table.compare thead th {
+            padding:    1rem 1.25rem;
+            font-size:  0.82rem;
+            font-weight:700;
+            text-align: left;
+            color:      var(--text-secondary);
+        }
+
+        table.compare thead th.col-feature {
+            color:     var(--text-muted);
+            font-size: 0.72rem;
+        }
+
+        table.compare thead th.col-hl {
+            color:      var(--amber);
+            background: rgba(243,156,18,0.04);
+        }
+
+        table.compare tbody tr {
+            border-bottom: 1px solid var(--border);
+            transition:    background 0.15s;
+        }
+
+        table.compare tbody tr:last-child { border-bottom: none; }
+        table.compare tbody tr:hover { background: var(--bg-hover); }
+
+        table.compare tbody td {
+            padding:    0.85rem 1.25rem;
+            font-size:  0.84rem;
+            color:      var(--text-secondary);
+        }
+
+        table.compare tbody td:first-child {
+            color:      var(--text-primary);
+            font-weight:600;
+        }
+
+        table.compare tbody td.col-hl { background: rgba(243,156,18,0.03); }
+
+        .cmp-yes  { color: var(--green);      font-weight: 700; }
+        .cmp-no   { color: var(--text-muted); }
+        .cmp-part { color: var(--amber);      font-weight: 600; }
+        .cmp-val  { color: var(--text-primary); font-weight: 600; }
+
+        /* ── WHO IT'S FOR ── */
+        .who-section { background: var(--bg-primary); }
+
+        .who-grid {
+            display:               grid;
+            grid-template-columns: 1fr 1fr;
+            gap:                   1.25rem;
+        }
+
+        .who-card {
+            background:    var(--bg-card);
+            border:        1px solid var(--border);
+            border-radius: 12px;
+            padding:       1.75rem;
+            display:       flex;
+            gap:           1.25rem;
+            align-items:   flex-start;
+            transition:    border-color 0.2s;
+        }
+
+        .who-card:hover { border-color: rgba(243,156,18,0.2); }
+
+        .who-icon {
+            font-size:  2rem;
+            flex-shrink:0;
+            line-height:1;
+        }
+
+        .who-card h3 {
+            font-size:     1rem;
+            font-weight:   700;
+            margin-bottom: 0.4rem;
+        }
+
+        .who-card p {
+            font-size:   0.84rem;
+            color:       var(--text-secondary);
+            line-height: 1.65;
+        }
+
+        /* ── NOT FOR YOU ── */
+        .not-for-section { background: var(--bg-secondary); }
+
+        .not-for-layout {
+            display:               grid;
+            grid-template-columns: 1fr 1fr;
+            gap:                   2rem;
+            align-items:           start;
+        }
+
+        .not-for-col h2 {
+            font-size:     1.4rem;
+            font-weight:   700;
+            margin-bottom: 1rem;
+        }
+
+        .not-for-list { list-style: none; }
+
+        .not-for-list li {
+            display:     flex;
+            align-items: flex-start;
+            gap:         0.65rem;
+            font-size:   0.86rem;
+            color:       var(--text-secondary);
+            padding:     0.4rem 0;
+            line-height: 1.55;
+        }
+
+        .nf-icon { flex-shrink: 0; font-size: 0.9rem; }
+
+        .better-for-col {
+            background:    var(--bg-card);
+            border:        1px solid rgba(243,156,18,0.18);
+            border-radius: 12px;
+            padding:       2rem;
+        }
+
+        .better-for-col h2 {
+            font-size:     1.4rem;
+            font-weight:   700;
+            margin-bottom: 0.5rem;
+        }
+
+        .better-for-col > p {
+            font-size:     0.84rem;
+            color:         var(--text-muted);
+            margin-bottom: 1.5rem;
+            line-height:   1.65;
+        }
+
+        .alt-product {
+            background:    var(--bg-secondary);
+            border:        1px solid var(--border);
+            border-radius: 8px;
+            padding:       1rem;
+            margin-bottom: 0.75rem;
+            display:       flex;
+            align-items:   center;
+            gap:           0.85rem;
+            text-decoration:none;
+            transition:    border-color 0.2s;
+        }
+
+        .alt-product:hover { border-color: rgba(243,156,18,0.3); }
+
+        .alt-product:last-child { margin-bottom: 0; }
+
+        .alt-icon { font-size: 1.5rem; flex-shrink: 0; }
+
+        .alt-name {
+            font-size:   0.9rem;
+            font-weight: 700;
+            color:       var(--text-primary);
+            display:     block;
+            margin-bottom:0.15rem;
+        }
+
+        .alt-desc {
+            font-size:  0.78rem;
+            color:      var(--text-muted);
+            line-height:1.4;
+        }
+
+        .alt-price {
+            margin-left: auto;
+            font-size:   0.82rem;
+            font-weight: 700;
+            color:       var(--gold);
+            flex-shrink: 0;
+        }
+
+        /* ── CANCELLATION ── */
+        .cancel-section { background: var(--bg-primary); }
+
+        .cancel-layout {
+            display:    grid;
+            grid-template-columns: 1fr 1fr;
+            gap:        2rem;
+            align-items:start;
+        }
+
+        .cancel-left h2 {
+            font-size:     clamp(1.4rem, 2.5vw, 1.9rem);
+            font-weight:   700;
+            margin-bottom: 1rem;
+            line-height:   1.25;
+        }
+
+        .cancel-left p {
+            font-size:   0.9rem;
+            color:       var(--text-secondary);
+            line-height: 1.75;
+            margin-bottom:1rem;
+        }
+
+        .cancel-steps {
+            display:       flex;
+            flex-direction:column;
+            gap:           0.75rem;
+            margin-top:    1rem;
+        }
+
+        .cancel-step {
+            display:     flex;
+            align-items: flex-start;
+            gap:         0.85rem;
+            font-size:   0.86rem;
+            color:       var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        .cancel-step-num {
+            width:           28px;
+            height:          28px;
+            border-radius:   50%;
+            background:      rgba(243,156,18,0.08);
+            border:          1px solid rgba(243,156,18,0.2);
+            display:         flex;
+            align-items:     center;
+            justify-content: center;
+            font-size:       0.72rem;
+            font-weight:     800;
+            color:           var(--amber);
+            flex-shrink:     0;
+        }
+
+        .cancel-right {
+            background:    var(--bg-card);
+            border:        1px solid var(--border);
+            border-radius: 12px;
+            padding:       2rem;
+        }
+
+        .cancel-right h3 {
+            font-size:     1rem;
+            font-weight:   700;
+            margin-bottom: 1.25rem;
+        }
+
+        .cancel-policy-row {
+            display:         flex;
+            justify-content: space-between;
+            align-items:     flex-start;
+            padding:         0.75rem 0;
+            border-bottom:   1px solid var(--border);
+            gap:             1rem;
+            font-size:       0.84rem;
+        }
+
+        .cancel-policy-row:last-child { border-bottom: none; }
+        .cpr-label { color: var(--text-secondary); }
+        .cpr-val   { font-weight: 700; color: var(--text-primary); text-align: right; }
+
+        /* ── FAQ ── */
+        .faq-section { background: var(--bg-secondary); }
+
+        .faq-grid {
+            display:               grid;
+            grid-template-columns: 1fr 1fr;
+            gap:                   1.25rem;
+        }
+
+        .faq-item {
+            background:    var(--bg-card);
+            border:        1px solid var(--border);
+            border-radius: 10px;
+            padding:       1.5rem;
+            transition:    border-color 0.2s;
+        }
+
+        .faq-item:hover { border-color: rgba(243,156,18,0.2); }
+
+        .faq-item h4 {
+            font-size:     0.95rem;
+            font-weight:   700;
+            margin-bottom: 0.5rem;
+        }
+
+        .faq-item p {
+            font-size:   0.85rem;
+            color:       var(--text-secondary);
+            line-height: 1.7;
+        }
+
+        /* ── CTA STRIP ── */
+        .cta-strip {
+            padding:    5rem 2rem;
+            text-align: center;
+            background: linear-gradient(135deg,
+                            rgba(243,156,18,0.06) 0%,
+                            rgba(212,165,55,0.06) 100%);
+            border-top:    1px solid rgba(243,156,18,0.12);
+            border-bottom: 1px solid rgba(243,156,18,0.12);
+        }
+
+        .cta-strip-inner { max-width: 700px; margin: 0 auto; }
+
+        .cta-strip h2 {
+            font-size:     clamp(1.5rem, 3vw, 2rem);
+            font-weight:   800;
+            margin-bottom: 0.75rem;
+        }
+
+        .cta-strip p {
+            color:         var(--text-secondary);
+            font-size:     1rem;
+            margin-bottom: 2rem;
+            line-height:   1.75;
+        }
+
+        .cta-strip-actions {
+            display:         flex;
+            gap:             1rem;
+            justify-content: center;
+            flex-wrap:       wrap;
+        }
+
+        /* Guarantee strip */
+        .guarantee-strip {
+            padding:         1.5rem 2rem;
+            background:      var(--bg-secondary);
+            border-bottom:   1px solid var(--border);
+            text-align:      center;
+        }
+
+        .guarantee-strip p {
+            font-size:  0.82rem;
+            color:      var(--text-muted);
+            max-width:  700px;
+            margin:     0 auto;
+            line-height:1.65;
+        }
+
+        .guarantee-strip strong { color: var(--amber); }
+
+        /* ── FOOTER ── */
+        footer {
+            padding:    4rem 2rem 3rem;
+            border-top: 1px solid var(--border);
+        }
+
+        .footer-inner { max-width: 1100px; margin: 0 auto; }
+
+        .footer-grid {
+            display:               grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap:                   2rem;
+            margin-bottom:         2.5rem;
+        }
+
+        .footer-logo {
+            font-size:       1.2rem;
+            font-weight:     700;
+            color:           var(--gold);
+            text-decoration: none;
+            display:         block;
+            margin-bottom:   0.5rem;
+        }
+
+        .footer-logo span { color: var(--text-primary); }
+
+        .footer-brand p {
+            font-size:   0.82rem;
+            color:       var(--text-muted);
+            line-height: 1.65;
+            max-width:   280px;
+        }
+
+        .footer-col h4 {
+            font-size:      0.72rem;
+            font-weight:    700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color:          var(--text-secondary);
+            margin-bottom:  0.85rem;
+        }
+
+        .footer-col a {
+            display:         block;
+            color:           var(--text-muted);
+            text-decoration: none;
+            font-size:       0.85rem;
+            padding:         0.25rem 0;
+            transition:      color 0.2s;
+        }
+
+        .footer-col a:hover { color: var(--gold); }
+
+        .footer-bottom {
+            border-top:      1px solid var(--border);
+            padding-top:     1.5rem;
+            display:         flex;
+            justify-content: space-between;
+            align-items:     center;
+            flex-wrap:       wrap;
+            gap:             0.75rem;
+        }
+
+        .footer-copy {
+            color:     var(--text-muted);
+            font-size: 0.8rem;
+        }
+
+        /* ── ANIMATIONS ── */
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(16px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        .anim   { animation: fadeUp 0.6s ease both; }
+        .anim-1 { animation-delay: 0.1s; }
+        .anim-2 { animation-delay: 0.2s; }
+        .anim-3 { animation-delay: 0.3s; }
+        .anim-4 { animation-delay: 0.4s; }
+
+        /* ── RESPONSIVE ── */
+        @media (max-width: 1000px) {
+            .features-grid  { grid-template-columns: 1fr 1fr; }
+            .support-grid   { grid-template-columns: 1fr 1fr; }
+            .revision-layout{ grid-template-columns: 1fr; }
+            .who-grid       { grid-template-columns: 1fr; }
+            .not-for-layout { grid-template-columns: 1fr; }
+            .cancel-layout  { grid-template-columns: 1fr; }
+            .footer-grid    { grid-template-columns: 1fr 1fr; }
+        }
+
+        @media (max-width: 650px) {
+            .nav-links {
+                display:        none;
+                position:       absolute;
+                top:            64px;
+                left:           0;
+                right:          0;
+                background:     rgba(10,10,15,0.98);
+                flex-direction: column;
+                padding:        1.5rem 2rem;
+                gap:            1rem;
+                border-bottom:  1px solid var(--border);
+            }
+
+            .nav-links.open     { display: flex; }
+            .nav-toggle         { display: block; }
+            .features-grid      { grid-template-columns: 1fr; }
+            .support-grid       { grid-template-columns: 1fr; }
+            .faq-grid           { grid-template-columns: 1fr; }
+            .footer-grid        { grid-template-columns: 1fr; }
+            .footer-bottom      { flex-direction: column; text-align: center; }
+            .hero-actions       { flex-direction: column; align-items: center; }
+            .cta-strip-actions  { flex-direction: column; align-items: center; }
+            .hero-price-block   { flex-direction: column; align-items: center;
+                                  text-align: center; }
+            .hero-price-divider { width: 80px; height: 1px; }
+            .hero-price-perks   { text-align: center; }
+            .month-timeline::before { left: 26px; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ── NAV ── -->
+<nav>
+    <div class="nav-inner">
+        <a href="index.html" class="nav-logo">⚔️ Character<span>Craft</span></a>
+        <button class="nav-toggle"
+                onclick="document.querySelector('.nav-links').classList.toggle('open')"
+                aria-label="Menu">☰</button>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="store.html">Store</a></li>
+            <li><a href="license.html">Server License</a></li>
+            <li><a href="retainer.html" class="active">Retainer</a></li>
+            <li><a href="free.html">Free Pack</a></li>
+            <li><a href="free.html" class="nav-cta">Get Free Pack</a></li>
+        </ul>
+    </div>
+</nav>
+
+<!-- ── HERO ── -->
+<section class="hero">
+    <div class="hero-inner">
+
+        <div class="hero-eyebrow anim">
+            📅 Monthly Retainer
+        </div>
+
+        <h1 class="anim anim-1">
+            Your NPC Roster.<br>
+            <span class="amber">Growing Every Month.</span>
+        </h1>
+
+        <p class="hero-sub anim anim-2">
+            One new hand-crafted character delivered every month.
+            Unlimited revisions on everything you have ever received.
+            Same-day support. Commercial rights on all characters.
+            A shared world that grows with your server.
+            Cancel any time — no lock-in, no penalties.
+        </p>
+
+        <div class="hero-price-block anim anim-3">
+            <div>
+                <span class="hero-price">$39</span>
+                <span class="hero-price-period">&nbsp;/ month</span>
+            </div>
+            <div class="hero-price-divider"></div>
+            <div class="hero-price-perks">
+                <div class="perk">
+                    <span class="perk-dot"></span>
+                    1 new character every month
+                </div>
+                <div class="perk">
+                    <span class="perk-dot"></span>
+                    Unlimited revisions — any character
+                </div>
+                <div class="perk">
+                    <span class="perk-dot"></span>
+                    Commercial rights included
+                </div>
+                <div class="perk">
+                    <span class="perk-dot"></span>
+                    Cancel any time
+                </div>
+            </div>
+        </div>
+
+        <div class="hero-actions anim anim-4">
+            <a href="pay-retainer.html" class="btn-primary">
+                📅 Join the Retainer →
+            </a>
+            <a href="store.html" class="btn-secondary">
+                ← Compare All Products
+            </a>
+        </div>
+
+        <div class="hero-badges anim anim-4">
+            <div class="hero-badge">
+                <span class="dot"></span>
+                First character within 24 hours
+            </div>
+            <div class="hero-badge">
+                <span class="dot"></span>
+                8-hour support response
+            </div>
+            <div class="hero-badge">
+                <span class="dot"></span>
+                No lock-in — cancel any time
+            </div>
+            <div class="hero-badge">
+                <span class="dot"></span>
+                Crypto payment monthly
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<!-- ── WHAT YOU GET ── -->
+<section class="section whats-in-section">
+    <div class="section-inner">
+        <div class="section-label">Every Month</div>
+        <h2 class="section-title">What the Retainer Delivers</h2>
+        <p class="section-desc">
+            Every month you stay active, you receive a new character
+            and retain full access to revision and support
+            for everything you have built so far.
+        </p>
+
+        <div class="features-grid">
+
+            <div class="feature-card">
+                <span class="feature-icon">⚔️</span>
+                <h3>One New Character Per Month</h3>
+                <p>
+                    A complete hand-crafted character pack delivered
+                    every 30 days. Full personality system prompt,
+                    25 hand-crafted memories, optimized config,
+                    edge case responses, and installation guide.
+                    Built to fit the world your previous characters
+                    already inhabit.
+                </p>
+                <span class="feature-tag">Monthly delivery</span>
+            </div>
+
+            <div class="feature-card">
+                <span class="feature-icon">🔄</span>
+                <h3>Unlimited Revisions</h3>
+                <p>
+                    Your server evolves. Characters should too.
+                    Request changes to any character in your library —
+                    personality shifts, new memories, config adjustments,
+                    lore updates — as many times as you need, any month
+                    you are active. No revision caps. No extra charges.
+                </p>
+                <span class="feature-tag">No limits</span>
+            </div>
+
+            <div class="feature-card">
+                <span class="feature-icon">💬</span>
+                <h3>Same-Day Support</h3>
+                <p>
+                    Eight-hour response window for any issue —
+                    install problems, config questions, character
+                    behaviour that feels wrong, or requests for
+                    new edge case coverage. You reach the person
+                    who wrote the files, not a support queue.
+                </p>
+                <span class="feature-tag">8-hour response</span>
+            </div>
+
+            <div class="feature-card">
+                <span class="feature-icon">⚖️</span>
+                <h3>Commercial Rights — Every Character</h3>
+                <p>
+                    Every character delivered under the retainer
+                    includes full commercial use rights. Deploy on
+                    public servers, monetized networks, paid access
+                    worlds. No attribution required. Rights are yours
+                    permanently — even if you cancel later.
+                </p>
+                <span class="feature-tag">Permanent rights</span>
+            </div>
+
+            <div class="feature-card">
+                <span class="feature-icon">🌍</span>
+                <h3>Growing World Lore System</h3>
+                <p>
+                    Every new character is written into the same shared
+                    world. The lore document expands each month —
+                    new characters reference older ones, new events
+                    get recorded, the world your players explore
+                    deepens with each delivery.
+                </p>
+                <span class="feature-tag">Cumulative lore</span>
+            </div>
+
+            <div class="feature-card">
+                <span class="feature-icon">🎯</span>
+                <h3>Priority Access and Input</h3>
+                <p>
+                    Retainer members get first access to new character
+                    releases before public launch. You can also submit
+                    briefs — suggest an archetype, a role, a personality
+                    type you need — and we build toward your server's
+                    specific requirements each month.
+                </p>
+                <span class="feature-tag">Priority queue</span>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- ── HOW IT WORKS ── -->
+<section class="section how-section">
+    <div class="section-inner">
+        <div class="section-label">Month by Month</div>
+        <h2 class="section-title">What the First Six Months Look Like</h2>
+        <p class="section-desc">
+            A retainer compounds. By month six you have six characters,
+            a deep world lore system, a full NPC relationship map,
+            and a roster that makes your server feel like it has
+            been running for years.
+        </p>
+
+        <div class="month-timeline">
+
+            <div class="month-row">
+                <div class="month-num">M1</div>
+                <div class="month-content">
+                    <h3>Month 1 — First Character + World Foundation</h3>
+                    <p>
+                        Your first character is delivered within 24 hours
+                        of payment confirmation. We also establish the
+                        foundation layer of your world lore — the faction
+                        structure, geographic reference, and historical
+                        timeline that every future character will be
+                        written into. You start with a complete character
+                        and a world ready to grow.
+                    </p>
+                    <div class="month-deliverables">
+                        <span class="month-chip">⚔️ Character 1 — full pack</span>
+                        <span class="month-chip">🌍 World foundation doc</span>
+                        <span class="month-chip">📅 World timeline v1</span>
+                        <span class="month-chip">⚙️ Optimized config</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="month-row">
+                <div class="month-num">M2</div>
+                <div class="month-content">
+                    <h3>Month 2 — Second Character + Relationship Layer</h3>
+                    <p>
+                        Your second character arrives and is written
+                        to know Character 1. Not vaguely — specifically.
+                        A history, a dynamic, a reason they interact the way
+                        they do. The NPC relationship map starts here.
+                        Players asking one NPC about the other get a real,
+                        specific answer that holds up under follow-up questions.
+                    </p>
+                    <div class="month-deliverables">
+                        <span class="month-chip">⚔️ Character 2 — full pack</span>
+                        <span class="month-chip">🔗 Relationship map v1</span>
+                        <span class="month-chip">🧠 Cross-ref memories</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="month-row">
+                <div class="month-num">M3</div>
+                <div class="month-content">
+                    <h3>Month 3 — Third Character + Lore Expansion</h3>
+                    <p>
+                        By month three the world has enough history
+                        to start generating depth automatically.
+                        Character 3 references events that Characters 1
+                        and 2 also remember — from a different angle.
+                        The lore document expands with new factions,
+                        new events, and new locations tied to this character's
+                        backstory.
+                    </p>
+                    <div class="month-deliverables">
+                        <span class="month-chip">⚔️ Character 3 — full pack</span>
+                        <span class="month-chip">🌍 Lore expansion update</span>
+                        <span class="month-chip">🔗 Relationship map v2</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="month-row">
+                <div class="month-num">M4</div>
+                <div class="month-content">
+                    <h3>Month 4 — Fourth Character + Revision Round</h3>
+                    <p>
+                        Month four includes your fourth character delivery
+                        plus a structured revision pass. With three months
+                        of actual player interaction data, you will know
+                        what edge cases need covering, which memories need
+                        updating, and which config settings need adjustment.
+                        We handle it all in this round.
+                    </p>
+                    <div class="month-deliverables">
+                        <span class="month-chip">⚔️ Character 4 — full pack</span>
+                        <span class="month-chip">🔄 Revision pass — all chars</span>
+                        <span class="month-chip">🛡️ Edge case updates</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="month-row">
+                <div class="month-num">M5</div>
+                <div class="month-content">
+                    <h3>Month 5 — Fifth Character + API Cost Review</h3>
+                    <p>
+                        Five NPCs running at active server hours
+                        generates real usage data. Month five includes
+                        a full API cost review — actual usage against
+                        your configs, model tier recommendations,
+                        and updated cost-optimized configs for every
+                        character based on real data rather than estimates.
+                    </p>
+                    <div class="month-deliverables">
+                        <span class="month-chip">⚔️ Character 5 — full pack</span>
+                        <span class="month-chip">📊 API cost review</span>
+                        <span class="month-chip">⚙️ Updated configs × 5</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="month-row">
+                <div class="month-num">M6+</div>
+                <div class="month-content">
+                    <h3>Month 6 and Beyond — The World Compounds</h3>
+                    <p>
+                        From month six onward the flywheel is running.
+                        Each new character is written into a rich,
+                        established world with a documented history
+                        and a populated relationship map.
+                        New characters feel like they have always been there.
+                        Your server has a living world — not a set of
+                        chatbots running in parallel.
+                    </p>
+                    <div class="month-deliverables">
+                        <span class="month-chip">⚔️ New character monthly</span>
+                        <span class="month-chip">🌍 Lore updated monthly</span>
+                        <span class="month-chip">🔄 Revisions on demand</span>
+                        <span class="month-chip">💬 8-hr support ongoing</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- ── REVISION SYSTEM ── -->
+<section class="section revisions-section">
+    <div class="section-inner">
+        <div class="section-label">Unlimited Revisions</div>
+        <h2 class="section-title">What "Unlimited" Actually Means</h2>
+
+        <div class="revision-layout">
+
+            <div class="revision-left">
+                <p>
+                    Most NPC packs are static. You get the files, you install
+                    them, and if your world changes — or your players find
+                    edge cases the character handles badly — you are on your
+                    own. The retainer works differently.
+                </p>
+                <p>
+                    Every month you are active, you have open revision access
+                    to every character you have ever received. Request as many
+                    changes as you need — there is no revision cap, no
+                    surcharge, and no queue priority system. You reach us
+                    directly and the change is handled.
+                </p>
+                <p>
+                    Characters keep up with your server's evolving lore,
+                    player behaviour, and plugin updates. They are maintained
+                    — not just delivered.
+                </p>
+
+                <div class="revision-examples">
+
+                    <div class="revision-ex">
+                        <span class="revision-ex-icon">🗡️</span>
+                        "Aldric's memory of the siege is too vague —
+                        players keep asking follow-up questions he can't answer.
+                        Can we add six more specific memories about that night?"
+                    </div>
+
+                    <div class="revision-ex">
+                        <span class="revision-ex-icon">💰</span>
+                        "Dravek needs to know about the new black market
+                        district we added to the server. Can we update his
+                        knowledge boundaries and add three new memories?"
+                    </div>
+
+                    <div class="revision-ex">
+                        <span class="revision-ex-icon">⚙️</span>
+                        "We upgraded our server hardware — can we loosen
+                        the token budget in all five configs to get
+                        longer, more detailed responses?"
+                    </div>
+
+                    <div class="revision-ex">
+                        <span class="revision-ex-icon">🌍</span>
+                        "We ran a server-wide event where the king was
+                        assassinated. Every character needs to reference
+                        this and have an opinion on it."
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="revision-right">
+                <h3>Revision Policy at a Glance</h3>
+
+                <div class="revision-limit-row">
+                    <span class="revision-limit-label">Revisions per month</span>
+                    <span class="revision-limit-val unlimited">Unlimited</span>
+                </div>
+                <div class="revision-limit-row">
+                    <span class="revision-limit-label">Characters eligible</span>
+                    <span class="revision-limit-val">All — ever received</span>
+                </div>
+                <div class="revision-limit-row">
+                    <span class="revision-limit-label">Memory additions</span>
+                    <span class="revision-limit-val unlimited">Unlimited</span>
+                </div>
+                <div class="revision-limit-row">
+                    <span class="revision-limit-label">Config adjustments</span>
+                    <span class="revision-limit-val unlimited">Unlimited</span>
+                </div>
+                <div class="revision-limit-row">
+                    <span class="revision-limit-label">Personality updates</span>
+                    <span class="revision-limit-val unlimited">Unlimited</span>
+                </div>
+                <div class="revision-limit-row">
+                    <span class="revision-limit-label">Lore sync updates</span>
+                    <span class="revision-limit-val unlimited">Unlimited</span>
+                </div>
+                <div class="revision-limit-row">
+                    <span class="revision-limit-label">Edge case additions</span>
+                    <span class="revision-limit-val unlimited">Unlimited</span>
+                </div>
+                <div class="revision-limit-row">
+                    <span class="revision-limit-label">Extra charge for revisions</span>
+                    <span class="revision-limit-val" style="color:var(--green);">
+                        None — ever
+                    </span>
+                </div>
+                <div class="revision-limit-row">
+                    <span class="revision-limit-label">Revision turnaround</span>
+                    <span class="revision-limit-val">Within 24 hours</span>
+                </div>
+                <div class="revision-limit-row">
+                    <span class="revision-limit-label">Access after cancellation</span>
+                    <span class="revision-limit-val">Files kept — revisions end</span>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- ── SUPPORT ── -->
+<section class="section support-section">
+    <div class="section-inner">
+        <div class="section-label">Support</div>
+        <h2 class="section-title">Support That Knows Your Characters</h2>
+        <p class="section-desc">
+            Every support interaction is with the person who wrote
+            the character. Not a bot. Not a ticket system.
+            Someone who knows exactly what is in those files.
+        </p>
+
+        <div class="support-grid">
+
+            <div class="support-card">
+                <span class="support-icon">⚡</span>
+                <h3>8-Hour Response Window</h3>
+                <p>
+                    Send a message via Discord or email.
+                    You get a response within eight hours —
+                    same calendar day for anything sent
+                    during waking hours. No waiting days
+                    for a generic reply.
+                </p>
+                <span class="support-sla">8-hr SLA</span>
+            </div>
+
+            <div class="support-card">
+                <span class="support-icon">🛠️</span>
+                <h3>Install and Config Help</h3>
+                <p>
+                    If something does not work after install
+                    we fix it. Config issues, memory retrieval
+                    problems, unexpected NPC behaviour —
+                    all covered under retainer support.
+                    No charge for fixes on files we delivered.
+                </p>
+                <span class="support-sla">No-charge fixes</span>
+            </div>
+
+            <div class="support-card">
+                <span class="support-icon">🎯</span>
+                <h3>Character Brief Submissions</h3>
+                <p>
+                    Tell us what your server needs next —
+                    a specific archetype, a role that players
+                    keep asking about, a character type that
+                    fits your current narrative arc.
+                    We use your briefs to shape the monthly delivery.
+                </p>
+                <span class="support-sla">Monthly input</span>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- ── COMPARISON TABLE ── -->
+<section class="section compare-section">
+    <div class="section-inner">
+        <div class="section-label">How It Compares</div>
+        <h2 class="section-title">Retainer vs. Everything Else</h2>
+        <p class="section-desc">
+            The retainer is not the right product for every server.
+            Here is how it stacks up so you can decide clearly.
+        </p>
+
+        <div class="compare-table-wrap">
+            <table class="compare">
+                <thead>
+                    <tr>
+                        <th class="col-feature">Feature</th>
+                        <th>Individual Pack</th>
+                        <th>Server License</th>
+                        <th class="col-hl">Monthly Retainer</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Characters delivered</td>
+                        <td class="cmp-val">1 — once</td>
+                        <td class="cmp-val">5 — once</td>
+                        <td class="cmp-val col-hl">1 every month</td>
+                    </tr>
+                    <tr>
+                        <td>Tailored to your world</td>
+                        <td class="cmp-no">Roster only</td>
+                        <td class="cmp-no">Roster only</td>
+                        <td class="cmp-yes col-hl">✓ Built to your brief</td>
+                    </tr>
+                    <tr>
+                        <td>Shared world lore</td>
+                        <td class="cmp-no">—</td>
+                        <td class="cmp-yes">✓ Full system</td>
+                        <td class="cmp-yes col-hl">✓ Grows monthly</td>
+                    </tr>
+                    <tr>
+                        <td>NPC relationship map</td>
+                        <td class="cmp-no">—</td>
+                        <td class="cmp-yes">✓ Full</td>
+                        <td class="cmp-yes col-hl">✓ Updated monthly</td>
+                    </tr>
+                    <tr>
+                        <td>Revisions</td>
+                        <td class="cmp-no">—</td>
+                        <td class="cmp-no">—</td>
+                        <td class="cmp-yes col-hl">✓ Unlimited</td>
+                    </tr>
+                    <tr>
+                        <td>API cost optimization</td>
+                        <td class="cmp-no">—</td>
+                        <td class="cmp-yes">✓ Full report</td>
+                        <td class="cmp-yes col-hl">✓ Ongoing review</td>
+                    </tr>
+                    <tr>
+                        <td>Commercial rights</td>
+                        <td class="cmp-no">Personal only</td>
+                        <td class="cmp-yes">✓ Full</td>
+                        <td class="cmp-yes col-hl">✓ Full — permanent</td>
+                    </tr>
+                    <tr>
+                        <td>Support response</td>
+                        <td class="cmp-val">24 hours</td>
+                        <td class="cmp-val">Same day</td>
+                        <td class="cmp-yes col-hl">8 hours</td>
+                    </tr>
+                    <tr>
+                        <td>Setup consultation</td>
+                        <td class="cmp-no">—</td>
+                        <td class="cmp-yes">✓ 30 min — once</td>
+                        <td class="cmp-yes col-hl">✓ Ongoing</td>
+                    </tr>
+                    <tr>
+                        <td>Priority new releases</td>
+                        <td class="cmp-no">—</td>
+                        <td class="cmp-no">—</td>
+                        <td class="cmp-yes col-hl">✓ Always first</td>
+                    </tr>
+                    <tr>
+                        <td>Lock-in</td>
+                        <td class="cmp-val">None — one-time</td>
+                        <td class="cmp-val">None — one-time</td>
+                        <td class="cmp-yes col-hl">None — cancel any time</td>
+                    </tr>
+                    <tr>
+                        <td>Cost</td>
+                        <td class="cmp-val">$4.85–$4.89</td>
+                        <td class="cmp-val">$24.99 once</td>
+                        <td class="cmp-val col-hl"
+                            style="color:var(--amber);font-weight:800;">
+                            $39 / month
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+
+<!-- ── WHO IT'S FOR ── -->
+<section class="section who-section">
+    <div class="section-inner">
+        <div class="section-label">Who It's Built For</div>
+        <h2 class="section-title">The Retainer Is Right for You If...</h2>
+        <p class="section-desc">
+            The retainer is the highest-touch product we offer.
+            It is worth it for the right servers and wasteful for others.
+        </p>
+
+        <div class="who-grid">
+
+            <div class="who-card">
+                <span class="who-icon">🏗️</span>
+                <div>
+                    <h3>You Are Actively Building a World</h3>
+                    <p>
+                        If your server has a living narrative —
+                        political factions, ongoing conflicts, evolving lore —
+                        the retainer keeps your NPCs in sync with it.
+                        New characters are written into the existing history.
+                        Old characters get updated when the world changes.
+                        Nothing goes stale.
+                    </p>
+                </div>
+            </div>
+
+            <div class="who-card">
+                <span class="who-icon">🔄</span>
+                <div>
+                    <h3>You Update Your Server Regularly</h3>
+                    <p>
+                        New districts, new quests, new events —
+                        if your server changes frequently, your NPCs
+                        need to change with it. The retainer's
+                        unlimited revisions mean your characters
+                        always reflect the current state of your world,
+                        not the state it was in when you first installed them.
+                    </p>
+                </div>
+            </div>
+
+            <div class="who-card">
+                <span class="who-icon">🎭</span>
+                <div>
+                    <h3>You Want Characters Built for Your Lore</h3>
+                    <p>
+                        Individual packs are built for generic fantasy
+                        server environments. The retainer lets you submit
+                        briefs — your world's specific factions, history,
+                        geography, and existing characters — and we build
+                        new NPCs that fit your world specifically,
+                        not a generic one.
+                    </p>
+                </div>
+            </div>
+
+            <div class="who-card">
+                <span class="who-icon">📈</span>
+                <div>
+                    <h3>You Are Running a Growing Network</h3>
+                    <p>
+                        If your player count is climbing and you are
+                        adding content to keep up, the retainer scales
+                        with you. New characters each month, world lore
+                        that deepens, and API cost reviews that keep
+                        your costs predictable as usage grows.
+                        It is infrastructure, not just content.
+                    </p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- ── NOT FOR YOU ── -->
+<section class="section not-for-section">
+    <div class="section-inner">
+        <div class="section-label">Honest Assessment</div>
+        <h2 class="section-title">When the Retainer Is Not the Right Choice</h2>
+
+        <div class="not-for-layout">
+
+            <div class="not-for-col">
+                <p style="font-size:0.9rem;color:var(--text-secondary);
+                          line-height:1.75;margin-bottom:1.5rem;">
+                    The retainer is $39 per month. For servers that do not
+                    need ongoing content, that is not efficient spending.
+                    Here is when you should look at something else instead.
+                </p>
+
+                <ul class="not-for-list">
+                    <li>
+                        <span class="nf-icon">🔒</span>
+                        Your server's lore is fixed — you are not adding
+                        new locations, factions, or story events and do not
+                        plan to. A one-time purchase covers you.
+                    </li>
+                    <li>
+                        <span class="nf-icon">🎮</span>
+                        You only need one or two NPCs and are happy
+                        with them staying as-is once installed.
+                        An individual pack is the right call.
+                    </li>
+                    <li>
+                        <span class="nf-icon">👥</span>
+                        Your server is private, small, and non-commercial.
+                        The commercial rights and lore system are overhead
+                        you do not need to pay for.
+                    </li>
+                    <li>
+                        <span class="nf-icon">🚀</span>
+                        You need five characters at launch and then
+                        maintenance, not ongoing additions.
+                        The Server License is a better fit.
+                    </li>
+                    <li>
+                        <span class="nf-icon">💸</span>
+                        Your server is in early stage with uncertain
+                        revenue. Start with a free pack or an individual
+                        character, prove the concept, then upgrade.
+                    </li>
+                </ul>
+            </div>
+
+            <div class="better-for-col">
+                <h2>Better Alternatives</h2>
+                <p>
+                    If the retainer is not right for your situation,
+                    one of these will be.
+                </p>
+
+                <a href="free.html" class="alt-product">
+                    <span class="alt-icon">🛡️</span>
+                    <div>
+                        <span class="alt-name">Free Pack — The Ghostwriter</span>
+                        <span class="alt-desc">
+                            Test the quality before spending anything.
+                            Full character, 15 memories, complete config.
+                        </span>
+                    </div>
+                    <span class="alt-price">Free</span>
+                </a>
+
+                <a href="pay-aldric.html" class="alt-product">
+                    <span class="alt-icon">⚔️</span>
+                    <div>
+                        <span class="alt-name">Aldric — Individual Pack</span>
+                        <span class="alt-desc">
+                            One complete character. Pay once. Yours forever.
+                            No ongoing commitment.
+                        </span>
+                    </div>
+                    <span class="alt-price">$4.89</span>
+                </a>
+
+                <a href="pay-city-bundle.html" class="alt-product">
+                    <span class="alt-icon">🏰</span>
+                    <div>
+                        <span class="alt-name">City Bundle</span>
+                        <span class="alt-desc">
+                            Two characters with shared world lore.
+                            Best value one-time purchase.
+                        </span>
+                    </div>
+                    <span class="alt-price">$8.47</span>
+                </a>
+
+                <a href="pay-server-license.html" class="alt-product">
+                    <span class="alt-icon">🌐</span>
+                    <div>
+                        <span class="alt-name">Server License</span>
+                        <span class="alt-desc">
+                            Five characters, commercial rights, full world system.
+                            One payment, no monthly commitment.
+                        </span>
+                    </div>
+                    <span class="alt-price">$24.99</span>
+                </a>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- ── CANCELLATION ── -->
+<section class="section cancel-section">
+    <div class="section-inner">
+        <div class="section-label">No Lock-In</div>
+        <h2 class="section-title">Cancellation Is Simple</h2>
+
+        <div class="cancel-layout">
+
+            <div class="cancel-left">
+                <p>
+                    There is no contract, no cancellation fee,
+                    and no minimum term. You pay month-to-month
+                    with crypto. If you stop paying, the retainer ends.
+                    You keep every file you received while active —
+                    permanently.
+                </p>
+                <p>
+                    Commercial rights on every character delivered
+                    during your active period remain yours after
+                    cancellation. You are not renting the files —
+                    you own them from the moment of delivery.
+                    What ends when you cancel is new deliveries
+                    and revision access.
+                </p>
+                <p>
+                    If you cancel and want to restart later,
+                    you pick up where you left off — same world,
+                    same characters, same lore continuity.
+                    The monthly price at restart may have changed,
+                    but your existing library does not.
+                </p>
+
+                <div class="cancel-steps">
+                    <div class="cancel-step">
+                        <span class="cancel-step-num">1</span>
+                        Message us on Discord or email to cancel —
+                        no form, no hold, no retention pitch.
+                        One message is all it takes.
+                    </div>
+                    <div class="cancel-step">
+                        <span class="cancel-step-num">2</span>
+                        We confirm cancellation within 24 hours
+                        and stop the monthly payment cycle.
+                        No charge after confirmation.
+                    </div>
+                    <div class="cancel-step">
+                        <span class="cancel-step-num">3</span>
+                        Keep every file you received.
+                        Commercial rights stay active.
+                        Revision access ends at the close of
+                        your final paid month.
+                    </div>
+                </div>
+            </div>
+
+            <div class="cancel-right">
+                <h3>Cancellation Policy — At a Glance</h3>
+
+                <div class="cancel-policy-row">
+                    <span class="cpr-label">Minimum term</span>
+                    <span class="cpr-val">None</span>
+                </div>
+                <div class="cancel-policy-row">
+                    <span class="cpr-label">Cancellation fee</span>
+                    <span class="cpr-val" style="color:var(--green);">None</span>
+                </div>
+                <div class="cancel-policy-row">
+                    <span class="cpr-label">Notice required</span>
+                    <span class="cpr-val">One message</span>
+                </div>
+                <div class="cancel-policy-row">
+                    <span class="cpr-label">Files after cancellation</span>
+                    <span class="cpr-val">Yours — permanently</span>
+                </div>
+                <div class="cancel-policy-row">
+                    <span class="cpr-label">Commercial rights after cancel</span>
+                    <span class="cpr-val" style="color:var(--green);">
+                        Stay active — permanently
+                    </span>
+                </div>
+                <div class="cancel-policy-row">
+                    <span class="cpr-label">Revision access after cancel</span>
+                    <span class="cpr-val">Ends — final paid month</span>
+                </div>
+                <div class="cancel-policy-row">
+                    <span class="cpr-label">Restart available</span>
+                    <span class="cpr-val">Yes — lore continues</span>
+                </div>
+                <div class="cancel-policy-row">
+                    <span class="cpr-label">Refunds</span>
+                    <span class="cpr-val">
+                        Crypto transactions are final —
+                        no refunds after delivery
+                    </span>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- ── FAQ ── -->
+<section class="section faq-section">
+    <div class="section-inner">
+        <div class="section-label">FAQ</div>
+        <h2 class="section-title">Retainer Questions</h2>
+        <p class="section-desc">
+            Everything you need to know before joining.
+        </p>
+
+        <div class="faq-grid">
+
+            <div class="faq-item">
+                <h4>When does my first character arrive?</h4>
+                <p>
+                    Within 24 hours of payment confirmation.
+                    Your first character and the world foundation
+                    document are delivered together via email and Discord.
+                    Subsequent characters arrive on a 30-day cycle
+                    from your start date.
+                </p>
+            </div>
+
+            <div class="faq-item">
+                <h4>Can I choose what character I get each month?</h4>
+                <p>
+                    Yes. You can submit a brief — archetype, role,
+                    personality type, specific lore requirements —
+                    and we build toward it. You can also leave it open
+                    and we deliver the next character in the world
+                    sequence that makes the most narrative sense.
+                    Either approach works.
+                </p>
+            </div>
+
+            <div class="faq-item">
+                <h4>What does "unlimited revisions" actually mean?</h4>
+                <p>
+                    No cap on the number of revision requests per month.
+                    No cap on which characters you can revise.
+                    Personality changes, new memories, config adjustments,
+                    lore sync updates, new edge case responses —
+                    all covered, no extra charge, turnaround within 24 hours.
+                </p>
+            </div>
+
+            <div class="faq-item">
+                <h4>How does monthly crypto payment work?</h4>
+                <p>
+                    Each month we send you a payment request for $39.
+                    You pay in your chosen coin — the same 15 coins
+                    accepted for one-time purchases. On confirmation,
+                    your next month activates. No auto-billing —
+                    every payment is a conscious choice.
+                </p>
+            </div>
+
+            <div class="faq-item">
+                <h4>What plugins do the retainer characters support?</h4>
+                <p>
+                    Currently SentiencePro and LlamaCraft Bridge,
+                    the same as all CharacterCraft products.
+                    As new plugins are added to the supported list,
+                    retainer members receive adapted configs for their
+                    entire library — automatically, no extra cost.
+                </p>
+            </div>
+
+            <div class="faq-item">
+                <h4>Do I keep the characters if I cancel?</h4>
+                <p>
+                    Yes. Every character delivered during your active
+                    period is yours permanently — files, commercial rights,
+                    and all. What ends at cancellation is new monthly
+                    deliveries, revision access, and priority support.
+                    You keep everything already delivered.
+                </p>
+            </div>
+
+            <div class="faq-item">
+                <h4>Can I pause instead of cancelling?</h4>
+                <p>
+                    We handle pauses on a case-by-case basis — reach
+                    out via Discord or email. For most situations we can
+                    defer a monthly delivery or hold your slot while
+                    your server is in a quiet period. Message us
+                    before the payment date and we will sort it.
+                </p>
+            </div>
+
+            <div class="faq-item">
+                <h4>What if a delivered character has issues after install?</h4>
+                <p>
+                    Contact us. Retainer members get 8-hour response
+                    and we fix any issue with files we delivered —
+                    no charge. If it is broken and we built it,
+                    we repair it. Config issues, memory problems,
+                    unexpected behaviour — all covered under
+                    active retainer support.
+                </p>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- ── CTA STRIP ── -->
+<div class="cta-strip">
+    <div class="cta-strip-inner">
+        <h2>📅 Ready to Build Something Lasting?</h2>
+        <p>
+            One new character every month. Unlimited revisions.
+            A world that grows with your server.
+            Commercial rights on everything. Cancel any time.
+            Your first character arrives within 24 hours.
+        </p>
+        <div class="cta-strip-actions">
+            <a href="pay-retainer.html" class="btn-primary">
+                Join the Retainer — $39/month →
+            </a>
+            <a href="store.html" class="btn-secondary">
+                ← View All Products
+            </a>
+        </div>
+    </div>
+</div>
+
+<!-- ── GUARANTEE STRIP ── -->
+<div class="guarantee-strip">
+    <p>
+        <strong>All cryptocurrency transactions are final.</strong>
+        No refunds after delivery. If a delivered character has
+        technical issues, we fix it at no charge — that is our
+        commitment. Cancel any time by messaging us on Discord or email.
+        Commercial rights on all delivered characters remain yours permanently.
+    </p>
+</div>
+
+<!-- ── FOOTER ── -->
+<footer>
+    <div class="footer-inner">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <a href="index.html" class="footer-logo">
+                    ⚔️ Character<span>Craft</span>
+                </a>
+                <p>Hand-crafted AI NPC personality packs for Minecraft
+                   server owners. Built for SentiencePro and LlamaCraft
+                   Bridge. Your NPCs should have a past — not a script.</p>
+            </div>
+
+            <div class="footer-col">
+                <h4>Products</h4>
+                <a href="free.html">Free Pack</a>
+                <a href="pay-aldric.html">Aldric</a>
+                <a href="pay-dravek.html">Dravek</a>
+                <a href="pay-city-bundle.html">City Bundle</a>
+                <a href="pay-server-license.html">Server License</a>
+                <a href="pay-retainer.html">Monthly Retainer</a>
+            </div>
+
+            <div class="footer-col">
+                <h4>Info</h4>
+                <a href="index.html">Home</a>
+                <a href="store.html">Store</a>
+                <a href="license.html">License Info</a>
+                <a href="retainer.html">Retainer Info</a>
+            </div>
+
+            <div class="footer-col">
+                <h4>Support</h4>
+                <a href="free.html">Free Starter Pack</a>
+                <a href="success.html">Order Status</a>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <div class="footer-copy">
+                © 2025 CharacterCraft. All rights reserved.
+                All cryptocurrency transactions are final.
+            </div>
+            <div class="footer-copy">
+                Supporting SentiencePro · LlamaCraft Bridge
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script>
+(function () {
+    'use strict';
+
+    /* Mobile nav */
+    document.addEventListener('click', function (e) {
+        var nav = document.querySelector('.nav-links');
+        var tog = document.querySelector('.nav-toggle');
+        if (nav && nav.classList.contains('open') &&
+            !nav.contains(e.target) && !tog.contains(e.target)) {
+            nav.classList.remove('open');
+        }
+    });
+
+    /* Scroll reveal */
+    var observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+                entry.target.style.opacity   = '1';
+                entry.target.style.transform = 'translateY(0)';
+            }
+        });
+    }, { threshold: 0.08 });
+
+    document.querySelectorAll(
+        '.feature-card, .month-row, .revision-ex, ' +
+        '.support-card, .who-card, .faq-item, ' +
+        '.alt-product, .cancel-step, .revision-right, ' +
+        '.cancel-right, .better-for-col, .compare-table-wrap'
+    ).forEach(function (el) {
+        el.style.opacity    = '0';
+        el.style.transform  = 'translateY(20px)';
+        el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+        observer.observe(el);
+    });
+
+}());
+</script>
+
+</body>
+</html>
