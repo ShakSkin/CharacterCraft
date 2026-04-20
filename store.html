@@ -1,0 +1,1773 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Store — CharacterCraft</title>
+    <meta name="description" content="Browse all CharacterCraft AI NPC packs. Individual characters, bundles, server license, and monthly retainer. Filter by type, price, and plugin.">
+    <base href="https://shakskin.github.io/CharacterCraft/">
+    <style>
+        :root {
+            --gold:          #D4A537;
+            --gold-light:    #F2D06B;
+            --bg-primary:    #0A0A0F;
+            --bg-secondary:  #12121A;
+            --bg-card:       #1A1A25;
+            --bg-hover:      #222233;
+            --text-primary:  #E8E8F0;
+            --text-secondary:#9999AA;
+            --text-muted:    #666677;
+            --border:        #2A2A3A;
+            --green:         #4CAF50;
+            --red:           #E74C3C;
+            --urgent-red:    #FF4444;
+            --purple:        #9B59B6;
+            --teal:          #1ABC9C;
+            --amber:         #F39C12;
+            --blue:          #3498DB;
+        }
+
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family:  'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
+            background:   var(--bg-primary);
+            color:        var(--text-primary);
+            line-height:  1.6;
+            overflow-x:   hidden;
+        }
+
+        /* ── NAV ── */
+        nav {
+            position:        sticky;
+            top:             0;
+            z-index:         1000;
+            background:      rgba(10,10,15,0.97);
+            backdrop-filter: blur(12px);
+            border-bottom:   1px solid var(--border);
+            padding:         0 2rem;
+        }
+
+        .nav-inner {
+            max-width:       1200px;
+            margin:          0 auto;
+            display:         flex;
+            justify-content: space-between;
+            align-items:     center;
+            height:          64px;
+        }
+
+        .nav-logo {
+            font-size:       1.25rem;
+            font-weight:     700;
+            color:           var(--gold);
+            text-decoration: none;
+        }
+
+        .nav-logo span { color: var(--text-primary); }
+
+        .nav-links {
+            display:     flex;
+            gap:         2rem;
+            list-style:  none;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color:           var(--text-secondary);
+            text-decoration: none;
+            font-size:       0.9rem;
+            font-weight:     500;
+            transition:      color 0.2s;
+        }
+
+        .nav-links a:hover  { color: var(--gold); }
+        .nav-links a.active { color: var(--gold); }
+
+        .nav-links .nav-cta {
+            background:    var(--gold);
+            color:         #000;
+            padding:       0.5rem 1.25rem;
+            border-radius: 6px;
+            font-weight:   700;
+        }
+
+        .nav-links .nav-cta:hover { background: var(--gold-light); }
+
+        .nav-toggle {
+            display:    none;
+            background: none;
+            border:     none;
+            color:      var(--text-primary);
+            font-size:  1.5rem;
+            cursor:     pointer;
+        }
+
+        /* ── BREADCRUMB ── */
+        .breadcrumb {
+            max-width: 1200px;
+            margin:    0 auto;
+            padding:   1.5rem 2rem 0;
+        }
+
+        .breadcrumb a {
+            color:           var(--text-muted);
+            text-decoration: none;
+            font-size:       0.8rem;
+            transition:      color 0.2s;
+        }
+
+        .breadcrumb a:hover { color: var(--gold); }
+        .breadcrumb .sep    { color: var(--text-muted); margin: 0 0.5rem; }
+        .breadcrumb .here   { color: var(--text-secondary); font-size: 0.8rem; }
+
+        /* ── STORE HEADER ── */
+        .store-header {
+            max-width:  1200px;
+            margin:     0 auto;
+            padding:    2rem 2rem 0;
+        }
+
+        .store-header-inner {
+            display:         flex;
+            align-items:     flex-end;
+            justify-content: space-between;
+            gap:             2rem;
+            padding-bottom:  2rem;
+            border-bottom:   1px solid var(--border);
+            flex-wrap:       wrap;
+        }
+
+        .store-header-left .store-eyebrow {
+            font-size:      0.72rem;
+            font-weight:    700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color:          var(--gold);
+            margin-bottom:  0.4rem;
+        }
+
+        .store-header-left h1 {
+            font-size:     2rem;
+            font-weight:   800;
+            margin-bottom: 0.35rem;
+            letter-spacing:-0.5px;
+        }
+
+        .store-header-left p {
+            color:    var(--text-secondary);
+            font-size:0.9rem;
+        }
+
+        .store-header-right {
+            display:    flex;
+            align-items:center;
+            gap:        0.75rem;
+            flex-shrink:0;
+        }
+
+        .result-count {
+            color:    var(--text-muted);
+            font-size:0.82rem;
+        }
+
+        .result-count strong { color: var(--text-primary); }
+
+        /* ── STORE LAYOUT ── */
+        .store-layout {
+            max-width:             1200px;
+            margin:                0 auto;
+            padding:               2rem 2rem 5rem;
+            display:               grid;
+            grid-template-columns: 260px 1fr;
+            gap:                   2rem;
+            align-items:           start;
+        }
+
+        /* ── SIDEBAR FILTERS ── */
+        .store-sidebar {
+            position: sticky;
+            top:      5rem;
+        }
+
+        .filter-panel {
+            background:    var(--bg-card);
+            border:        1px solid var(--border);
+            border-radius: 12px;
+            overflow:      hidden;
+            margin-bottom: 1rem;
+        }
+
+        .filter-panel-header {
+            padding:         0.85rem 1.25rem;
+            border-bottom:   1px solid var(--border);
+            display:         flex;
+            align-items:     center;
+            justify-content: space-between;
+            cursor:          pointer;
+            user-select:     none;
+        }
+
+        .filter-panel-header h3 {
+            font-size:  0.82rem;
+            font-weight:700;
+            color:      var(--text-secondary);
+            letter-spacing:0.5px;
+            text-transform:uppercase;
+        }
+
+        .filter-panel-header .fph-icon {
+            color:     var(--text-muted);
+            font-size: 0.75rem;
+            transition:transform 0.2s;
+        }
+
+        .filter-panel-header.collapsed .fph-icon {
+            transform: rotate(-90deg);
+        }
+
+        .filter-panel-body {
+            padding: 1rem 1.25rem;
+        }
+
+        .filter-panel-body.hidden { display: none; }
+
+        /* Filter options */
+        .filter-option {
+            display:     flex;
+            align-items: center;
+            gap:         0.6rem;
+            padding:     0.4rem 0;
+            cursor:      pointer;
+        }
+
+        .filter-option input[type="checkbox"] {
+            width:        16px;
+            height:       16px;
+            accent-color: var(--gold);
+            cursor:       pointer;
+            flex-shrink:  0;
+        }
+
+        .filter-option input[type="radio"] {
+            width:        16px;
+            height:       16px;
+            accent-color: var(--gold);
+            cursor:       pointer;
+            flex-shrink:  0;
+        }
+
+        .filter-option label {
+            font-size:   0.85rem;
+            color:       var(--text-secondary);
+            cursor:      pointer;
+            flex:        1;
+            display:     flex;
+            align-items: center;
+            justify-content:space-between;
+            gap:         0.5rem;
+        }
+
+        .filter-count {
+            font-size:     0.7rem;
+            color:         var(--text-muted);
+            background:    var(--bg-hover);
+            padding:       0.1rem 0.45rem;
+            border-radius: 50px;
+        }
+
+        /* Price range */
+        .price-range-display {
+            display:         flex;
+            justify-content: space-between;
+            font-size:       0.8rem;
+            color:           var(--text-muted);
+            margin-bottom:   0.5rem;
+        }
+
+        .price-range-display strong { color: var(--gold); }
+
+        input[type="range"] {
+            width:        100%;
+            accent-color: var(--gold);
+            cursor:       pointer;
+        }
+
+        /* Sort */
+        .sort-select {
+            width:         100%;
+            padding:       0.6rem 0.85rem;
+            background:    var(--bg-primary);
+            border:        1px solid var(--border);
+            border-radius: 8px;
+            color:         var(--text-primary);
+            font-size:     0.85rem;
+            font-family:   inherit;
+            outline:       none;
+            cursor:        pointer;
+        }
+
+        .sort-select:focus { border-color: var(--gold); }
+        .sort-select option { background: var(--bg-card); }
+
+        /* Clear filters */
+        .clear-filters-btn {
+            display:       block;
+            width:         100%;
+            padding:       0.6rem;
+            background:    none;
+            border:        1px solid var(--border);
+            border-radius: 8px;
+            color:         var(--text-muted);
+            font-size:     0.82rem;
+            cursor:        pointer;
+            transition:    all 0.2s;
+            text-align:    center;
+            margin-top:    0.5rem;
+        }
+
+        .clear-filters-btn:hover {
+            border-color: var(--urgent-red);
+            color:        var(--urgent-red);
+        }
+
+        /* Active filter tags */
+        .active-filters {
+            display:    flex;
+            flex-wrap:  wrap;
+            gap:        0.4rem;
+            margin-top: 0.75rem;
+        }
+
+        .filter-tag {
+            display:       inline-flex;
+            align-items:   center;
+            gap:           0.35rem;
+            background:    rgba(212,165,55,0.08);
+            border:        1px solid rgba(212,165,55,0.2);
+            color:         var(--gold);
+            font-size:     0.7rem;
+            font-weight:   600;
+            padding:       0.2rem 0.6rem;
+            border-radius: 50px;
+            cursor:        pointer;
+        }
+
+        .filter-tag:hover { background: rgba(212,165,55,0.15); }
+        .filter-tag .ft-x { font-size: 0.65rem; }
+
+        /* ── MAIN CONTENT ── */
+        .store-main {}
+
+        /* View toggle */
+        .store-toolbar {
+            display:         flex;
+            align-items:     center;
+            justify-content: space-between;
+            margin-bottom:   1.5rem;
+            gap:             1rem;
+            flex-wrap:       wrap;
+        }
+
+        .toolbar-left {
+            display:    flex;
+            align-items:center;
+            gap:        0.75rem;
+        }
+
+        .toolbar-sort {
+            display:    flex;
+            align-items:center;
+            gap:        0.5rem;
+            font-size:  0.82rem;
+            color:      var(--text-muted);
+        }
+
+        .toolbar-sort select {
+            padding:       0.45rem 0.75rem;
+            background:    var(--bg-card);
+            border:        1px solid var(--border);
+            border-radius: 6px;
+            color:         var(--text-primary);
+            font-size:     0.82rem;
+            font-family:   inherit;
+            outline:       none;
+            cursor:        pointer;
+        }
+
+        .toolbar-sort select option { background: var(--bg-card); }
+
+        .view-toggle {
+            display:    flex;
+            gap:        0.25rem;
+            background: var(--bg-card);
+            border:     1px solid var(--border);
+            border-radius:8px;
+            padding:    0.25rem;
+        }
+
+        .view-btn {
+            padding:       0.4rem 0.65rem;
+            background:    none;
+            border:        none;
+            border-radius: 6px;
+            color:         var(--text-muted);
+            font-size:     0.85rem;
+            cursor:        pointer;
+            transition:    all 0.2s;
+        }
+
+        .view-btn.active {
+            background: var(--bg-hover);
+            color:      var(--text-primary);
+        }
+
+        /* ── PRODUCT GRID ── */
+        .products-grid {
+            display:               grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap:                   1.25rem;
+        }
+
+        .products-grid.view-list {
+            grid-template-columns: 1fr;
+        }
+
+        /* ── PRODUCT CARD ── */
+        .prod-card {
+            background:     var(--bg-card);
+            border:         1px solid var(--border);
+            border-radius:  14px;
+            overflow:       hidden;
+            display:        flex;
+            flex-direction: column;
+            transition:     all 0.25s;
+            position:       relative;
+            text-decoration:none;
+            color:          inherit;
+        }
+
+        .prod-card:hover {
+            transform:  translateY(-4px);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.3);
+        }
+
+        /* Card accent borders */
+        .prod-card.acc-gold   { border-color: rgba(212,165,55,0.2); }
+        .prod-card.acc-green  { border-color: rgba(76,175,80,0.2); }
+        .prod-card.acc-purple { border-color: rgba(155,89,182,0.2); }
+        .prod-card.acc-teal   { border-color: rgba(26,188,156,0.2); }
+        .prod-card.acc-amber  { border-color: rgba(243,156,18,0.2); }
+
+        .prod-card.acc-gold:hover   { border-color: rgba(212,165,55,0.45); }
+        .prod-card.acc-green:hover  { border-color: rgba(76,175,80,0.45); }
+        .prod-card.acc-purple:hover { border-color: rgba(155,89,182,0.45); }
+        .prod-card.acc-teal:hover   { border-color: rgba(26,188,156,0.45); }
+        .prod-card.acc-amber:hover  { border-color: rgba(243,156,18,0.45); }
+
+        /* Card top banner */
+        .prod-card-banner {
+            padding:    1.5rem 1.5rem 1rem;
+            position:   relative;
+        }
+
+        .prod-card-banner.banner-gold   { background: linear-gradient(135deg, #2a1a0a, #150d05); }
+        .prod-card-banner.banner-green  { background: linear-gradient(135deg, #0a1a0a, #051505); }
+        .prod-card-banner.banner-purple { background: linear-gradient(135deg, #150a25, #0a0515); }
+        .prod-card-banner.banner-teal   { background: linear-gradient(135deg, #031a14, #010f0d); }
+        .prod-card-banner.banner-amber  { background: linear-gradient(135deg, #1a1200, #0f0a00); }
+
+        .prod-icon { font-size: 2.25rem; display: block; margin-bottom: 0.6rem; }
+
+        .prod-name {
+            font-size:   1.05rem;
+            font-weight: 800;
+            margin-bottom:0.15rem;
+        }
+
+        .prod-role {
+            font-size:0.78rem;
+            color:    var(--text-muted);
+        }
+
+        /* Badges */
+        .prod-badges {
+            position: absolute;
+            top:      1rem;
+            right:    1rem;
+            display:  flex;
+            gap:      0.3rem;
+            flex-wrap:wrap;
+            justify-content:flex-end;
+        }
+
+        .prod-badge {
+            font-size:      0.58rem;
+            font-weight:    800;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            padding:        0.2rem 0.55rem;
+            border-radius:  50px;
+        }
+
+        .badge-sale   { background: var(--urgent-red); color: #fff; }
+        .badge-free   { background: var(--green); color: #fff; }
+        .badge-bundle { background: var(--purple); color: #fff; }
+        .badge-pro    { background: var(--teal); color: #000; }
+        .badge-sub    { background: var(--amber); color: #000; }
+        .badge-new    { background: var(--blue); color: #fff; }
+
+        /* Card body */
+        .prod-card-body {
+            padding: 1.25rem 1.5rem;
+            flex:    1;
+            display: flex;
+            flex-direction:column;
+        }
+
+        /* Tags row */
+        .prod-tags {
+            display:    flex;
+            flex-wrap:  wrap;
+            gap:        0.35rem;
+            margin-bottom:0.85rem;
+        }
+
+        .prod-tag {
+            font-size:     0.62rem;
+            font-weight:   700;
+            letter-spacing:0.5px;
+            text-transform:uppercase;
+            padding:       0.18rem 0.55rem;
+            border-radius: 50px;
+            border:        1px solid;
+        }
+
+        .tag-character {
+            color:        var(--gold);
+            border-color: rgba(212,165,55,0.3);
+            background:   rgba(212,165,55,0.06);
+        }
+
+        .tag-bundle {
+            color:        var(--purple);
+            border-color: rgba(155,89,182,0.3);
+            background:   rgba(155,89,182,0.06);
+        }
+
+        .tag-license {
+            color:        var(--teal);
+            border-color: rgba(26,188,156,0.3);
+            background:   rgba(26,188,156,0.06);
+        }
+
+        .tag-subscription {
+            color:        var(--amber);
+            border-color: rgba(243,156,18,0.3);
+            background:   rgba(243,156,18,0.06);
+        }
+
+        .tag-free {
+            color:        var(--green);
+            border-color: rgba(76,175,80,0.3);
+            background:   rgba(76,175,80,0.06);
+        }
+
+        .tag-commercial {
+            color:        var(--blue);
+            border-color: rgba(52,152,219,0.3);
+            background:   rgba(52,152,219,0.06);
+        }
+
+        /* Quote */
+        .prod-quote {
+            font-style:    italic;
+            font-size:     0.82rem;
+            color:         var(--text-muted);
+            line-height:   1.6;
+            margin-bottom: 1rem;
+            padding-left:  0.75rem;
+            border-left:   2px solid var(--border);
+        }
+
+        /* Feature list */
+        .prod-features {
+            list-style:    none;
+            margin-bottom: 1.25rem;
+            flex:          1;
+        }
+
+        .prod-features li {
+            font-size:   0.82rem;
+            color:       var(--text-secondary);
+            padding:     0.28rem 0;
+            display:     flex;
+            align-items: flex-start;
+            gap:         0.5rem;
+            border-bottom:1px solid rgba(255,255,255,0.03);
+        }
+
+        .prod-features li:last-child { border-bottom: none; }
+
+        .prod-features li::before {
+            content:     '✓';
+            color:       var(--green);
+            font-weight: 700;
+            flex-shrink: 0;
+            font-size:   0.75rem;
+            margin-top:  0.1rem;
+        }
+
+        /* Stats row */
+        .prod-stats {
+            display:    flex;
+            gap:        1rem;
+            margin-bottom:1rem;
+            flex-wrap:  wrap;
+        }
+
+        .prod-stat {
+            text-align: center;
+        }
+
+        .stat-val {
+            font-size:   1rem;
+            font-weight: 800;
+            display:     block;
+            line-height: 1;
+            margin-bottom:0.15rem;
+        }
+
+        .stat-lbl {
+            font-size:  0.65rem;
+            color:      var(--text-muted);
+            font-weight:600;
+            letter-spacing:0.5px;
+            text-transform:uppercase;
+        }
+
+        /* Price row */
+        .prod-price-row {
+            display:     flex;
+            align-items: center;
+            gap:         0.6rem;
+            margin-bottom:0.85rem;
+            flex-wrap:   wrap;
+        }
+
+        .prod-price {
+            font-size:   1.35rem;
+            font-weight: 800;
+            line-height: 1;
+        }
+
+        .prod-price-orig {
+            font-size:       0.8rem;
+            color:           var(--text-muted);
+            text-decoration: line-through;
+        }
+
+        .prod-price-note {
+            font-size:  0.72rem;
+            color:      var(--text-muted);
+            margin-left:auto;
+        }
+
+        .prod-save-badge {
+            font-size:     0.65rem;
+            font-weight:   700;
+            color:         var(--green);
+            background:    rgba(76,175,80,0.1);
+            border:        1px solid rgba(76,175,80,0.2);
+            padding:       0.15rem 0.5rem;
+            border-radius: 50px;
+        }
+
+        /* CTA button */
+        .prod-cta {
+            display:         block;
+            text-align:      center;
+            padding:         0.75rem 1.25rem;
+            border-radius:   8px;
+            font-size:       0.88rem;
+            font-weight:     700;
+            text-decoration: none;
+            transition:      all 0.2s;
+            border:          1px solid;
+        }
+
+        .prod-cta:hover { transform: translateY(-1px); }
+
+        .cta-gold   { background:rgba(212,165,55,0.1); border-color:rgba(212,165,55,0.3); color:var(--gold); }
+        .cta-green  { background:rgba(76,175,80,0.1);  border-color:rgba(76,175,80,0.3);  color:var(--green); }
+        .cta-purple { background:rgba(155,89,182,0.1); border-color:rgba(155,89,182,0.3); color:var(--purple); }
+        .cta-teal   { background:rgba(26,188,156,0.1); border-color:rgba(26,188,156,0.3); color:var(--teal); }
+        .cta-amber  { background:rgba(243,156,18,0.1); border-color:rgba(243,156,18,0.3); color:var(--amber); }
+
+        .cta-gold:hover   { background:rgba(212,165,55,0.2); }
+        .cta-green:hover  { background:rgba(76,175,80,0.2); }
+        .cta-purple:hover { background:rgba(155,89,182,0.2); }
+        .cta-teal:hover   { background:rgba(26,188,156,0.2); }
+        .cta-amber:hover  { background:rgba(243,156,18,0.2); }
+
+        /* ── LIST VIEW CARD ── */
+        .products-grid.view-list .prod-card {
+            flex-direction: row;
+            align-items:    stretch;
+        }
+
+        .products-grid.view-list .prod-card-banner {
+            width:       200px;
+            flex-shrink: 0;
+            display:     flex;
+            flex-direction:column;
+            justify-content:center;
+        }
+
+        .products-grid.view-list .prod-card-body {
+            flex-direction: row;
+            align-items:    center;
+            gap:            1.5rem;
+        }
+
+        .products-grid.view-list .prod-features {
+            flex:        1;
+            margin:      0;
+        }
+
+        .products-grid.view-list .prod-price-section {
+            flex-shrink: 0;
+            text-align:  right;
+            min-width:   140px;
+        }
+
+        .products-grid.view-list .prod-quote { display: none; }
+        .products-grid.view-list .prod-stats { display: none; }
+        .products-grid.view-list .prod-tags  { margin-bottom: 0.5rem; }
+
+        /* ── EMPTY STATE ── */
+        .empty-state {
+            grid-column: 1 / -1;
+            text-align:  center;
+            padding:     4rem 2rem;
+        }
+
+        .empty-icon  { font-size: 3rem; margin-bottom: 1rem; }
+        .empty-state h3 { font-size: 1.15rem; font-weight: 700; margin-bottom: 0.5rem; }
+        .empty-state p  { color: var(--text-muted); font-size: 0.88rem; }
+
+        .reset-btn {
+            display:       inline-block;
+            margin-top:    1.25rem;
+            padding:       0.65rem 1.75rem;
+            background:    var(--gold);
+            color:         #000;
+            border-radius: 8px;
+            font-size:     0.88rem;
+            font-weight:   700;
+            border:        none;
+            cursor:        pointer;
+            text-decoration:none;
+            transition:    all 0.2s;
+        }
+
+        .reset-btn:hover { background: var(--gold-light); }
+
+        /* ── COMPARE BAR ── */
+        .compare-bar {
+            position:        fixed;
+            bottom:          0;
+            left:            0;
+            right:           0;
+            background:      rgba(26,26,37,0.98);
+            backdrop-filter: blur(12px);
+            border-top:      1px solid var(--border);
+            padding:         1rem 2rem;
+            display:         none;
+            align-items:     center;
+            justify-content: center;
+            gap:             1.5rem;
+            z-index:         500;
+            flex-wrap:       wrap;
+        }
+
+        .compare-bar.visible { display: flex; }
+
+        .compare-bar p {
+            color:    var(--text-secondary);
+            font-size:0.88rem;
+        }
+
+        .compare-items {
+            display: flex;
+            gap:     0.5rem;
+        }
+
+        .compare-item {
+            background:    var(--bg-card);
+            border:        1px solid var(--border);
+            border-radius: 6px;
+            padding:       0.35rem 0.85rem;
+            font-size:     0.8rem;
+            color:         var(--text-primary);
+            display:       flex;
+            align-items:   center;
+            gap:           0.4rem;
+        }
+
+        .compare-item button {
+            background: none;
+            border:     none;
+            color:      var(--text-muted);
+            cursor:     pointer;
+            font-size:  0.75rem;
+            padding:    0;
+            line-height:1;
+        }
+
+        .compare-btn {
+            padding:       0.6rem 1.5rem;
+            background:    var(--gold);
+            color:         #000;
+            border:        none;
+            border-radius: 8px;
+            font-size:     0.88rem;
+            font-weight:   700;
+            cursor:        pointer;
+            transition:    all 0.2s;
+        }
+
+        .compare-btn:hover { background: var(--gold-light); }
+
+        /* ── FOOTER ── */
+        footer {
+            padding:    3rem 2rem;
+            border-top: 1px solid var(--border);
+            text-align: center;
+        }
+
+        .footer-links {
+            display:         flex;
+            justify-content: center;
+            gap:             2rem;
+            margin-bottom:   1.25rem;
+            flex-wrap:       wrap;
+        }
+
+        .footer-links a {
+            color:           var(--text-secondary);
+            text-decoration: none;
+            font-size:       0.88rem;
+            transition:      color 0.2s;
+        }
+
+        .footer-links a:hover { color: var(--gold); }
+        .footer-copy { color: var(--text-muted); font-size: 0.8rem; }
+
+        /* ── RESPONSIVE ── */
+        @media (max-width: 1100px) {
+            .store-layout          { grid-template-columns: 220px 1fr; }
+            .products-grid         { grid-template-columns: 1fr 1fr; }
+        }
+
+        @media (max-width: 900px) {
+            .store-layout          { grid-template-columns: 1fr; }
+            .store-sidebar         { position: static; }
+            .products-grid         { grid-template-columns: 1fr 1fr; }
+            .products-grid.view-list .prod-card { flex-direction: column; }
+            .products-grid.view-list .prod-card-banner { width: 100%; }
+        }
+
+        @media (max-width: 650px) {
+            .nav-links {
+                display:        none;
+                position:       absolute;
+                top:            64px;
+                left:           0;
+                right:          0;
+                background:     rgba(10,10,15,0.98);
+                flex-direction: column;
+                padding:        1.5rem 2rem;
+                gap:            1rem;
+                border-bottom:  1px solid var(--border);
+            }
+
+            .nav-links.open { display: flex; }
+            .nav-toggle     { display: block; }
+
+            .products-grid { grid-template-columns: 1fr; }
+            .store-header-inner { flex-direction: column; align-items: flex-start; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ── NAV ── -->
+<nav>
+    <div class="nav-inner">
+        <a href="index.html" class="nav-logo">⚔️ Character<span>Craft</span></a>
+        <button class="nav-toggle"
+                onclick="document.querySelector('.nav-links').classList.toggle('cc-open')"
+                aria-label="Menu">☰</button>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="store.html" class="active">Store</a></li>
+            <li><a href="license.html">Server License</a></li>
+            <li><a href="retainer.html">Retainer</a></li>
+            <li><a href="free.html">Free Pack</a></li>
+            <li><a href="free.html" class="nav-cta">Get Free Pack</a></li>
+        </ul>
+    </div>
+</nav>
+
+<!-- ── BREADCRUMB ── -->
+<div class="breadcrumb">
+    <a href="index.html">Home</a>
+    <span class="sep">›</span>
+    <span class="here">Store</span>
+</div>
+
+<!-- ── STORE HEADER ── -->
+<div class="store-header">
+    <div class="store-header-inner">
+        <div class="store-header-left">
+            <div class="store-eyebrow">CharacterCraft Store</div>
+            <h1>Browse All Products</h1>
+            <p>
+                <strong id="result-num">6</strong> products ·
+                Individual packs, bundles, and subscription tiers
+            </p>
+        </div>
+        <div class="store-header-right">
+            <span class="result-count">
+                Showing <strong id="showing-count">6</strong> of 6
+            </span>
+        </div>
+    </div>
+</div>
+
+<!-- ── STORE LAYOUT ── -->
+<div class="store-layout">
+
+    <!-- ══ SIDEBAR ══ -->
+    <aside class="store-sidebar">
+
+        <!-- Sort -->
+        <div class="filter-panel">
+            <div class="filter-panel-header">
+                <h3>Sort By</h3>
+                <span class="fph-icon">▾</span>
+            </div>
+            <div class="filter-panel-body">
+                <select class="sort-select" id="sort-select"
+                        onchange="Store.applyFilters()">
+                    <option value="featured">Featured</option>
+                    <option value="price-asc">Price: Low to High</option>
+                    <option value="price-desc">Price: High to Low</option>
+                    <option value="memories-desc">Most Memories</option>
+                    <option value="name-asc">Name: A–Z</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Product Type -->
+        <div class="filter-panel">
+            <div class="filter-panel-header"
+                 onclick="Store.togglePanel(this)">
+                <h3>Product Type</h3>
+                <span class="fph-icon">▾</span>
+            </div>
+            <div class="filter-panel-body">
+                <div class="filter-option">
+                    <input type="checkbox" id="type-free"
+                           value="free" onchange="Store.applyFilters()">
+                    <label for="type-free">
+                        Free Pack
+                        <span class="filter-count">1</span>
+                    </label>
+                </div>
+                <div class="filter-option">
+                    <input type="checkbox" id="type-character"
+                           value="character" onchange="Store.applyFilters()">
+                    <label for="type-character">
+                        Individual Character
+                        <span class="filter-count">2</span>
+                    </label>
+                </div>
+                <div class="filter-option">
+                    <input type="checkbox" id="type-bundle"
+                           value="bundle" onchange="Store.applyFilters()">
+                    <label for="type-bundle">
+                        Bundle
+                        <span class="filter-count">1</span>
+                    </label>
+                </div>
+                <div class="filter-option">
+                    <input type="checkbox" id="type-license"
+                           value="license" onchange="Store.applyFilters()">
+                    <label for="type-license">
+                        Server License
+                        <span class="filter-count">1</span>
+                    </label>
+                </div>
+                <div class="filter-option">
+                    <input type="checkbox" id="type-subscription"
+                           value="subscription" onchange="Store.applyFilters()">
+                    <label for="type-subscription">
+                        Subscription
+                        <span class="filter-count">1</span>
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <!-- Price Range -->
+        <div class="filter-panel">
+            <div class="filter-panel-header"
+                 onclick="Store.togglePanel(this)">
+                <h3>Max Price</h3>
+                <span class="fph-icon">▾</span>
+            </div>
+            <div class="filter-panel-body">
+                <div class="price-range-display">
+                    <span>Free</span>
+                    <span>Up to <strong id="price-display">$39</strong></span>
+                </div>
+                <input type="range" id="price-range"
+                       min="0" max="39" value="39" step="1"
+                       oninput="Store.updatePriceDisplay(this.value)"
+                       onchange="Store.applyFilters()">
+            </div>
+        </div>
+
+        <!-- Plugin Support -->
+        <div class="filter-panel">
+            <div class="filter-panel-header"
+                 onclick="Store.togglePanel(this)">
+                <h3>Plugin Support</h3>
+                <span class="fph-icon">▾</span>
+            </div>
+            <div class="filter-panel-body">
+                <div class="filter-option">
+                    <input type="checkbox" id="plugin-sentience"
+                           value="SentiencePro" onchange="Store.applyFilters()">
+                    <label for="plugin-sentience">
+                        SentiencePro
+                        <span class="filter-count">6</span>
+                    </label>
+                </div>
+                <div class="filter-option">
+                    <input type="checkbox" id="plugin-llama"
+                           value="LlamaCraft" onchange="Store.applyFilters()">
+                    <label for="plugin-llama">
+                        LlamaCraft Bridge
+                        <span class="filter-count">6</span>
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <!-- Features -->
+        <div class="filter-panel">
+            <div class="filter-panel-header"
+                 onclick="Store.togglePanel(this)">
+                <h3>Features</h3>
+                <span class="fph-icon">▾</span>
+            </div>
+            <div class="filter-panel-body">
+                <div class="filter-option">
+                    <input type="checkbox" id="feat-commercial"
+                           value="commercial" onchange="Store.applyFilters()">
+                    <label for="feat-commercial">
+                        Commercial Rights
+                        <span class="filter-count">2</span>
+                    </label>
+                </div>
+                <div class="filter-option">
+                    <input type="checkbox" id="feat-worldlore"
+                           value="worldlore" onchange="Store.applyFilters()">
+                    <label for="feat-worldlore">
+                        World Lore System
+                        <span class="filter-count">2</span>
+                    </label>
+                </div>
+                <div class="filter-option">
+                    <input type="checkbox" id="feat-revisions"
+                           value="revisions" onchange="Store.applyFilters()">
+                    <label for="feat-revisions">
+                        Unlimited Revisions
+                        <span class="filter-count">1</span>
+                    </label>
+                </div>
+                <div class="filter-option">
+                    <input type="checkbox" id="feat-consultation"
+                           value="consultation" onchange="Store.applyFilters()">
+                    <label for="feat-consultation">
+                        Setup Consultation
+                        <span class="filter-count">2</span>
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <!-- Active filters display -->
+        <div class="active-filters" id="active-filters"></div>
+
+        <button class="clear-filters-btn"
+                onclick="Store.clearFilters()">
+            ✕ Clear All Filters
+        </button>
+
+    </aside>
+    <!-- ══ END SIDEBAR ══ -->
+
+    <!-- ══ MAIN ══ -->
+    <div class="store-main">
+
+        <!-- Toolbar -->
+        <div class="store-toolbar">
+            <div class="toolbar-left">
+                <div class="toolbar-sort">
+                    <span>View:</span>
+                </div>
+                <div class="view-toggle">
+                    <button class="view-btn active" id="btn-grid"
+                            onclick="Store.setView('grid')"
+                            title="Grid view">⊞</button>
+                    <button class="view-btn" id="btn-list"
+                            onclick="Store.setView('list')"
+                            title="List view">☰</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Product Grid -->
+        <div class="products-grid" id="products-grid">
+            <!-- Populated by JS -->
+        </div>
+
+    </div>
+    <!-- ══ END MAIN ══ -->
+
+</div>
+
+<!-- ── FOOTER ── -->
+<footer>
+    <div class="footer-links">
+        <a href="index.html">Home</a>
+        <a href="store.html">Store</a>
+        <a href="license.html">Server License</a>
+        <a href="retainer.html">Retainer</a>
+        <a href="free.html">Free Pack</a>
+    </div>
+    <p class="footer-copy">
+        © 2025 CharacterCraft. All rights reserved.
+        All cryptocurrency transactions are final.
+    </p>
+</footer>
+
+<script>
+var Store = (function () {
+    'use strict';
+
+    /* ── PRODUCT DATA ───────────────────────────────── */
+    var PRODUCTS = [
+        {
+            id:           'ghostwriter',
+            name:         'The Ghostwriter',
+            role:         'Starter Guard NPC — Complete Free Pack',
+            icon:         '🛡️',
+            price:        0,
+            priceDisplay: 'Free',
+            priceOrig:    null,
+            priceSave:    null,
+            priceNote:    'No payment required',
+            type:         'free',
+            accentClass:  'acc-green',
+            bannerClass:  'banner-green',
+            ctaClass:     'cta-green',
+            ctaText:      'Download Free Pack →',
+            href:         'free.html',
+            featured:     0,
+            memories:     15,
+            characters:   1,
+            tags:         ['free'],
+            plugins:      ['SentiencePro', 'LlamaCraft'],
+            features:     [],
+            quote:        '"I have stood at this gate longer than most men have been alive."',
+            featureList: [
+                '600+ word personality system prompt',
+                '15 hand-crafted memory entries',
+                'Optimized config.yml',
+                '7 edge case responses pre-built',
+                'Step-by-step installation guide',
+                'No payment — just your email'
+            ],
+            badges: [{ text: 'Free', cls: 'badge-free' }],
+            stats: [
+                { val: '15', lbl: 'Memories' },
+                { val: '1', lbl: 'Character' },
+                { val: '600+', lbl: 'Word Prompt' }
+            ]
+        },
+        {
+            id:           'aldric',
+            name:         'Aldric',
+            role:         'Grizzled Gate Captain — 31 Years of Service',
+            icon:         '⚔️',
+            price:        4.89,
+            priceDisplay: '$4.89',
+            priceOrig:    '$6.99',
+            priceSave:    'Save 30%',
+            priceNote:    'One-time · Delivered in 2hr',
+            type:         'character',
+            accentClass:  'acc-gold',
+            bannerClass:  'banner-gold',
+            ctaClass:     'cta-gold',
+            ctaText:      'Get Aldric →',
+            href:         'pay-aldric.html',
+            featured:     1,
+            memories:     25,
+            characters:   1,
+            tags:         ['character'],
+            plugins:      ['SentiencePro', 'LlamaCraft'],
+            features:     [],
+            quote:        '"Thirty-one years on this gate. Some fires don\'t go out just because you stop seeing the smoke."',
+            featureList: [
+                '600+ word deep personality system prompt',
+                '25 hand-crafted memory entries',
+                'Optimized config.yml with cost controls',
+                'Emotional triggers & refusal patterns',
+                '7+ edge case responses pre-built',
+                'Personal support + free updates for life'
+            ],
+            badges: [
+                { text: '30% Off', cls: 'badge-sale' },
+                { text: 'Popular', cls: 'badge-new' }
+            ],
+            stats: [
+                { val: '25', lbl: 'Memories' },
+                { val: '1', lbl: 'Character' },
+                { val: '600+', lbl: 'Word Prompt' }
+            ]
+        },
+        {
+            id:           'dravek',
+            name:         'Dravek',
+            role:         'Corrupt Merchant — Knows Everyone\'s Price',
+            icon:         '💰',
+            price:        4.85,
+            priceDisplay: '$4.85',
+            priceOrig:    '$6.99',
+            priceSave:    'Save 30%',
+            priceNote:    'One-time · Delivered in 2hr',
+            type:         'character',
+            accentClass:  'acc-green',
+            bannerClass:  'banner-green',
+            ctaClass:     'cta-green',
+            ctaText:      'Get Dravek →',
+            href:         'pay-dravek.html',
+            featured:     2,
+            memories:     25,
+            characters:   1,
+            tags:         ['character'],
+            plugins:      ['SentiencePro', 'LlamaCraft'],
+            features:     [],
+            quote:        '"Everything has a price, friend. The trick is knowing who\'s paying it."',
+            featureList: [
+                '600+ word personality with full ethics code',
+                '25 hand-crafted memories including contacts',
+                'Merchant-optimized config with negotiation logic',
+                'Bribery and information-trading response patterns',
+                'Knowledge boundaries — what he\'ll sell vs. keep',
+                'Personal support + free updates for life'
+            ],
+            badges: [{ text: '30% Off', cls: 'badge-sale' }],
+            stats: [
+                { val: '25', lbl: 'Memories' },
+                { val: '1', lbl: 'Character' },
+                { val: '600+', lbl: 'Word Prompt' }
+            ]
+        },
+        {
+            id:           'city-bundle',
+            name:         'City Bundle',
+            role:         'Aldric + Dravek — Two Characters. One World.',
+            icon:         '🏰',
+            price:        8.47,
+            priceDisplay: '$8.47',
+            priceOrig:    '$13.98',
+            priceSave:    'Save 39%',
+            priceNote:    'One-time · Delivered in 2hr',
+            type:         'bundle',
+            accentClass:  'acc-purple',
+            bannerClass:  'banner-purple',
+            ctaClass:     'cta-purple',
+            ctaText:      'Get City Bundle →',
+            href:         'pay-city-bundle.html',
+            featured:     3,
+            memories:     50,
+            characters:   2,
+            tags:         ['bundle'],
+            plugins:      ['SentiencePro', 'LlamaCraft'],
+            features:     ['worldlore'],
+            quote:        '"They reference the same fire — from completely different windows."',
+            featureList: [
+                'Complete Aldric pack — all files included',
+                'Complete Dravek pack — all files included',
+                'Shared world lore document',
+                'Cross-reference memories — they mention each other',
+                '50 total hand-crafted memories',
+                'Both advanced configs + edge cases'
+            ],
+            badges: [
+                { text: 'Save 39%', cls: 'badge-bundle' },
+                { text: 'Best Value', cls: 'badge-new' }
+            ],
+            stats: [
+                { val: '50', lbl: 'Memories' },
+                { val: '2', lbl: 'Characters' },
+                { val: '1', lbl: 'World Lore' }
+            ]
+        },
+        {
+            id:           'server-license',
+            name:         'Server License',
+            role:         '5 Characters · Commercial Rights · Full System',
+            icon:         '🌐',
+            price:        24.99,
+            priceDisplay: '$24.99',
+            priceOrig:    '$34.99',
+            priceSave:    'Save 29%',
+            priceNote:    'One-time · Delivered in 4hr',
+            type:         'license',
+            accentClass:  'acc-teal',
+            bannerClass:  'banner-teal',
+            ctaClass:     'cta-teal',
+            ctaText:      'Get Server License →',
+            href:         'pay-server-license.html',
+            featured:     4,
+            memories:     125,
+            characters:   5,
+            tags:         ['license'],
+            plugins:      ['SentiencePro', 'LlamaCraft'],
+            features:     ['commercial', 'worldlore', 'consultation'],
+            quote:        '"Five characters. One world. Built for server owners who take their NPC infrastructure seriously."',
+            featureList: [
+                '5 full character packs — your choice from roster',
+                '125 total hand-crafted memories',
+                'Complete world lore system + relationship map',
+                'API cost optimization report',
+                'Commercial server use rights — no restrictions',
+                '1hr setup consultation + priority support'
+            ],
+            badges: [
+                { text: 'Pro', cls: 'badge-pro' },
+                { text: 'Save 29%', cls: 'badge-sale' }
+            ],
+            stats: [
+                { val: '125', lbl: 'Memories' },
+                { val: '5', lbl: 'Characters' },
+                { val: '1hr', lbl: 'Consultation' }
+            ]
+        },
+        {
+            id:           'retainer',
+            name:         'Monthly Retainer',
+            role:         'Your NPC Team. Every Month.',
+            icon:         '📅',
+            price:        39,
+            priceDisplay: '$39',
+            priceOrig:    null,
+            priceSave:    null,
+            priceNote:    '/month · Cancel anytime',
+            type:         'subscription',
+            accentClass:  'acc-amber',
+            bannerClass:  'banner-amber',
+            ctaClass:     'cta-amber',
+            ctaText:      'Join Retainer →',
+            href:         'pay-retainer.html',
+            featured:     5,
+            memories:     25,
+            characters:   1,
+            tags:         ['subscription'],
+            plugins:      ['SentiencePro', 'LlamaCraft'],
+            features:     ['commercial', 'revisions', 'consultation'],
+            quote:        '"One new character every month. Unlimited revisions. Same-day support."',
+            featureList: [
+                '1 new full character pack delivered monthly',
+                'Unlimited revisions — any character, any time',
+                'Same-day support response (within 8 hours)',
+                'Priority access to all new releases',
+                'Commercial use rights on all characters',
+                'Ongoing lore continuity maintained'
+            ],
+            badges: [{ text: 'Monthly', cls: 'badge-sub' }],
+            stats: [
+                { val: '25+', lbl: 'Memories/mo' },
+                { val: '8hr', lbl: 'Support SLA' },
+                { val: '∞', lbl: 'Revisions' }
+            ]
+        }
+    ];
+
+    /* ── STATE ──────────────────────────────────────── */
+    var state = {
+        view:      'grid',
+        maxPrice:  39,
+        types:     [],
+        plugins:   [],
+        features:  [],
+        sort:      'featured'
+    };
+
+    /* ── RENDER CARD ────────────────────────────────── */
+    function renderCard(p, isList) {
+
+        var badgesHtml = p.badges.map(function (b) {
+            return '<span class="prod-badge ' + b.cls + '">' + b.text + '</span>';
+        }).join('');
+
+        var tagsHtml = p.tags.map(function (t) {
+            return '<span class="prod-tag tag-' + t + '">' + t + '</span>';
+        }).join('');
+
+        if (p.features.indexOf('commercial') !== -1) {
+            tagsHtml += '<span class="prod-tag tag-commercial">Commercial</span>';
+        }
+
+        var featuresHtml = p.featureList.map(function (f) {
+            return '<li>' + f + '</li>';
+        }).join('');
+
+        var statsHtml = p.stats.map(function (s) {
+            return '<div class="prod-stat">' +
+                '<span class="stat-val" style="color:' + accentColor(p) + ';">' +
+                s.val + '</span>' +
+                '<span class="stat-lbl">' + s.lbl + '</span>' +
+                '</div>';
+        }).join('');
+
+        var priceHtml = '<div class="prod-price" style="color:' +
+            accentColor(p) + ';">' + p.priceDisplay + '</div>';
+
+        if (p.priceOrig) {
+            priceHtml += '<span class="prod-price-orig">' + p.priceOrig + '</span>';
+        }
+
+        if (p.priceSave) {
+            priceHtml += '<span class="prod-save-badge">' + p.priceSave + '</span>';
+        }
+
+        priceHtml += '<span class="prod-price-note">' + p.priceNote + '</span>';
+
+        if (isList) {
+            return '<a href="' + p.href + '" class="prod-card ' +
+                p.accentClass + '" data-type="' + p.type +
+                '" data-price="' + p.price + '">' +
+
+                '<div class="prod-card-banner ' + p.bannerClass + '">' +
+                '<div class="prod-badges">' + badgesHtml + '</div>' +
+                '<span class="prod-icon">' + p.icon + '</span>' +
+                '<div class="prod-name">' + p.name + '</div>' +
+                '<div class="prod-role">' + p.role + '</div>' +
+                '</div>' +
+
+                '<div class="prod-card-body">' +
+                '<div style="flex:1;">' +
+                '<div class="prod-tags" style="margin-bottom:0.75rem;">' + tagsHtml + '</div>' +
+                '<ul class="prod-features">' + featuresHtml + '</ul>' +
+                '</div>' +
+                '<div class="prod-price-section">' +
+                '<div class="prod-price-row" style="justify-content:flex-end;margin-bottom:0.75rem;">' +
+                priceHtml + '</div>' +
+                '<span class="prod-cta ' + p.ctaClass + '">' + p.ctaText + '</span>' +
+                '</div>' +
+                '</div>' +
+                '</a>';
+        }
+
+        return '<a href="' + p.href + '" class="prod-card ' +
+            p.accentClass + '" data-type="' + p.type +
+            '" data-price="' + p.price + '">' +
+
+            '<div class="prod-card-banner ' + p.bannerClass + '">' +
+            '<div class="prod-badges">' + badgesHtml + '</div>' +
+            '<span class="prod-icon">' + p.icon + '</span>' +
+            '<div class="prod-name">' + p.name + '</div>' +
+            '<div class="prod-role">' + p.role + '</div>' +
+            '</div>' +
+
+            '<div class="prod-card-body">' +
+            '<div class="prod-tags">' + tagsHtml + '</div>' +
+            '<div class="prod-quote">' + p.quote + '</div>' +
+            '<div class="prod-stats">' + statsHtml + '</div>' +
+            '<ul class="prod-features">' + featuresHtml + '</ul>' +
+            '<div class="prod-price-row">' + priceHtml + '</div>' +
+            '<a href="' + p.href + '" class="prod-cta ' + p.ctaClass + '">' +
+            p.ctaText + '</a>' +
+            '</div>' +
+            '</a>';
+    }
+
+    function accentColor(p) {
+        var map = {
+            'acc-gold':   'var(--gold)',
+            'acc-green':  'var(--green)',
+            'acc-purple': 'var(--purple)',
+            'acc-teal':   'var(--teal)',
+            'acc-amber':  'var(--amber)'
+        };
+        return map[p.accentClass] || 'var(--gold)';
+    }
+
+    /* ── FILTER & SORT ──────────────────────────────── */
+    function getFilters() {
+        state.sort     = document.getElementById('sort-select').value;
+        state.maxPrice = parseFloat(document.getElementById('price-range').value);
+
+        state.types = [];
+        ['free','character','bundle','license','subscription'].forEach(function (t) {
+            var el = document.getElementById('type-' + t);
+            if (el && el.checked) state.types.push(t);
+        });
+
+        state.plugins = [];
+        ['sentience','llama'].forEach(function (key) {
+            var el = document.getElementById('plugin-' + key);
+            if (el && el.checked) {
+                state.plugins.push(key === 'sentience' ? 'SentiencePro' : 'LlamaCraft');
+            }
+        });
+
+        state.features = [];
+        ['commercial','worldlore','revisions','consultation'].forEach(function (f) {
+            var el = document.getElementById('feat-' + f);
+            if (el && el.checked) state.features.push(f);
+        });
+    }
+
+    function filterProducts() {
+        return PRODUCTS.filter(function (p) {
+
+            /* Type filter */
+            if (state.types.length > 0 && state.types.indexOf(p.type) === -1) {
+                return false;
+            }
+
+            /* Price filter */
+            if (p.price > state.maxPrice) return false;
+
+            /* Plugin filter */
+            if (state.plugins.length > 0) {
+                var hasPlugin = state.plugins.some(function (pl) {
+                    return p.plugins.indexOf(pl) !== -1;
+                });
+                if (!hasPlugin) return false;
+            }
+
+            /* Feature filter */
+            if (state.features.length > 0) {
+                var hasAllFeatures = state.features.every(function (f) {
+                    return p.features.indexOf(f) !== -1;
+                });
+                if (!hasAllFeatures) return false;
+            }
+
+            return true;
+        });
+    }
+
+    function sortProducts(products) {
+        var sorted = products.slice();
+        switch (state.sort) {
+            case 'price-asc':
+                sorted.sort(function (a, b) { return a.price - b.price; });
+                break;
+            case 'price-desc':
+                sorted.sort(function (a, b) { return b.price - a.price; });
+                break;
+            case 'memories-desc':
+                sorted.sort(function (a, b) { return b.memories - a.memories; });
+                break;
+            case 'name-asc':
+                sorted.sort(function (a, b) {
+                    return a.name.localeCompare(b.name);
+                });
+                break;
+            default: /* featured */
+                sorted.sort(function (a, b) {
+                    return a.featured - b.featured;
+                });
+        }
+        return sorted;
+    }
+
+    /* ── APPLY FILTERS ──────────────────────────────── */
+    function applyFilters() {
+        getFilters();
+        var filtered = filterProducts();
+        var sorted   = sortProducts(filtered);
+        renderGrid(sorted);
+        updateCounts(sorted.length);
+        renderActiveTags();
+    }
+
+    /* ── RENDER GRID ────────────────────────────────── */
+    function renderGrid(products) {
+        var grid   = document.getElementById('products-grid');
+        var isList = state.view === 'list';
+
+        if (products.length === 0) {
+            grid.innerHTML =
+                '<div class="empty-state">' +
+                '<div class="empty-icon">🔍</div>' +
+                '<h3>No products match your filters</h3>' +
+                '<p>Try adjusting your filters or clearing them to see all products.</p>' +
+                '<button class="reset-btn" onclick="Store.clearFilters()">Clear Filters</button>' +
+                '</div>';
+            return;
+        }
+
+        grid.innerHTML = products.map(function (p) {
+            return renderCard(p, isList);
+        }).join('');
+    }
+
+    /* ── UPDATE COUNTS ──────────────────────────────── */
+    function updateCounts(num) {
+        var el = document.getElementById('showing-count');
+        if (el) el.textContent = num;
+    }
+
+    /* ── ACTIVE FILTER TAGS ─────────────────────────── */
+    function renderActiveTags() {
+        var container = document.getElementById('active-filters');
+        var tags      = [];
+
+        state.types.forEach(function (t) {
+            tags.push({ label: t, remove: function () {
+                var el = document.getElementById('type-' + t);
+                if (el) el.checked = false;
+                applyFilters();
+            }});
+        });
+
+        state.plugins.forEach(function (p) {
+            tags.push({ label: p, remove: function () {
+                var key = p === 'SentiencePro' ? 'sentience' : 'llama';
+                var el  = document.getElementById('plugin-' + key);
+                if (el) el.checked = false;
+                applyFilters();
+            }});
+        });
+
+        state.features.forEach(function (f) {
+            tags.push({ label: f, remove: function () {
+                var el = document.getElementById('feat-' + f);
+                if (el) el.checked = false;
+                applyFilters();
+            }});
+        });
+
+        if (state.maxPrice < 39) {
+            tags.push({ label: 'Max $' + state.maxPrice, remove: function () {
+                var el = document.getElementById('price-range');
+                if (el) { el.value = 39; }
+                updatePriceDisplay(39);
+                applyFilters();
+            }});
+        }
+
+        container.innerHTML = tags.map(function (tag, i) {
+            return '<span class="filter-tag" onclick="Store._removeTag(' + i + ')">' +
+                tag.label + ' <span class="ft-x">✕</span></span>';
+        }).join('');
+
+        Store._tagRemovers = tags.map(function (t) { return t.remove; });
+    }
+
+    /* ── PUBLIC HELPERS ─────────────────────────────── */
+    function setView(view) {
+        state.view = view;
+        var grid = document.getElementById('products-grid');
+
+        document.getElementById('btn-grid').classList.toggle('active', view === 'grid');
+        document.getElementById('btn-list').classList.toggle('active', view === 'list');
+
+        if (view === 'list') {
+            grid.classList.add('view-list');
+        } else {
+            grid.classList.remove('view-list');
+        }
+
+        applyFilters();
+    }
+
+    function togglePanel(header) {
+        var body = header.nextElementSibling;
+        body.classList.toggle('hidden');
+        header.classList.toggle('collapsed');
+    }
+
+    function updatePriceDisplay(val) {
+        var el = document.getElementById('price-display');
+        if (el) el.textContent = val == 0 ? 'Free only' : '$' + val;
+    }
+
+    function clearFilters() {
+        ['type-free','type-character','type-bundle',
+         'type-license','type-subscription',
+         'plugin-sentience','plugin-llama',
+         'feat-commercial','feat-worldlore',
+         'feat-revisions','feat-consultation'
+        ].forEach(function (id) {
+            var el = document.getElementById(id);
+            if (el) el.checked = false;
+        });
+
+        var pr = document.getElementById('price-range');
+        if (pr) pr.value = 39;
+        updatePriceDisplay(39);
+
+        document.getElementById('sort-select').value = 'featured';
+        applyFilters();
+    }
+
+    /* ── INIT ───────────────────────────────────────── */
+    function init() {
+        applyFilters();
+
+        /* Mobile nav */
+        document.addEventListener('click', function (e) {
+            var nav = document.querySelector('.nav-links');
+            var tog = document.querySelector('.nav-toggle');
+            if (nav && nav.classList.contains('cc-open') &&
+                !nav.contains(e.target) && !tog.contains(e.target)) {
+                nav.classList.remove('cc-open');
+            }
+        });
+    }
+
+    init();
+
+    return {
+        applyFilters:      applyFilters,
+        setView:           setView,
+        togglePanel:       togglePanel,
+        updatePriceDisplay:updatePriceDisplay,
+        clearFilters:      clearFilters,
+        _removeTag: function (i) {
+            if (Store._tagRemovers && Store._tagRemovers[i]) {
+                Store._tagRemovers[i]();
+            }
+        },
+        _tagRemovers: []
+    };
+
+}());
+</script>
+
+</body>
+</html>
