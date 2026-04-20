@@ -3,8 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Store — CharacterCraft</title>
-    <meta name="description" content="Browse all CharacterCraft AI NPC packs. Individual characters, bundles, server license, and monthly retainer. Filter by type, price, and plugin.">
+    <title>Store — CharacterCraft AI NPC Packs</title>
+    <meta name="description" content="Browse all CharacterCraft AI NPC personality packs. Free starter, individual characters, bundles, server license, and monthly retainer. One-time crypto payment.">
+    <meta property="og:title" content="Store — CharacterCraft AI NPC Packs">
+    <meta property="og:description" content="Every CharacterCraft pack in one place. Deep personalities, real memories, optimized configs. Pay once. Yours forever.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://shakskin.github.io/CharacterCraft/store.html">
+    <link rel="canonical" href="https://shakskin.github.io/CharacterCraft/store.html">
     <base href="https://shakskin.github.io/CharacterCraft/">
     <style>
         :root {
@@ -63,6 +68,7 @@
             font-weight:     700;
             color:           var(--gold);
             text-decoration: none;
+            letter-spacing:  -0.3px;
         }
 
         .nav-logo span { color: var(--text-primary); }
@@ -82,7 +88,7 @@
             transition:      color 0.2s;
         }
 
-        .nav-links a:hover  { color: var(--gold); }
+        .nav-links a:hover,
         .nav-links a.active { color: var(--gold); }
 
         .nav-links .nav-cta {
@@ -91,9 +97,10 @@
             padding:       0.5rem 1.25rem;
             border-radius: 6px;
             font-weight:   700;
+            transition:    background 0.2s;
         }
 
-        .nav-links .nav-cta:hover { background: var(--gold-light); }
+        .nav-links .nav-cta:hover { background: var(--gold-light); color: #000; }
 
         .nav-toggle {
             display:    none;
@@ -104,779 +111,682 @@
             cursor:     pointer;
         }
 
-        /* ── BREADCRUMB ── */
-        .breadcrumb {
-            max-width: 1200px;
+        /* ── PAGE HEADER ── */
+        .page-header {
+            padding:    5rem 2rem 3rem;
+            text-align: center;
+            position:   relative;
+            overflow:   hidden;
+        }
+
+        .page-header::before {
+            content:        '';
+            position:       absolute;
+            inset:          0;
+            background:     radial-gradient(ellipse at 50% 0%,
+                                rgba(212,165,55,0.07) 0%,
+                                transparent 65%);
+            pointer-events: none;
+        }
+
+        .page-header-inner {
+            max-width: 720px;
             margin:    0 auto;
-            padding:   1.5rem 2rem 0;
+            position:  relative;
+            z-index:   1;
         }
 
-        .breadcrumb a {
-            color:           var(--text-muted);
-            text-decoration: none;
-            font-size:       0.8rem;
-            transition:      color 0.2s;
-        }
-
-        .breadcrumb a:hover { color: var(--gold); }
-        .breadcrumb .sep    { color: var(--text-muted); margin: 0 0.5rem; }
-        .breadcrumb .here   { color: var(--text-secondary); font-size: 0.8rem; }
-
-        /* ── STORE HEADER ── */
-        .store-header {
-            max-width:  1200px;
-            margin:     0 auto;
-            padding:    2rem 2rem 0;
-        }
-
-        .store-header-inner {
-            display:         flex;
-            align-items:     flex-end;
-            justify-content: space-between;
-            gap:             2rem;
-            padding-bottom:  2rem;
-            border-bottom:   1px solid var(--border);
-            flex-wrap:       wrap;
-        }
-
-        .store-header-left .store-eyebrow {
-            font-size:      0.72rem;
-            font-weight:    700;
-            letter-spacing: 2px;
-            text-transform: uppercase;
+        .page-eyebrow {
+            display:        inline-flex;
+            align-items:    center;
+            gap:            0.5rem;
+            background:     rgba(212,165,55,0.08);
+            border:         1px solid rgba(212,165,55,0.2);
             color:          var(--gold);
-            margin-bottom:  0.4rem;
+            font-size:      0.75rem;
+            font-weight:    700;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            padding:        0.35rem 1rem;
+            border-radius:  50px;
+            margin-bottom:  1.25rem;
         }
 
-        .store-header-left h1 {
-            font-size:     2rem;
+        .page-header h1 {
+            font-size:     clamp(2rem, 5vw, 3rem);
             font-weight:   800;
-            margin-bottom: 0.35rem;
+            line-height:   1.1;
+            margin-bottom: 1rem;
             letter-spacing:-0.5px;
         }
 
-        .store-header-left p {
-            color:    var(--text-secondary);
-            font-size:0.9rem;
-        }
+        .page-header h1 .gold { color: var(--gold); }
 
-        .store-header-right {
-            display:    flex;
-            align-items:center;
-            gap:        0.75rem;
-            flex-shrink:0;
-        }
-
-        .result-count {
-            color:    var(--text-muted);
-            font-size:0.82rem;
-        }
-
-        .result-count strong { color: var(--text-primary); }
-
-        /* ── STORE LAYOUT ── */
-        .store-layout {
-            max-width:             1200px;
-            margin:                0 auto;
-            padding:               2rem 2rem 5rem;
-            display:               grid;
-            grid-template-columns: 260px 1fr;
-            gap:                   2rem;
-            align-items:           start;
-        }
-
-        /* ── SIDEBAR FILTERS ── */
-        .store-sidebar {
-            position: sticky;
-            top:      5rem;
-        }
-
-        .filter-panel {
-            background:    var(--bg-card);
-            border:        1px solid var(--border);
-            border-radius: 12px;
-            overflow:      hidden;
-            margin-bottom: 1rem;
-        }
-
-        .filter-panel-header {
-            padding:         0.85rem 1.25rem;
-            border-bottom:   1px solid var(--border);
-            display:         flex;
-            align-items:     center;
-            justify-content: space-between;
-            cursor:          pointer;
-            user-select:     none;
-        }
-
-        .filter-panel-header h3 {
-            font-size:  0.82rem;
-            font-weight:700;
-            color:      var(--text-secondary);
-            letter-spacing:0.5px;
-            text-transform:uppercase;
-        }
-
-        .filter-panel-header .fph-icon {
-            color:     var(--text-muted);
-            font-size: 0.75rem;
-            transition:transform 0.2s;
-        }
-
-        .filter-panel-header.collapsed .fph-icon {
-            transform: rotate(-90deg);
-        }
-
-        .filter-panel-body {
-            padding: 1rem 1.25rem;
-        }
-
-        .filter-panel-body.hidden { display: none; }
-
-        /* Filter options */
-        .filter-option {
-            display:     flex;
-            align-items: center;
-            gap:         0.6rem;
-            padding:     0.4rem 0;
-            cursor:      pointer;
-        }
-
-        .filter-option input[type="checkbox"] {
-            width:        16px;
-            height:       16px;
-            accent-color: var(--gold);
-            cursor:       pointer;
-            flex-shrink:  0;
-        }
-
-        .filter-option input[type="radio"] {
-            width:        16px;
-            height:       16px;
-            accent-color: var(--gold);
-            cursor:       pointer;
-            flex-shrink:  0;
-        }
-
-        .filter-option label {
-            font-size:   0.85rem;
+        .page-header p {
+            font-size:   1rem;
             color:       var(--text-secondary);
-            cursor:      pointer;
-            flex:        1;
+            line-height: 1.75;
+            max-width:   580px;
+            margin:      0 auto 1.5rem;
+        }
+
+        /* Trust bar */
+        .trust-bar {
+            display:         flex;
+            align-items:     center;
+            justify-content: center;
+            gap:             1.5rem;
+            flex-wrap:       wrap;
+            padding:         0.85rem 2rem;
+            background:      var(--bg-secondary);
+            border-top:      1px solid var(--border);
+            border-bottom:   1px solid var(--border);
+        }
+
+        .trust-item {
             display:     flex;
             align-items: center;
-            justify-content:space-between;
-            gap:         0.5rem;
+            gap:         0.4rem;
+            font-size:   0.78rem;
+            color:       var(--text-secondary);
+            font-weight: 600;
         }
 
-        .filter-count {
-            font-size:     0.7rem;
-            color:         var(--text-muted);
-            background:    var(--bg-hover);
-            padding:       0.1rem 0.45rem;
-            border-radius: 50px;
-        }
+        .trust-item .trust-icon { font-size: 0.9rem; }
+        .trust-item .trust-highlight { color: var(--gold); }
 
-        /* Price range */
-        .price-range-display {
-            display:         flex;
-            justify-content: space-between;
-            font-size:       0.8rem;
-            color:           var(--text-muted);
-            margin-bottom:   0.5rem;
-        }
-
-        .price-range-display strong { color: var(--gold); }
-
-        input[type="range"] {
-            width:        100%;
-            accent-color: var(--gold);
-            cursor:       pointer;
-        }
-
-        /* Sort */
-        .sort-select {
-            width:         100%;
-            padding:       0.6rem 0.85rem;
-            background:    var(--bg-primary);
-            border:        1px solid var(--border);
-            border-radius: 8px;
-            color:         var(--text-primary);
-            font-size:     0.85rem;
-            font-family:   inherit;
-            outline:       none;
-            cursor:        pointer;
-        }
-
-        .sort-select:focus { border-color: var(--gold); }
-        .sort-select option { background: var(--bg-card); }
-
-        /* Clear filters */
-        .clear-filters-btn {
-            display:       block;
-            width:         100%;
-            padding:       0.6rem;
-            background:    none;
-            border:        1px solid var(--border);
-            border-radius: 8px;
-            color:         var(--text-muted);
-            font-size:     0.82rem;
-            cursor:        pointer;
-            transition:    all 0.2s;
-            text-align:    center;
-            margin-top:    0.5rem;
-        }
-
-        .clear-filters-btn:hover {
-            border-color: var(--urgent-red);
-            color:        var(--urgent-red);
-        }
-
-        /* Active filter tags */
-        .active-filters {
-            display:    flex;
-            flex-wrap:  wrap;
-            gap:        0.4rem;
-            margin-top: 0.75rem;
-        }
-
-        .filter-tag {
-            display:       inline-flex;
-            align-items:   center;
-            gap:           0.35rem;
-            background:    rgba(212,165,55,0.08);
-            border:        1px solid rgba(212,165,55,0.2);
-            color:         var(--gold);
-            font-size:     0.7rem;
-            font-weight:   600;
-            padding:       0.2rem 0.6rem;
-            border-radius: 50px;
-            cursor:        pointer;
-        }
-
-        .filter-tag:hover { background: rgba(212,165,55,0.15); }
-        .filter-tag .ft-x { font-size: 0.65rem; }
-
-        /* ── MAIN CONTENT ── */
-        .store-main {}
-
-        /* View toggle */
-        .store-toolbar {
+        /* ── FILTER BAR ── */
+        .filter-bar {
+            padding:         1.5rem 2rem;
             display:         flex;
             align-items:     center;
             justify-content: space-between;
-            margin-bottom:   1.5rem;
-            gap:             1rem;
             flex-wrap:       wrap;
+            gap:             1rem;
+            max-width:       1200px;
+            margin:          0 auto;
         }
 
-        .toolbar-left {
+        .filter-tabs {
             display:    flex;
-            align-items:center;
-            gap:        0.75rem;
-        }
-
-        .toolbar-sort {
-            display:    flex;
-            align-items:center;
             gap:        0.5rem;
-            font-size:  0.82rem;
-            color:      var(--text-muted);
+            flex-wrap:  wrap;
         }
 
-        .toolbar-sort select {
-            padding:       0.45rem 0.75rem;
-            background:    var(--bg-card);
+        .filter-tab {
+            padding:       0.4rem 1rem;
+            border-radius: 50px;
             border:        1px solid var(--border);
-            border-radius: 6px;
-            color:         var(--text-primary);
-            font-size:     0.82rem;
-            font-family:   inherit;
-            outline:       none;
-            cursor:        pointer;
-        }
-
-        .toolbar-sort select option { background: var(--bg-card); }
-
-        .view-toggle {
-            display:    flex;
-            gap:        0.25rem;
-            background: var(--bg-card);
-            border:     1px solid var(--border);
-            border-radius:8px;
-            padding:    0.25rem;
-        }
-
-        .view-btn {
-            padding:       0.4rem 0.65rem;
-            background:    none;
-            border:        none;
-            border-radius: 6px;
-            color:         var(--text-muted);
-            font-size:     0.85rem;
+            background:    var(--bg-card);
+            color:         var(--text-secondary);
+            font-size:     0.8rem;
+            font-weight:   600;
             cursor:        pointer;
             transition:    all 0.2s;
         }
 
-        .view-btn.active {
-            background: var(--bg-hover);
-            color:      var(--text-primary);
+        .filter-tab:hover,
+        .filter-tab.active {
+            background:   rgba(212,165,55,0.1);
+            border-color: rgba(212,165,55,0.3);
+            color:        var(--gold);
         }
 
-        /* ── PRODUCT GRID ── */
+        .store-count {
+            font-size:  0.8rem;
+            color:      var(--text-muted);
+            font-weight:600;
+        }
+
+        /* ── STORE GRID ── */
+        .store-section {
+            padding:   0 2rem 5rem;
+        }
+
+        .store-inner {
+            max-width: 1200px;
+            margin:    0 auto;
+        }
+
+        /* Tier label */
+        .tier-label {
+            display:         flex;
+            align-items:     center;
+            gap:             0.75rem;
+            margin:          2.5rem 0 1.25rem;
+        }
+
+        .tier-label-text {
+            font-size:      0.72rem;
+            font-weight:    700;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color:          var(--text-muted);
+            white-space:    nowrap;
+        }
+
+        .tier-label-line {
+            flex:       1;
+            height:     1px;
+            background: var(--border);
+        }
+
+        /* PRODUCT CARDS */
         .products-grid {
             display:               grid;
             grid-template-columns: repeat(3, 1fr);
             gap:                   1.25rem;
         }
 
-        .products-grid.view-list {
+        .products-grid.grid-2 {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        .products-grid.grid-1 {
             grid-template-columns: 1fr;
         }
 
-        /* ── PRODUCT CARD ── */
-        .prod-card {
+        .product-card {
             background:     var(--bg-card);
             border:         1px solid var(--border);
             border-radius:  14px;
-            overflow:       hidden;
+            padding:        2rem;
             display:        flex;
             flex-direction: column;
             transition:     all 0.25s;
             position:       relative;
+            overflow:       hidden;
             text-decoration:none;
             color:          inherit;
         }
 
-        .prod-card:hover {
+        .product-card:hover {
             transform:  translateY(-4px);
-            box-shadow: 0 12px 40px rgba(0,0,0,0.3);
+            box-shadow: 0 16px 48px rgba(0,0,0,0.35);
         }
 
-        /* Card accent borders */
-        .prod-card.acc-gold   { border-color: rgba(212,165,55,0.2); }
-        .prod-card.acc-green  { border-color: rgba(76,175,80,0.2); }
-        .prod-card.acc-purple { border-color: rgba(155,89,182,0.2); }
-        .prod-card.acc-teal   { border-color: rgba(26,188,156,0.2); }
-        .prod-card.acc-amber  { border-color: rgba(243,156,18,0.2); }
-
-        .prod-card.acc-gold:hover   { border-color: rgba(212,165,55,0.45); }
-        .prod-card.acc-green:hover  { border-color: rgba(76,175,80,0.45); }
-        .prod-card.acc-purple:hover { border-color: rgba(155,89,182,0.45); }
-        .prod-card.acc-teal:hover   { border-color: rgba(26,188,156,0.45); }
-        .prod-card.acc-amber:hover  { border-color: rgba(243,156,18,0.45); }
-
-        /* Card top banner */
-        .prod-card-banner {
-            padding:    1.5rem 1.5rem 1rem;
-            position:   relative;
+        .product-card::before {
+            content:        '';
+            position:       absolute;
+            inset:          0;
+            pointer-events: none;
         }
 
-        .prod-card-banner.banner-gold   { background: linear-gradient(135deg, #2a1a0a, #150d05); }
-        .prod-card-banner.banner-green  { background: linear-gradient(135deg, #0a1a0a, #051505); }
-        .prod-card-banner.banner-purple { background: linear-gradient(135deg, #150a25, #0a0515); }
-        .prod-card-banner.banner-teal   { background: linear-gradient(135deg, #031a14, #010f0d); }
-        .prod-card-banner.banner-amber  { background: linear-gradient(135deg, #1a1200, #0f0a00); }
+        /* Accent system */
+        .card-gold   { --ca: #D4A537; --cr: 212,165,55; }
+        .card-green  { --ca: #4CAF50; --cr: 76,175,80;  }
+        .card-purple { --ca: #9B59B6; --cr: 155,89,182; }
+        .card-teal   { --ca: #1ABC9C; --cr: 26,188,156; }
+        .card-amber  { --ca: #F39C12; --cr: 243,156,18; }
+        .card-blue   { --ca: #3498DB; --cr: 52,152,219; }
 
-        .prod-icon { font-size: 2.25rem; display: block; margin-bottom: 0.6rem; }
+        .product-card:hover { border-color: rgba(var(--cr, 212,165,55), 0.35); }
 
-        .prod-name {
-            font-size:   1.05rem;
-            font-weight: 800;
-            margin-bottom:0.15rem;
+        .product-card::before {
+            background: radial-gradient(circle at 50% 0%,
+                            rgba(var(--cr, 212,165,55), 0.05) 0%,
+                            transparent 65%);
         }
 
-        .prod-role {
-            font-size:0.78rem;
-            color:    var(--text-muted);
-        }
-
-        /* Badges */
-        .prod-badges {
-            position: absolute;
-            top:      1rem;
-            right:    1rem;
-            display:  flex;
-            gap:      0.3rem;
-            flex-wrap:wrap;
-            justify-content:flex-end;
-        }
-
-        .prod-badge {
-            font-size:      0.58rem;
+        /* Badge */
+        .card-badge {
+            position:       absolute;
+            top:            1.1rem;
+            right:          1.1rem;
+            font-size:      0.6rem;
             font-weight:    800;
-            letter-spacing: 1px;
+            letter-spacing: 1.5px;
             text-transform: uppercase;
-            padding:        0.2rem 0.55rem;
+            padding:        0.22rem 0.65rem;
             border-radius:  50px;
+            z-index:        1;
         }
 
-        .badge-sale   { background: var(--urgent-red); color: #fff; }
-        .badge-free   { background: var(--green); color: #fff; }
-        .badge-bundle { background: var(--purple); color: #fff; }
-        .badge-pro    { background: var(--teal); color: #000; }
-        .badge-sub    { background: var(--amber); color: #000; }
-        .badge-new    { background: var(--blue); color: #fff; }
+        .badge-free   { background: var(--green);       color: #fff; }
+        .badge-sale   { background: var(--urgent-red);  color: #fff; }
+        .badge-best   { background: var(--purple);      color: #fff; }
+        .badge-pro    { background: var(--teal);        color: #000; }
+        .badge-new    { background: var(--blue);        color: #fff; }
 
-        /* Card body */
-        .prod-card-body {
-            padding: 1.25rem 1.5rem;
-            flex:    1;
-            display: flex;
-            flex-direction:column;
-        }
-
-        /* Tags row */
-        .prod-tags {
-            display:    flex;
-            flex-wrap:  wrap;
-            gap:        0.35rem;
-            margin-bottom:0.85rem;
-        }
-
-        .prod-tag {
-            font-size:     0.62rem;
-            font-weight:   700;
-            letter-spacing:0.5px;
-            text-transform:uppercase;
-            padding:       0.18rem 0.55rem;
-            border-radius: 50px;
-            border:        1px solid;
-        }
-
-        .tag-character {
-            color:        var(--gold);
-            border-color: rgba(212,165,55,0.3);
-            background:   rgba(212,165,55,0.06);
-        }
-
-        .tag-bundle {
-            color:        var(--purple);
-            border-color: rgba(155,89,182,0.3);
-            background:   rgba(155,89,182,0.06);
-        }
-
-        .tag-license {
-            color:        var(--teal);
-            border-color: rgba(26,188,156,0.3);
-            background:   rgba(26,188,156,0.06);
-        }
-
-        .tag-subscription {
-            color:        var(--amber);
-            border-color: rgba(243,156,18,0.3);
-            background:   rgba(243,156,18,0.06);
-        }
-
-        .tag-free {
-            color:        var(--green);
-            border-color: rgba(76,175,80,0.3);
-            background:   rgba(76,175,80,0.06);
-        }
-
-        .tag-commercial {
-            color:        var(--blue);
-            border-color: rgba(52,152,219,0.3);
-            background:   rgba(52,152,219,0.06);
-        }
-
-        /* Quote */
-        .prod-quote {
-            font-style:    italic;
-            font-size:     0.82rem;
-            color:         var(--text-muted);
-            line-height:   1.6;
-            margin-bottom: 1rem;
-            padding-left:  0.75rem;
-            border-left:   2px solid var(--border);
-        }
-
-        /* Feature list */
-        .prod-features {
-            list-style:    none;
+        /* Card header */
+        .card-header {
+            display:       flex;
+            align-items:   flex-start;
+            gap:           1rem;
             margin-bottom: 1.25rem;
-            flex:          1;
+            position:      relative;
+            z-index:       1;
         }
 
-        .prod-features li {
-            font-size:   0.82rem;
+        .card-icon {
+            font-size:     2.75rem;
+            flex-shrink:   0;
+            line-height:   1;
+        }
+
+        .card-title-block { flex: 1; }
+
+        .card-name {
+            font-size:   1.15rem;
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom:0.2rem;
+        }
+
+        .card-role {
+            font-size:  0.78rem;
+            color:      var(--text-muted);
+            line-height:1.4;
+        }
+
+        /* Divider */
+        .card-divider {
+            height:        1px;
+            background:    var(--border);
+            margin:        1.25rem 0;
+            position:      relative;
+            z-index:       1;
+        }
+
+        /* Features */
+        .card-features {
+            list-style:    none;
+            margin-bottom: 1.5rem;
+            flex:          1;
+            position:      relative;
+            z-index:       1;
+        }
+
+        .card-features li {
+            font-size:   0.84rem;
             color:       var(--text-secondary);
             padding:     0.28rem 0;
             display:     flex;
             align-items: flex-start;
-            gap:         0.5rem;
-            border-bottom:1px solid rgba(255,255,255,0.03);
+            gap:         0.55rem;
+            line-height: 1.5;
         }
 
-        .prod-features li:last-child { border-bottom: none; }
-
-        .prod-features li::before {
-            content:     '✓';
+        .feat-check {
             color:       var(--green);
             font-weight: 700;
             flex-shrink: 0;
             font-size:   0.75rem;
-            margin-top:  0.1rem;
+            margin-top:  0.15rem;
         }
 
-        /* Stats row */
-        .prod-stats {
-            display:    flex;
-            gap:        1rem;
-            margin-bottom:1rem;
-            flex-wrap:  wrap;
+        .feat-star {
+            color:      var(--gold);
+            font-size:  0.75rem;
+            flex-shrink:0;
+            margin-top: 0.15rem;
         }
 
-        .prod-stat {
-            text-align: center;
+        /* What's inside expanded block */
+        .card-inside {
+            background:    rgba(255,255,255,0.02);
+            border:        1px solid var(--border);
+            border-radius: 8px;
+            padding:       1rem;
+            margin-bottom: 1.25rem;
+            position:      relative;
+            z-index:       1;
         }
 
-        .stat-val {
-            font-size:   1rem;
-            font-weight: 800;
-            display:     block;
-            line-height: 1;
-            margin-bottom:0.15rem;
+        .card-inside-label {
+            font-size:      0.65rem;
+            font-weight:    700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color:          var(--text-muted);
+            margin-bottom:  0.6rem;
         }
 
-        .stat-lbl {
-            font-size:  0.65rem;
-            color:      var(--text-muted);
-            font-weight:600;
-            letter-spacing:0.5px;
-            text-transform:uppercase;
+        .inside-item {
+            display:      flex;
+            align-items:  center;
+            gap:          0.5rem;
+            font-size:    0.8rem;
+            color:        var(--text-secondary);
+            padding:      0.18rem 0;
         }
 
-        /* Price row */
-        .prod-price-row {
+        .inside-icon { font-size: 0.85rem; }
+
+        /* Pricing */
+        .card-pricing {
+            position:  relative;
+            z-index:   1;
+        }
+
+        .card-price-row {
             display:     flex;
-            align-items: center;
+            align-items: baseline;
             gap:         0.6rem;
             margin-bottom:0.85rem;
-            flex-wrap:   wrap;
         }
 
-        .prod-price {
-            font-size:   1.35rem;
+        .card-price {
+            font-size:   2rem;
             font-weight: 800;
+            color:       var(--ca, var(--gold));
             line-height: 1;
         }
 
-        .prod-price-orig {
-            font-size:       0.8rem;
+        .card-price-orig {
+            font-size:       0.82rem;
             color:           var(--text-muted);
             text-decoration: line-through;
         }
 
-        .prod-price-note {
-            font-size:  0.72rem;
-            color:      var(--text-muted);
-            margin-left:auto;
+        .card-price-save {
+            font-size:    0.72rem;
+            font-weight:  700;
+            color:        var(--urgent-red);
+            background:   rgba(255,68,68,0.08);
+            border:       1px solid rgba(255,68,68,0.15);
+            padding:      0.15rem 0.5rem;
+            border-radius:50px;
         }
 
-        .prod-save-badge {
-            font-size:     0.65rem;
-            font-weight:   700;
-            color:         var(--green);
-            background:    rgba(76,175,80,0.1);
-            border:        1px solid rgba(76,175,80,0.2);
-            padding:       0.15rem 0.5rem;
-            border-radius: 50px;
+        .card-price-period {
+            font-size:   0.78rem;
+            color:       var(--text-muted);
+            margin-left: auto;
         }
 
-        /* CTA button */
-        .prod-cta {
+        .card-btn {
             display:         block;
             text-align:      center;
-            padding:         0.75rem 1.25rem;
-            border-radius:   8px;
-            font-size:       0.88rem;
+            padding:         0.8rem 1.5rem;
+            border-radius:   9px;
+            font-size:       0.9rem;
             font-weight:     700;
             text-decoration: none;
             transition:      all 0.2s;
-            border:          1px solid;
+            background:      rgba(var(--cr, 212,165,55), 0.1);
+            border:          1px solid rgba(var(--cr, 212,165,55), 0.25);
+            color:           var(--ca, var(--gold));
+            position:        relative;
+            z-index:         1;
         }
 
-        .prod-cta:hover { transform: translateY(-1px); }
-
-        .cta-gold   { background:rgba(212,165,55,0.1); border-color:rgba(212,165,55,0.3); color:var(--gold); }
-        .cta-green  { background:rgba(76,175,80,0.1);  border-color:rgba(76,175,80,0.3);  color:var(--green); }
-        .cta-purple { background:rgba(155,89,182,0.1); border-color:rgba(155,89,182,0.3); color:var(--purple); }
-        .cta-teal   { background:rgba(26,188,156,0.1); border-color:rgba(26,188,156,0.3); color:var(--teal); }
-        .cta-amber  { background:rgba(243,156,18,0.1); border-color:rgba(243,156,18,0.3); color:var(--amber); }
-
-        .cta-gold:hover   { background:rgba(212,165,55,0.2); }
-        .cta-green:hover  { background:rgba(76,175,80,0.2); }
-        .cta-purple:hover { background:rgba(155,89,182,0.2); }
-        .cta-teal:hover   { background:rgba(26,188,156,0.2); }
-        .cta-amber:hover  { background:rgba(243,156,18,0.2); }
-
-        /* ── LIST VIEW CARD ── */
-        .products-grid.view-list .prod-card {
-            flex-direction: row;
-            align-items:    stretch;
+        .card-btn:hover {
+            background: rgba(var(--cr, 212,165,55), 0.2);
+            transform:  translateY(-1px);
         }
 
-        .products-grid.view-list .prod-card-banner {
-            width:       200px;
-            flex-shrink: 0;
-            display:     flex;
-            flex-direction:column;
-            justify-content:center;
+        .card-btn.btn-primary {
+            background: var(--ca, var(--gold));
+            color:      #000;
+            border:     none;
         }
 
-        .products-grid.view-list .prod-card-body {
-            flex-direction: row;
-            align-items:    center;
-            gap:            1.5rem;
+        .card-btn.btn-primary:hover {
+            filter:     brightness(1.1);
+            background: var(--ca, var(--gold));
         }
 
-        .products-grid.view-list .prod-features {
-            flex:        1;
-            margin:      0;
+        .card-btn.btn-free-style {
+            background: rgba(76,175,80,0.1);
+            border:     1px solid rgba(76,175,80,0.25);
+            color:      var(--green);
         }
 
-        .products-grid.view-list .prod-price-section {
-            flex-shrink: 0;
-            text-align:  right;
-            min-width:   140px;
-        }
+        .card-btn.btn-free-style:hover { background: rgba(76,175,80,0.2); }
 
-        .products-grid.view-list .prod-quote { display: none; }
-        .products-grid.view-list .prod-stats { display: none; }
-        .products-grid.view-list .prod-tags  { margin-bottom: 0.5rem; }
-
-        /* ── EMPTY STATE ── */
-        .empty-state {
-            grid-column: 1 / -1;
-            text-align:  center;
-            padding:     4rem 2rem;
-        }
-
-        .empty-icon  { font-size: 3rem; margin-bottom: 1rem; }
-        .empty-state h3 { font-size: 1.15rem; font-weight: 700; margin-bottom: 0.5rem; }
-        .empty-state p  { color: var(--text-muted); font-size: 0.88rem; }
-
-        .reset-btn {
-            display:       inline-block;
-            margin-top:    1.25rem;
-            padding:       0.65rem 1.75rem;
-            background:    var(--gold);
-            color:         #000;
-            border-radius: 8px;
-            font-size:     0.88rem;
-            font-weight:   700;
-            border:        none;
-            cursor:        pointer;
-            text-decoration:none;
-            transition:    all 0.2s;
-        }
-
-        .reset-btn:hover { background: var(--gold-light); }
-
-        /* ── COMPARE BAR ── */
-        .compare-bar {
-            position:        fixed;
-            bottom:          0;
-            left:            0;
-            right:           0;
-            background:      rgba(26,26,37,0.98);
-            backdrop-filter: blur(12px);
-            border-top:      1px solid var(--border);
-            padding:         1rem 2rem;
-            display:         none;
-            align-items:     center;
-            justify-content: center;
-            gap:             1.5rem;
-            z-index:         500;
-            flex-wrap:       wrap;
-        }
-
-        .compare-bar.visible { display: flex; }
-
-        .compare-bar p {
-            color:    var(--text-secondary);
-            font-size:0.88rem;
-        }
-
-        .compare-items {
-            display: flex;
-            gap:     0.5rem;
-        }
-
-        .compare-item {
-            background:    var(--bg-card);
-            border:        1px solid var(--border);
-            border-radius: 6px;
-            padding:       0.35rem 0.85rem;
-            font-size:     0.8rem;
-            color:         var(--text-primary);
+        /* Delivery note */
+        .card-delivery {
             display:       flex;
             align-items:   center;
             gap:           0.4rem;
+            font-size:     0.73rem;
+            color:         var(--text-muted);
+            margin-top:    0.65rem;
+            justify-content:center;
+            position:      relative;
+            z-index:       1;
         }
 
-        .compare-item button {
-            background: none;
-            border:     none;
-            color:      var(--text-muted);
-            cursor:     pointer;
-            font-size:  0.75rem;
-            padding:    0;
-            line-height:1;
+        /* ── FEATURED / WIDE CARD ── */
+        .product-card.card-wide {
+            grid-column: 1 / -1;
         }
 
-        .compare-btn {
-            padding:       0.6rem 1.5rem;
-            background:    var(--gold);
-            color:         #000;
-            border:        none;
-            border-radius: 8px;
-            font-size:     0.88rem;
+        .wide-layout {
+            display: flex;
+            gap:     2.5rem;
+            align-items:flex-start;
+        }
+
+        .wide-left  { flex: 1; }
+        .wide-right {
+            width:        320px;
+            flex-shrink:  0;
+            background:   rgba(255,255,255,0.02);
+            border:       1px solid var(--border);
+            border-radius:10px;
+            padding:      1.5rem;
+        }
+
+        .wide-right h4 {
+            font-size:     0.72rem;
             font-weight:   700;
-            cursor:        pointer;
-            transition:    all 0.2s;
+            letter-spacing:1px;
+            text-transform:uppercase;
+            color:         var(--text-muted);
+            margin-bottom: 1rem;
         }
 
-        .compare-btn:hover { background: var(--gold-light); }
+        /* ── COMPARISON TABLE ── */
+        .compare-section {
+            padding:    0 2rem 5rem;
+            max-width:  1200px;
+            margin:     0 auto;
+        }
+
+        .compare-label {
+            font-size:      0.72rem;
+            font-weight:    700;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color:          var(--gold);
+            margin-bottom:  0.5rem;
+        }
+
+        .compare-title {
+            font-size:     clamp(1.4rem, 2.5vw, 1.9rem);
+            font-weight:   700;
+            margin-bottom: 2rem;
+        }
+
+        .compare-table-wrap {
+            overflow-x:    auto;
+            border-radius: 12px;
+            border:        1px solid var(--border);
+        }
+
+        table.compare {
+            width:           100%;
+            border-collapse: collapse;
+            min-width:       720px;
+        }
+
+        table.compare thead tr {
+            background:   var(--bg-secondary);
+            border-bottom:1px solid var(--border);
+        }
+
+        table.compare thead th {
+            padding:    1rem 1.25rem;
+            font-size:  0.82rem;
+            font-weight:700;
+            text-align: left;
+            color:      var(--text-secondary);
+        }
+
+        table.compare thead th.col-feature {
+            color:     var(--text-muted);
+            font-size: 0.72rem;
+        }
+
+        table.compare thead th.col-highlight {
+            color:      var(--gold);
+            background: rgba(212,165,55,0.04);
+        }
+
+        table.compare tbody tr {
+            border-bottom: 1px solid var(--border);
+            transition:    background 0.15s;
+        }
+
+        table.compare tbody tr:last-child { border-bottom: none; }
+        table.compare tbody tr:hover { background: var(--bg-hover); }
+
+        table.compare tbody td {
+            padding:    0.85rem 1.25rem;
+            font-size:  0.84rem;
+            color:      var(--text-secondary);
+            text-align: left;
+        }
+
+        table.compare tbody td:first-child {
+            color:      var(--text-primary);
+            font-weight:600;
+        }
+
+        table.compare tbody td.col-highlight {
+            background: rgba(212,165,55,0.03);
+        }
+
+        .cmp-yes   { color: var(--green); font-weight: 700; }
+        .cmp-no    { color: var(--text-muted); }
+        .cmp-part  { color: var(--amber); font-weight: 600; }
+        .cmp-val   { color: var(--text-primary); font-weight: 600; }
+
+        /* ── PAYMENT STRIP ── */
+        .payment-strip {
+            background:    var(--bg-secondary);
+            border-top:    1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+            padding:       2rem 2rem;
+            text-align:    center;
+        }
+
+        .payment-strip-inner { max-width: 800px; margin: 0 auto; }
+
+        .payment-strip h3 {
+            font-size:     1.1rem;
+            font-weight:   700;
+            margin-bottom: 0.5rem;
+        }
+
+        .payment-strip p {
+            color:         var(--text-secondary);
+            font-size:     0.88rem;
+            margin-bottom: 1.25rem;
+        }
+
+        .coins-grid {
+            display:         flex;
+            flex-wrap:       wrap;
+            gap:             0.5rem;
+            justify-content: center;
+        }
+
+        .coin-chip {
+            display:       flex;
+            align-items:   center;
+            gap:           0.35rem;
+            background:    var(--bg-card);
+            border:        1px solid var(--border);
+            border-radius: 50px;
+            padding:       0.3rem 0.75rem;
+            font-size:     0.75rem;
+            font-weight:   600;
+            color:         var(--text-secondary);
+        }
 
         /* ── FOOTER ── */
         footer {
-            padding:    3rem 2rem;
+            padding:    4rem 2rem 3rem;
             border-top: 1px solid var(--border);
-            text-align: center;
         }
 
-        .footer-links {
-            display:         flex;
-            justify-content: center;
-            gap:             2rem;
-            margin-bottom:   1.25rem;
-            flex-wrap:       wrap;
+        .footer-inner { max-width: 1200px; margin: 0 auto; }
+
+        .footer-grid {
+            display:               grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap:                   2rem;
+            margin-bottom:         2.5rem;
         }
 
-        .footer-links a {
-            color:           var(--text-secondary);
+        .footer-logo {
+            font-size:       1.2rem;
+            font-weight:     700;
+            color:           var(--gold);
             text-decoration: none;
-            font-size:       0.88rem;
+            display:         block;
+            margin-bottom:   0.5rem;
+        }
+
+        .footer-logo span { color: var(--text-primary); }
+
+        .footer-brand p {
+            font-size:   0.82rem;
+            color:       var(--text-muted);
+            line-height: 1.65;
+            max-width:   280px;
+        }
+
+        .footer-col h4 {
+            font-size:      0.72rem;
+            font-weight:    700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color:          var(--text-secondary);
+            margin-bottom:  0.85rem;
+        }
+
+        .footer-col a {
+            display:         block;
+            color:           var(--text-muted);
+            text-decoration: none;
+            font-size:       0.85rem;
+            padding:         0.25rem 0;
             transition:      color 0.2s;
         }
 
-        .footer-links a:hover { color: var(--gold); }
-        .footer-copy { color: var(--text-muted); font-size: 0.8rem; }
+        .footer-col a:hover { color: var(--gold); }
 
-        /* ── RESPONSIVE ── */
-        @media (max-width: 1100px) {
-            .store-layout          { grid-template-columns: 220px 1fr; }
-            .products-grid         { grid-template-columns: 1fr 1fr; }
+        .footer-bottom {
+            border-top:      1px solid var(--border);
+            padding-top:     1.5rem;
+            display:         flex;
+            justify-content: space-between;
+            align-items:     center;
+            flex-wrap:       wrap;
+            gap:             0.75rem;
         }
 
-        @media (max-width: 900px) {
-            .store-layout          { grid-template-columns: 1fr; }
-            .store-sidebar         { position: static; }
-            .products-grid         { grid-template-columns: 1fr 1fr; }
-            .products-grid.view-list .prod-card { flex-direction: column; }
-            .products-grid.view-list .prod-card-banner { width: 100%; }
+        .footer-copy {
+            color:     var(--text-muted);
+            font-size: 0.8rem;
+        }
+
+        /* ── ANIMATIONS ── */
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(16px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ── RESPONSIVE ── */
+        @media (max-width: 1050px) {
+            .products-grid             { grid-template-columns: 1fr 1fr; }
+            .wide-layout               { flex-direction: column; }
+            .wide-right                { width: 100%; }
+            .footer-grid               { grid-template-columns: 1fr 1fr; }
         }
 
         @media (max-width: 650px) {
@@ -896,8 +806,10 @@
             .nav-links.open { display: flex; }
             .nav-toggle     { display: block; }
 
-            .products-grid { grid-template-columns: 1fr; }
-            .store-header-inner { flex-direction: column; align-items: flex-start; }
+            .products-grid             { grid-template-columns: 1fr; }
+            .footer-grid               { grid-template-columns: 1fr; }
+            .footer-bottom             { flex-direction: column; text-align: center; }
+            .product-card.card-wide    { grid-column: 1; }
         }
     </style>
 </head>
@@ -908,7 +820,7 @@
     <div class="nav-inner">
         <a href="index.html" class="nav-logo">⚔️ Character<span>Craft</span></a>
         <button class="nav-toggle"
-                onclick="document.querySelector('.nav-links').classList.toggle('cc-open')"
+                onclick="document.querySelector('.nav-links').classList.toggle('open')"
                 aria-label="Menu">☰</button>
         <ul class="nav-links">
             <li><a href="index.html">Home</a></li>
@@ -921,850 +833,654 @@
     </div>
 </nav>
 
-<!-- ── BREADCRUMB ── -->
-<div class="breadcrumb">
-    <a href="index.html">Home</a>
-    <span class="sep">›</span>
-    <span class="here">Store</span>
-</div>
+<!-- ── PAGE HEADER ── -->
+<header class="page-header">
+    <div class="page-header-inner">
+        <div class="page-eyebrow">🏪 Character Store</div>
+        <h1>Every Pack. <span class="gold">One Place.</span></h1>
+        <p>
+            Six products. One-time crypto payment. Yours forever.
+            From a free starter guard to a full server system —
+            every pack includes the files, the memories, the config,
+            and the install guide.
+        </p>
+    </div>
+</header>
 
-<!-- ── STORE HEADER ── -->
-<div class="store-header">
-    <div class="store-header-inner">
-        <div class="store-header-left">
-            <div class="store-eyebrow">CharacterCraft Store</div>
-            <h1>Browse All Products</h1>
-            <p>
-                <strong id="result-num">6</strong> products ·
-                Individual packs, bundles, and subscription tiers
-            </p>
-        </div>
-        <div class="store-header-right">
-            <span class="result-count">
-                Showing <strong id="showing-count">6</strong> of 6
-            </span>
-        </div>
+<!-- ── TRUST BAR ── -->
+<div class="trust-bar">
+    <div class="trust-item">
+        <span class="trust-icon">🔗</span>
+        <span>On-chain payment verification</span>
+    </div>
+    <div class="trust-item">
+        <span class="trust-icon">⚡</span>
+        <span class="trust-highlight">2-hour delivery</span>
+    </div>
+    <div class="trust-item">
+        <span class="trust-icon">♾️</span>
+        <span>Free updates for life</span>
+    </div>
+    <div class="trust-item">
+        <span class="trust-icon">🛠️</span>
+        <span>Direct creator support</span>
+    </div>
+    <div class="trust-item">
+        <span class="trust-icon">💬</span>
+        <span>15 coins accepted</span>
     </div>
 </div>
 
-<!-- ── STORE LAYOUT ── -->
-<div class="store-layout">
+<!-- ── FILTER BAR ── -->
+<div class="filter-bar">
+    <div class="filter-tabs">
+        <button class="filter-tab active">All Products</button>
+        <button class="filter-tab">Individual</button>
+        <button class="filter-tab">Bundles</button>
+        <button class="filter-tab">Subscription</button>
+        <button class="filter-tab">Free</button>
+    </div>
+    <span class="store-count">6 products</span>
+</div>
 
-    <!-- ══ SIDEBAR ══ -->
-    <aside class="store-sidebar">
+<!-- ── STORE ── -->
+<main class="store-section">
+    <div class="store-inner">
 
-        <!-- Sort -->
-        <div class="filter-panel">
-            <div class="filter-panel-header">
-                <h3>Sort By</h3>
-                <span class="fph-icon">▾</span>
-            </div>
-            <div class="filter-panel-body">
-                <select class="sort-select" id="sort-select"
-                        onchange="Store.applyFilters()">
-                    <option value="featured">Featured</option>
-                    <option value="price-asc">Price: Low to High</option>
-                    <option value="price-desc">Price: High to Low</option>
-                    <option value="memories-desc">Most Memories</option>
-                    <option value="name-asc">Name: A–Z</option>
-                </select>
-            </div>
+        <!-- FREE TIER -->
+        <div class="tier-label">
+            <span class="tier-label-text">Free</span>
+            <span class="tier-label-line"></span>
         </div>
 
-        <!-- Product Type -->
-        <div class="filter-panel">
-            <div class="filter-panel-header"
-                 onclick="Store.togglePanel(this)">
-                <h3>Product Type</h3>
-                <span class="fph-icon">▾</span>
-            </div>
-            <div class="filter-panel-body">
-                <div class="filter-option">
-                    <input type="checkbox" id="type-free"
-                           value="free" onchange="Store.applyFilters()">
-                    <label for="type-free">
-                        Free Pack
-                        <span class="filter-count">1</span>
-                    </label>
+        <div class="products-grid grid-1">
+            <a href="free.html" class="product-card card-green">
+                <span class="card-badge badge-free">Free</span>
+
+                <div class="wide-layout">
+                    <div class="wide-left">
+                        <div class="card-header">
+                            <span class="card-icon">🛡️</span>
+                            <div class="card-title-block">
+                                <div class="card-name">The Ghostwriter</div>
+                                <div class="card-role">Starter Guard NPC — Your First AI Character</div>
+                            </div>
+                        </div>
+
+                        <ul class="card-features">
+                            <li><span class="feat-check">✓</span> 600+ word personality system prompt — guard archetype, written not generated</li>
+                            <li><span class="feat-check">✓</span> 15 hand-crafted memory entries — specific events, people, and wounds</li>
+                            <li><span class="feat-check">✓</span> Optimized config.yml for SentiencePro and LlamaCraft Bridge</li>
+                            <li><span class="feat-check">✓</span> Step-by-step installation guide — live in under 10 minutes</li>
+                            <li><span class="feat-check">✓</span> 5 pre-built edge case responses for common player questions</li>
+                            <li><span class="feat-check">✓</span> No payment, no card, no account — just your email and a download link</li>
+                        </ul>
+
+                        <p style="font-size:0.84rem;color:var(--text-muted);line-height:1.65;">
+                            The Ghostwriter is a complete guard NPC. He remembers the night
+                            the east gate was breached, the captain who died in his arms,
+                            and why he does not trust travelers who arrive after dark.
+                            Not a template — a character.
+                        </p>
+                    </div>
+
+                    <div class="wide-right">
+                        <h4>What's inside</h4>
+                        <div class="inside-item"><span class="inside-icon">📄</span> personality_ghostwriter.txt</div>
+                        <div class="inside-item"><span class="inside-icon">🧠</span> memories_ghostwriter.json</div>
+                        <div class="inside-item"><span class="inside-icon">⚙️</span> config.yml (optimized)</div>
+                        <div class="inside-item"><span class="inside-icon">🛡️</span> edge_cases.txt (5 responses)</div>
+                        <div class="inside-item"><span class="inside-icon">📋</span> install_guide.pdf</div>
+
+                        <div class="card-divider"></div>
+
+                        <div class="card-price-row">
+                            <span class="card-price" style="color:var(--green);">Free</span>
+                        </div>
+                        <span class="card-btn btn-free-style">Download Free Pack →</span>
+                        <div class="card-delivery">
+                            <span>📬</span> Delivered instantly to your email
+                        </div>
+                    </div>
                 </div>
-                <div class="filter-option">
-                    <input type="checkbox" id="type-character"
-                           value="character" onchange="Store.applyFilters()">
-                    <label for="type-character">
-                        Individual Character
-                        <span class="filter-count">2</span>
-                    </label>
-                </div>
-                <div class="filter-option">
-                    <input type="checkbox" id="type-bundle"
-                           value="bundle" onchange="Store.applyFilters()">
-                    <label for="type-bundle">
-                        Bundle
-                        <span class="filter-count">1</span>
-                    </label>
-                </div>
-                <div class="filter-option">
-                    <input type="checkbox" id="type-license"
-                           value="license" onchange="Store.applyFilters()">
-                    <label for="type-license">
-                        Server License
-                        <span class="filter-count">1</span>
-                    </label>
-                </div>
-                <div class="filter-option">
-                    <input type="checkbox" id="type-subscription"
-                           value="subscription" onchange="Store.applyFilters()">
-                    <label for="type-subscription">
-                        Subscription
-                        <span class="filter-count">1</span>
-                    </label>
-                </div>
-            </div>
+            </a>
         </div>
 
-        <!-- Price Range -->
-        <div class="filter-panel">
-            <div class="filter-panel-header"
-                 onclick="Store.togglePanel(this)">
-                <h3>Max Price</h3>
-                <span class="fph-icon">▾</span>
-            </div>
-            <div class="filter-panel-body">
-                <div class="price-range-display">
-                    <span>Free</span>
-                    <span>Up to <strong id="price-display">$39</strong></span>
-                </div>
-                <input type="range" id="price-range"
-                       min="0" max="39" value="39" step="1"
-                       oninput="Store.updatePriceDisplay(this.value)"
-                       onchange="Store.applyFilters()">
-            </div>
+        <!-- INDIVIDUAL CHARACTERS -->
+        <div class="tier-label">
+            <span class="tier-label-text">Individual Characters</span>
+            <span class="tier-label-line"></span>
         </div>
 
-        <!-- Plugin Support -->
-        <div class="filter-panel">
-            <div class="filter-panel-header"
-                 onclick="Store.togglePanel(this)">
-                <h3>Plugin Support</h3>
-                <span class="fph-icon">▾</span>
-            </div>
-            <div class="filter-panel-body">
-                <div class="filter-option">
-                    <input type="checkbox" id="plugin-sentience"
-                           value="SentiencePro" onchange="Store.applyFilters()">
-                    <label for="plugin-sentience">
-                        SentiencePro
-                        <span class="filter-count">6</span>
-                    </label>
+        <div class="products-grid">
+
+            <!-- ALDRIC -->
+            <a href="pay-aldric.html" class="product-card card-gold">
+                <span class="card-badge badge-sale">30% Off</span>
+
+                <div class="card-header">
+                    <span class="card-icon">⚔️</span>
+                    <div class="card-title-block">
+                        <div class="card-name">Aldric</div>
+                        <div class="card-role">Grizzled Gate Captain · 31 Years of Service</div>
+                    </div>
                 </div>
-                <div class="filter-option">
-                    <input type="checkbox" id="plugin-llama"
-                           value="LlamaCraft" onchange="Store.applyFilters()">
-                    <label for="plugin-llama">
-                        LlamaCraft Bridge
-                        <span class="filter-count">6</span>
-                    </label>
+
+                <ul class="card-features">
+                    <li><span class="feat-check">✓</span> 600+ word personality system prompt</li>
+                    <li><span class="feat-check">✓</span> 25 hand-crafted memories — battles, losses, loyalties</li>
+                    <li><span class="feat-check">✓</span> Advanced config with token cost controls</li>
+                    <li><span class="feat-check">✓</span> Emotional trigger patterns — what makes him open up</li>
+                    <li><span class="feat-check">✓</span> Refusal patterns — what he will never discuss</li>
+                    <li><span class="feat-check">✓</span> 7+ edge case responses — tested under player pressure</li>
+                    <li><span class="feat-check">✓</span> Full installation guide</li>
+                </ul>
+
+                <div class="card-inside">
+                    <div class="card-inside-label">Character brief</div>
+                    <div class="inside-item"><span class="inside-icon">🗡️</span> Served under three lords — only trusts one</div>
+                    <div class="inside-item"><span class="inside-icon">💀</span> Lost his left ear in the Siege of Varrenhold</div>
+                    <div class="inside-item"><span class="inside-icon">🍺</span> Drinks alone after the night watch ends</div>
+                    <div class="inside-item"><span class="inside-icon">🤝</span> Knows Dravek. Does not like him. Still does business.</div>
                 </div>
-            </div>
+
+                <div class="card-pricing">
+                    <div class="card-price-row">
+                        <span class="card-price">$4.89</span>
+                        <span class="card-price-orig">$6.99</span>
+                        <span class="card-price-save">Save 30%</span>
+                    </div>
+                    <span class="card-btn">Get Aldric →</span>
+                    <div class="card-delivery">
+                        <span>⚡</span> Delivered within 2 hours of payment
+                    </div>
+                </div>
+            </a>
+
+            <!-- DRAVEK -->
+            <a href="pay-dravek.html" class="product-card card-green">
+                <span class="card-badge badge-sale">30% Off</span>
+
+                <div class="card-header">
+                    <span class="card-icon">💰</span>
+                    <div class="card-title-block">
+                        <div class="card-name">Dravek</div>
+                        <div class="card-role">Corrupt Merchant · Knows Everyone's Price</div>
+                    </div>
+                </div>
+
+                <ul class="card-features">
+                    <li><span class="feat-check">✓</span> 600+ word personality prompt with embedded ethics code</li>
+                    <li><span class="feat-check">✓</span> 25 memories — contacts, debts, grudges, secrets</li>
+                    <li><span class="feat-check">✓</span> Negotiation and bribery logic baked into prompt</li>
+                    <li><span class="feat-check">✓</span> Knowledge boundaries — what he knows vs. pretends not to</li>
+                    <li><span class="feat-check">✓</span> Paranoia scaling — gets cagier as players push</li>
+                    <li><span class="feat-check">✓</span> 7+ edge case responses</li>
+                    <li><span class="feat-check">✓</span> Full installation guide</li>
+                </ul>
+
+                <div class="card-inside">
+                    <div class="card-inside-label">Character brief</div>
+                    <div class="inside-item"><span class="inside-icon">🤫</span> Has blackmail material on the city treasurer</div>
+                    <div class="inside-item"><span class="inside-icon">🐀</span> Runs three storefronts — one is a front</div>
+                    <div class="inside-item"><span class="inside-icon">🗡️</span> Knows Aldric. Knows exactly what Aldric owes him.</div>
+                    <div class="inside-item"><span class="inside-icon">💎</span> Never sells at first price. Ever.</div>
+                </div>
+
+                <div class="card-pricing">
+                    <div class="card-price-row">
+                        <span class="card-price" style="color:var(--green);">$4.85</span>
+                        <span class="card-price-orig">$6.99</span>
+                        <span class="card-price-save">Save 30%</span>
+                    </div>
+                    <span class="card-btn">Get Dravek →</span>
+                    <div class="card-delivery">
+                        <span>⚡</span> Delivered within 2 hours of payment
+                    </div>
+                </div>
+            </a>
+
         </div>
 
-        <!-- Features -->
-        <div class="filter-panel">
-            <div class="filter-panel-header"
-                 onclick="Store.togglePanel(this)">
-                <h3>Features</h3>
-                <span class="fph-icon">▾</span>
-            </div>
-            <div class="filter-panel-body">
-                <div class="filter-option">
-                    <input type="checkbox" id="feat-commercial"
-                           value="commercial" onchange="Store.applyFilters()">
-                    <label for="feat-commercial">
-                        Commercial Rights
-                        <span class="filter-count">2</span>
-                    </label>
-                </div>
-                <div class="filter-option">
-                    <input type="checkbox" id="feat-worldlore"
-                           value="worldlore" onchange="Store.applyFilters()">
-                    <label for="feat-worldlore">
-                        World Lore System
-                        <span class="filter-count">2</span>
-                    </label>
-                </div>
-                <div class="filter-option">
-                    <input type="checkbox" id="feat-revisions"
-                           value="revisions" onchange="Store.applyFilters()">
-                    <label for="feat-revisions">
-                        Unlimited Revisions
-                        <span class="filter-count">1</span>
-                    </label>
-                </div>
-                <div class="filter-option">
-                    <input type="checkbox" id="feat-consultation"
-                           value="consultation" onchange="Store.applyFilters()">
-                    <label for="feat-consultation">
-                        Setup Consultation
-                        <span class="filter-count">2</span>
-                    </label>
-                </div>
-            </div>
+        <!-- BUNDLES -->
+        <div class="tier-label">
+            <span class="tier-label-text">Bundles</span>
+            <span class="tier-label-line"></span>
         </div>
 
-        <!-- Active filters display -->
-        <div class="active-filters" id="active-filters"></div>
+        <div class="products-grid grid-1">
+            <a href="pay-city-bundle.html" class="product-card card-purple">
+                <span class="card-badge badge-best">Best Value</span>
 
-        <button class="clear-filters-btn"
-                onclick="Store.clearFilters()">
-            ✕ Clear All Filters
-        </button>
+                <div class="wide-layout">
+                    <div class="wide-left">
+                        <div class="card-header">
+                            <span class="card-icon">🏰</span>
+                            <div class="card-title-block">
+                                <div class="card-name">City Bundle</div>
+                                <div class="card-role">Aldric + Dravek · Two Characters. One Shared World.</div>
+                            </div>
+                        </div>
 
-    </aside>
-    <!-- ══ END SIDEBAR ══ -->
+                        <ul class="card-features">
+                            <li><span class="feat-star">★</span> Both complete character packs — every file from each individual product</li>
+                            <li><span class="feat-star">★</span> Shared world lore document — one consistent history, two perspectives</li>
+                            <li><span class="feat-star">★</span> Cross-reference memories — Aldric and Dravek know each other, specifically</li>
+                            <li><span class="feat-star">★</span> 50 total hand-crafted memories across both characters</li>
+                            <li><span class="feat-star">★</span> Both optimized configs + both installation guides</li>
+                            <li><span class="feat-star">★</span> 14+ combined edge case responses</li>
+                            <li><span class="feat-star">★</span> No contradictions — their stories line up and diverge exactly where they should</li>
+                        </ul>
 
-    <!-- ══ MAIN ══ -->
-    <div class="store-main">
+                        <p style="font-size:0.84rem;color:var(--text-muted);line-height:1.65;margin-top:0.75rem;">
+                            The bundle is not two packs stapled together.
+                            The shared lore document means both characters
+                            reference the same events from their own angle.
+                            Players asking Aldric about Dravek — and then
+                            asking Dravek about Aldric — get two different
+                            stories that are both true.
+                        </p>
+                    </div>
 
-        <!-- Toolbar -->
-        <div class="store-toolbar">
-            <div class="toolbar-left">
-                <div class="toolbar-sort">
-                    <span>View:</span>
+                    <div class="wide-right">
+                        <h4>Everything included</h4>
+                        <div class="inside-item"><span class="inside-icon">⚔️</span> Aldric — full character pack</div>
+                        <div class="inside-item"><span class="inside-icon">💰</span> Dravek — full character pack</div>
+                        <div class="inside-item"><span class="inside-icon">🌍</span> shared_world_lore.pdf</div>
+                        <div class="inside-item"><span class="inside-icon">🔗</span> cross_reference_memories.json</div>
+                        <div class="inside-item"><span class="inside-icon">⚙️</span> Both optimized configs</div>
+                        <div class="inside-item"><span class="inside-icon">📋</span> Both installation guides</div>
+                        <div class="inside-item"><span class="inside-icon">🛡️</span> 14+ edge case responses</div>
+
+                        <div class="card-divider"></div>
+
+                        <div class="card-price-row">
+                            <span class="card-price" style="color:var(--purple);">$8.47</span>
+                            <span class="card-price-orig">$13.98</span>
+                            <span class="card-price-save">Save 39%</span>
+                        </div>
+                        <span class="card-btn"
+                              style="background:rgba(155,89,182,0.1);
+                                     border-color:rgba(155,89,182,0.25);
+                                     color:var(--purple);">
+                            Get City Bundle →
+                        </span>
+                        <div class="card-delivery">
+                            <span>⚡</span> Delivered within 2 hours of payment
+                        </div>
+                    </div>
                 </div>
-                <div class="view-toggle">
-                    <button class="view-btn active" id="btn-grid"
-                            onclick="Store.setView('grid')"
-                            title="Grid view">⊞</button>
-                    <button class="view-btn" id="btn-list"
-                            onclick="Store.setView('list')"
-                            title="List view">☰</button>
-                </div>
-            </div>
+            </a>
         </div>
 
-        <!-- Product Grid -->
-        <div class="products-grid" id="products-grid">
-            <!-- Populated by JS -->
+        <!-- LICENSE & RETAINER -->
+        <div class="tier-label">
+            <span class="tier-label-text">Server Plans</span>
+            <span class="tier-label-line"></span>
+        </div>
+
+        <div class="products-grid">
+
+            <!-- SERVER LICENSE -->
+            <a href="pay-server-license.html" class="product-card card-teal">
+                <span class="card-badge badge-pro">Pro</span>
+
+                <div class="card-header">
+                    <span class="card-icon">🌐</span>
+                    <div class="card-title-block">
+                        <div class="card-name">Server License</div>
+                        <div class="card-role">5 Characters · Commercial Rights · Full World System</div>
+                    </div>
+                </div>
+
+                <ul class="card-features">
+                    <li><span class="feat-star">★</span> 5 full character packs — your choice from the roster</li>
+                    <li><span class="feat-star">★</span> Complete world lore system — all characters share one history</li>
+                    <li><span class="feat-star">★</span> NPC relationship map — who knows who, who owes what</li>
+                    <li><span class="feat-star">★</span> API cost optimization report for your server's usage pattern</li>
+                    <li><span class="feat-star">★</span> Commercial use rights — use on public servers, no attribution required</li>
+                    <li><span class="feat-star">★</span> 30-minute setup consultation via Discord</li>
+                    <li><span class="feat-star">★</span> Priority support — same-day response</li>
+                </ul>
+
+                <div class="card-inside">
+                    <div class="card-inside-label">Best for</div>
+                    <div class="inside-item"><span class="inside-icon">🏰</span> Public RPG servers with paying players</div>
+                    <div class="inside-item"><span class="inside-icon">💼</span> Server owners who need commercial rights</div>
+                    <div class="inside-item"><span class="inside-icon">🌐</span> Networks running multiple worlds</div>
+                    <div class="inside-item"><span class="inside-icon">⚙️</span> Servers managing API cost at scale</div>
+                </div>
+
+                <div class="card-pricing">
+                    <div class="card-price-row">
+                        <span class="card-price" style="color:var(--teal);">$24.99</span>
+                        <span class="card-price-orig">$34.99</span>
+                        <span class="card-price-save">Save 28%</span>
+                    </div>
+                    <a href="license.html"
+                       style="display:block;text-align:center;font-size:0.75rem;
+                              color:var(--text-muted);margin-bottom:0.5rem;
+                              text-decoration:none;">
+                        → Full license details and comparison
+                    </a>
+                    <span class="card-btn"
+                          style="background:rgba(26,188,156,0.1);
+                                 border-color:rgba(26,188,156,0.25);
+                                 color:var(--teal);">
+                        Get Server License →
+                    </span>
+                    <div class="card-delivery">
+                        <span>⚡</span> Delivered within 4 hours of payment
+                    </div>
+                </div>
+            </a>
+
+            <!-- MONTHLY RETAINER -->
+            <a href="pay-retainer.html" class="product-card card-amber">
+
+                <div class="card-header">
+                    <span class="card-icon">📅</span>
+                    <div class="card-title-block">
+                        <div class="card-name">Monthly Retainer</div>
+                        <div class="card-role">1 New Character Every Month · Unlimited Revisions</div>
+                    </div>
+                </div>
+
+                <ul class="card-features">
+                    <li><span class="feat-star">★</span> 1 brand-new character delivered every month</li>
+                    <li><span class="feat-star">★</span> Unlimited revisions on any character in your library</li>
+                    <li><span class="feat-star">★</span> Same-day support — 8-hour response window</li>
+                    <li><span class="feat-star">★</span> Priority access to new releases before public launch</li>
+                    <li><span class="feat-star">★</span> Commercial use rights included — every character</li>
+                    <li><span class="feat-star">★</span> Shared world system — each new character fits the lore</li>
+                    <li><span class="feat-star">★</span> Cancel any time — no lock-in, no penalties</li>
+                </ul>
+
+                <div class="card-inside">
+                    <div class="card-inside-label">Best for</div>
+                    <div class="inside-item"><span class="inside-icon">🔄</span> Servers that update content regularly</div>
+                    <div class="inside-item"><span class="inside-icon">🏗️</span> Growing RPG networks building a world</div>
+                    <div class="inside-item"><span class="inside-icon">🎯</span> Owners who want NPCs tailored to their specific lore</div>
+                    <div class="inside-item"><span class="inside-icon">💬</span> Anyone who wants direct revision access</div>
+                </div>
+
+                <div class="card-pricing">
+                    <div class="card-price-row">
+                        <span class="card-price" style="color:var(--amber);">$39</span>
+                        <span class="card-price-period">/month · cancel anytime</span>
+                    </div>
+                    <a href="retainer.html"
+                       style="display:block;text-align:center;font-size:0.75rem;
+                              color:var(--text-muted);margin-bottom:0.5rem;
+                              text-decoration:none;">
+                        → Full retainer details and FAQ
+                    </a>
+                    <span class="card-btn"
+                          style="background:rgba(243,156,18,0.1);
+                                 border-color:rgba(243,156,18,0.25);
+                                 color:var(--amber);">
+                        Join Retainer →
+                    </span>
+                    <div class="card-delivery">
+                        <span>📬</span> First character within 24 hours of signup
+                    </div>
+                </div>
+            </a>
+
         </div>
 
     </div>
-    <!-- ══ END MAIN ══ -->
+</main>
 
+<!-- ── COMPARISON TABLE ── -->
+<section class="compare-section">
+    <div class="compare-label">At a Glance</div>
+    <h2 class="compare-title">Compare All Products</h2>
+
+    <div class="compare-table-wrap">
+        <table class="compare">
+            <thead>
+                <tr>
+                    <th class="col-feature">Feature</th>
+                    <th>Free Pack</th>
+                    <th>Individual</th>
+                    <th>City Bundle</th>
+                    <th class="col-highlight">Server License</th>
+                    <th>Retainer</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Characters included</td>
+                    <td class="cmp-val">1</td>
+                    <td class="cmp-val">1</td>
+                    <td class="cmp-val">2</td>
+                    <td class="cmp-val col-highlight">5</td>
+                    <td class="cmp-val">1 / month</td>
+                </tr>
+                <tr>
+                    <td>Personality prompt length</td>
+                    <td class="cmp-val">600+ words</td>
+                    <td class="cmp-val">600+ words</td>
+                    <td class="cmp-val">600+ words</td>
+                    <td class="cmp-val col-highlight">600+ words</td>
+                    <td class="cmp-val">600+ words</td>
+                </tr>
+                <tr>
+                    <td>Hand-crafted memories</td>
+                    <td class="cmp-val">15</td>
+                    <td class="cmp-val">25</td>
+                    <td class="cmp-val">50 total</td>
+                    <td class="cmp-val col-highlight">25 per char</td>
+                    <td class="cmp-val">25</td>
+                </tr>
+                <tr>
+                    <td>Optimized config.yml</td>
+                    <td class="cmp-yes">✓ Basic</td>
+                    <td class="cmp-yes">✓ Advanced</td>
+                    <td class="cmp-yes">✓ Advanced</td>
+                    <td class="cmp-yes col-highlight">✓ Advanced</td>
+                    <td class="cmp-yes">✓ Advanced</td>
+                </tr>
+                <tr>
+                    <td>Edge case responses</td>
+                    <td class="cmp-val">5</td>
+                    <td class="cmp-val">7+</td>
+                    <td class="cmp-val">14+</td>
+                    <td class="cmp-val col-highlight">7+ per char</td>
+                    <td class="cmp-val">7+</td>
+                </tr>
+                <tr>
+                    <td>Shared world lore doc</td>
+                    <td class="cmp-no">—</td>
+                    <td class="cmp-no">—</td>
+                    <td class="cmp-yes">✓</td>
+                    <td class="cmp-yes col-highlight">✓ Full system</td>
+                    <td class="cmp-yes">✓</td>
+                </tr>
+                <tr>
+                    <td>NPC relationship map</td>
+                    <td class="cmp-no">—</td>
+                    <td class="cmp-no">—</td>
+                    <td class="cmp-part">Partial</td>
+                    <td class="cmp-yes col-highlight">✓ Full</td>
+                    <td class="cmp-yes">✓</td>
+                </tr>
+                <tr>
+                    <td>API cost optimization</td>
+                    <td class="cmp-no">—</td>
+                    <td class="cmp-no">—</td>
+                    <td class="cmp-no">—</td>
+                    <td class="cmp-yes col-highlight">✓ Full report</td>
+                    <td class="cmp-part">Guidance</td>
+                </tr>
+                <tr>
+                    <td>Commercial use rights</td>
+                    <td class="cmp-no">—</td>
+                    <td class="cmp-no">Personal only</td>
+                    <td class="cmp-no">Personal only</td>
+                    <td class="cmp-yes col-highlight">✓ Full</td>
+                    <td class="cmp-yes">✓ Full</td>
+                </tr>
+                <tr>
+                    <td>Setup consultation</td>
+                    <td class="cmp-no">—</td>
+                    <td class="cmp-no">—</td>
+                    <td class="cmp-no">—</td>
+                    <td class="cmp-yes col-highlight">✓ 30 min</td>
+                    <td class="cmp-yes">✓ Ongoing</td>
+                </tr>
+                <tr>
+                    <td>Revision access</td>
+                    <td class="cmp-no">—</td>
+                    <td class="cmp-no">—</td>
+                    <td class="cmp-no">—</td>
+                    <td class="cmp-no">—</td>
+                    <td class="cmp-yes">✓ Unlimited</td>
+                </tr>
+                <tr>
+                    <td>Support response</td>
+                    <td class="cmp-val">24 hrs</td>
+                    <td class="cmp-val">24 hrs</td>
+                    <td class="cmp-val">24 hrs</td>
+                    <td class="cmp-yes col-highlight">Same day</td>
+                    <td class="cmp-yes">8 hours</td>
+                </tr>
+                <tr>
+                    <td>Free updates</td>
+                    <td class="cmp-yes">✓ For life</td>
+                    <td class="cmp-yes">✓ For life</td>
+                    <td class="cmp-yes">✓ For life</td>
+                    <td class="cmp-yes col-highlight">✓ For life</td>
+                    <td class="cmp-yes">✓ Included</td>
+                </tr>
+                <tr>
+                    <td>Price</td>
+                    <td class="cmp-yes" style="color:var(--green);font-weight:800;">Free</td>
+                    <td class="cmp-val">$4.85 – $4.89</td>
+                    <td class="cmp-val">$8.47</td>
+                    <td class="cmp-val col-highlight"
+                        style="color:var(--teal);font-weight:800;">$24.99</td>
+                    <td class="cmp-val"
+                        style="color:var(--amber);font-weight:800;">$39/mo</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</section>
+
+<!-- ── PAYMENT STRIP ── -->
+<div class="payment-strip">
+    <div class="payment-strip-inner">
+        <h3>🔗 Crypto-Only · On-Chain Verification</h3>
+        <p>
+            Every payment is confirmed directly on the blockchain.
+            No third-party processor, no chargebacks, no held funds.
+            We accept 15 coins — delivery follows within 2 hours of confirmation.
+        </p>
+        <div class="coins-grid">
+            <span class="coin-chip">◎ SOL</span>
+            <span class="coin-chip">₮ USDT</span>
+            <span class="coin-chip">Ł LTC</span>
+            <span class="coin-chip">Ŧ TRX</span>
+            <span class="coin-chip">Ð DOGE</span>
+            <span class="coin-chip">Ξ ETH</span>
+            <span class="coin-chip">₿ BTC</span>
+            <span class="coin-chip">+ 8 more</span>
+        </div>
+    </div>
 </div>
 
 <!-- ── FOOTER ── -->
 <footer>
-    <div class="footer-links">
-        <a href="index.html">Home</a>
-        <a href="store.html">Store</a>
-        <a href="license.html">Server License</a>
-        <a href="retainer.html">Retainer</a>
-        <a href="free.html">Free Pack</a>
+    <div class="footer-inner">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <a href="index.html" class="footer-logo">
+                    ⚔️ Character<span>Craft</span>
+                </a>
+                <p>Hand-crafted AI NPC personality packs for Minecraft
+                   server owners. Built for SentiencePro and LlamaCraft
+                   Bridge. Your NPCs should have a past — not a script.</p>
+            </div>
+
+            <div class="footer-col">
+                <h4>Products</h4>
+                <a href="free.html">Free Pack</a>
+                <a href="pay-aldric.html">Aldric</a>
+                <a href="pay-dravek.html">Dravek</a>
+                <a href="pay-city-bundle.html">City Bundle</a>
+                <a href="pay-server-license.html">Server License</a>
+                <a href="pay-retainer.html">Monthly Retainer</a>
+            </div>
+
+            <div class="footer-col">
+                <h4>Info</h4>
+                <a href="index.html">Home</a>
+                <a href="store.html">Store</a>
+                <a href="license.html">License Info</a>
+                <a href="retainer.html">Retainer Info</a>
+            </div>
+
+            <div class="footer-col">
+                <h4>Support</h4>
+                <a href="free.html">Free Starter Pack</a>
+                <a href="success.html">Order Status</a>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <div class="footer-copy">
+                © 2025 CharacterCraft. All rights reserved.
+                All cryptocurrency transactions are final.
+            </div>
+            <div class="footer-copy">
+                Supporting SentiencePro · LlamaCraft Bridge
+            </div>
+        </div>
     </div>
-    <p class="footer-copy">
-        © 2025 CharacterCraft. All rights reserved.
-        All cryptocurrency transactions are final.
-    </p>
 </footer>
 
 <script>
-var Store = (function () {
+(function () {
     'use strict';
 
-    /* ── PRODUCT DATA ───────────────────────────────── */
-    var PRODUCTS = [
-        {
-            id:           'ghostwriter',
-            name:         'The Ghostwriter',
-            role:         'Starter Guard NPC — Complete Free Pack',
-            icon:         '🛡️',
-            price:        0,
-            priceDisplay: 'Free',
-            priceOrig:    null,
-            priceSave:    null,
-            priceNote:    'No payment required',
-            type:         'free',
-            accentClass:  'acc-green',
-            bannerClass:  'banner-green',
-            ctaClass:     'cta-green',
-            ctaText:      'Download Free Pack →',
-            href:         'free.html',
-            featured:     0,
-            memories:     15,
-            characters:   1,
-            tags:         ['free'],
-            plugins:      ['SentiencePro', 'LlamaCraft'],
-            features:     [],
-            quote:        '"I have stood at this gate longer than most men have been alive."',
-            featureList: [
-                '600+ word personality system prompt',
-                '15 hand-crafted memory entries',
-                'Optimized config.yml',
-                '7 edge case responses pre-built',
-                'Step-by-step installation guide',
-                'No payment — just your email'
-            ],
-            badges: [{ text: 'Free', cls: 'badge-free' }],
-            stats: [
-                { val: '15', lbl: 'Memories' },
-                { val: '1', lbl: 'Character' },
-                { val: '600+', lbl: 'Word Prompt' }
-            ]
-        },
-        {
-            id:           'aldric',
-            name:         'Aldric',
-            role:         'Grizzled Gate Captain — 31 Years of Service',
-            icon:         '⚔️',
-            price:        4.89,
-            priceDisplay: '$4.89',
-            priceOrig:    '$6.99',
-            priceSave:    'Save 30%',
-            priceNote:    'One-time · Delivered in 2hr',
-            type:         'character',
-            accentClass:  'acc-gold',
-            bannerClass:  'banner-gold',
-            ctaClass:     'cta-gold',
-            ctaText:      'Get Aldric →',
-            href:         'pay-aldric.html',
-            featured:     1,
-            memories:     25,
-            characters:   1,
-            tags:         ['character'],
-            plugins:      ['SentiencePro', 'LlamaCraft'],
-            features:     [],
-            quote:        '"Thirty-one years on this gate. Some fires don\'t go out just because you stop seeing the smoke."',
-            featureList: [
-                '600+ word deep personality system prompt',
-                '25 hand-crafted memory entries',
-                'Optimized config.yml with cost controls',
-                'Emotional triggers & refusal patterns',
-                '7+ edge case responses pre-built',
-                'Personal support + free updates for life'
-            ],
-            badges: [
-                { text: '30% Off', cls: 'badge-sale' },
-                { text: 'Popular', cls: 'badge-new' }
-            ],
-            stats: [
-                { val: '25', lbl: 'Memories' },
-                { val: '1', lbl: 'Character' },
-                { val: '600+', lbl: 'Word Prompt' }
-            ]
-        },
-        {
-            id:           'dravek',
-            name:         'Dravek',
-            role:         'Corrupt Merchant — Knows Everyone\'s Price',
-            icon:         '💰',
-            price:        4.85,
-            priceDisplay: '$4.85',
-            priceOrig:    '$6.99',
-            priceSave:    'Save 30%',
-            priceNote:    'One-time · Delivered in 2hr',
-            type:         'character',
-            accentClass:  'acc-green',
-            bannerClass:  'banner-green',
-            ctaClass:     'cta-green',
-            ctaText:      'Get Dravek →',
-            href:         'pay-dravek.html',
-            featured:     2,
-            memories:     25,
-            characters:   1,
-            tags:         ['character'],
-            plugins:      ['SentiencePro', 'LlamaCraft'],
-            features:     [],
-            quote:        '"Everything has a price, friend. The trick is knowing who\'s paying it."',
-            featureList: [
-                '600+ word personality with full ethics code',
-                '25 hand-crafted memories including contacts',
-                'Merchant-optimized config with negotiation logic',
-                'Bribery and information-trading response patterns',
-                'Knowledge boundaries — what he\'ll sell vs. keep',
-                'Personal support + free updates for life'
-            ],
-            badges: [{ text: '30% Off', cls: 'badge-sale' }],
-            stats: [
-                { val: '25', lbl: 'Memories' },
-                { val: '1', lbl: 'Character' },
-                { val: '600+', lbl: 'Word Prompt' }
-            ]
-        },
-        {
-            id:           'city-bundle',
-            name:         'City Bundle',
-            role:         'Aldric + Dravek — Two Characters. One World.',
-            icon:         '🏰',
-            price:        8.47,
-            priceDisplay: '$8.47',
-            priceOrig:    '$13.98',
-            priceSave:    'Save 39%',
-            priceNote:    'One-time · Delivered in 2hr',
-            type:         'bundle',
-            accentClass:  'acc-purple',
-            bannerClass:  'banner-purple',
-            ctaClass:     'cta-purple',
-            ctaText:      'Get City Bundle →',
-            href:         'pay-city-bundle.html',
-            featured:     3,
-            memories:     50,
-            characters:   2,
-            tags:         ['bundle'],
-            plugins:      ['SentiencePro', 'LlamaCraft'],
-            features:     ['worldlore'],
-            quote:        '"They reference the same fire — from completely different windows."',
-            featureList: [
-                'Complete Aldric pack — all files included',
-                'Complete Dravek pack — all files included',
-                'Shared world lore document',
-                'Cross-reference memories — they mention each other',
-                '50 total hand-crafted memories',
-                'Both advanced configs + edge cases'
-            ],
-            badges: [
-                { text: 'Save 39%', cls: 'badge-bundle' },
-                { text: 'Best Value', cls: 'badge-new' }
-            ],
-            stats: [
-                { val: '50', lbl: 'Memories' },
-                { val: '2', lbl: 'Characters' },
-                { val: '1', lbl: 'World Lore' }
-            ]
-        },
-        {
-            id:           'server-license',
-            name:         'Server License',
-            role:         '5 Characters · Commercial Rights · Full System',
-            icon:         '🌐',
-            price:        24.99,
-            priceDisplay: '$24.99',
-            priceOrig:    '$34.99',
-            priceSave:    'Save 29%',
-            priceNote:    'One-time · Delivered in 4hr',
-            type:         'license',
-            accentClass:  'acc-teal',
-            bannerClass:  'banner-teal',
-            ctaClass:     'cta-teal',
-            ctaText:      'Get Server License →',
-            href:         'pay-server-license.html',
-            featured:     4,
-            memories:     125,
-            characters:   5,
-            tags:         ['license'],
-            plugins:      ['SentiencePro', 'LlamaCraft'],
-            features:     ['commercial', 'worldlore', 'consultation'],
-            quote:        '"Five characters. One world. Built for server owners who take their NPC infrastructure seriously."',
-            featureList: [
-                '5 full character packs — your choice from roster',
-                '125 total hand-crafted memories',
-                'Complete world lore system + relationship map',
-                'API cost optimization report',
-                'Commercial server use rights — no restrictions',
-                '1hr setup consultation + priority support'
-            ],
-            badges: [
-                { text: 'Pro', cls: 'badge-pro' },
-                { text: 'Save 29%', cls: 'badge-sale' }
-            ],
-            stats: [
-                { val: '125', lbl: 'Memories' },
-                { val: '5', lbl: 'Characters' },
-                { val: '1hr', lbl: 'Consultation' }
-            ]
-        },
-        {
-            id:           'retainer',
-            name:         'Monthly Retainer',
-            role:         'Your NPC Team. Every Month.',
-            icon:         '📅',
-            price:        39,
-            priceDisplay: '$39',
-            priceOrig:    null,
-            priceSave:    null,
-            priceNote:    '/month · Cancel anytime',
-            type:         'subscription',
-            accentClass:  'acc-amber',
-            bannerClass:  'banner-amber',
-            ctaClass:     'cta-amber',
-            ctaText:      'Join Retainer →',
-            href:         'pay-retainer.html',
-            featured:     5,
-            memories:     25,
-            characters:   1,
-            tags:         ['subscription'],
-            plugins:      ['SentiencePro', 'LlamaCraft'],
-            features:     ['commercial', 'revisions', 'consultation'],
-            quote:        '"One new character every month. Unlimited revisions. Same-day support."',
-            featureList: [
-                '1 new full character pack delivered monthly',
-                'Unlimited revisions — any character, any time',
-                'Same-day support response (within 8 hours)',
-                'Priority access to all new releases',
-                'Commercial use rights on all characters',
-                'Ongoing lore continuity maintained'
-            ],
-            badges: [{ text: 'Monthly', cls: 'badge-sub' }],
-            stats: [
-                { val: '25+', lbl: 'Memories/mo' },
-                { val: '8hr', lbl: 'Support SLA' },
-                { val: '∞', lbl: 'Revisions' }
-            ]
+    /* Mobile nav */
+    document.addEventListener('click', function (e) {
+        var nav = document.querySelector('.nav-links');
+        var tog = document.querySelector('.nav-toggle');
+        if (nav && nav.classList.contains('open') &&
+            !nav.contains(e.target) && !tog.contains(e.target)) {
+            nav.classList.remove('open');
         }
-    ];
+    });
 
-    /* ── STATE ──────────────────────────────────────── */
-    var state = {
-        view:      'grid',
-        maxPrice:  39,
-        types:     [],
-        plugins:   [],
-        features:  [],
-        sort:      'featured'
-    };
-
-    /* ── RENDER CARD ────────────────────────────────── */
-    function renderCard(p, isList) {
-
-        var badgesHtml = p.badges.map(function (b) {
-            return '<span class="prod-badge ' + b.cls + '">' + b.text + '</span>';
-        }).join('');
-
-        var tagsHtml = p.tags.map(function (t) {
-            return '<span class="prod-tag tag-' + t + '">' + t + '</span>';
-        }).join('');
-
-        if (p.features.indexOf('commercial') !== -1) {
-            tagsHtml += '<span class="prod-tag tag-commercial">Commercial</span>';
-        }
-
-        var featuresHtml = p.featureList.map(function (f) {
-            return '<li>' + f + '</li>';
-        }).join('');
-
-        var statsHtml = p.stats.map(function (s) {
-            return '<div class="prod-stat">' +
-                '<span class="stat-val" style="color:' + accentColor(p) + ';">' +
-                s.val + '</span>' +
-                '<span class="stat-lbl">' + s.lbl + '</span>' +
-                '</div>';
-        }).join('');
-
-        var priceHtml = '<div class="prod-price" style="color:' +
-            accentColor(p) + ';">' + p.priceDisplay + '</div>';
-
-        if (p.priceOrig) {
-            priceHtml += '<span class="prod-price-orig">' + p.priceOrig + '</span>';
-        }
-
-        if (p.priceSave) {
-            priceHtml += '<span class="prod-save-badge">' + p.priceSave + '</span>';
-        }
-
-        priceHtml += '<span class="prod-price-note">' + p.priceNote + '</span>';
-
-        if (isList) {
-            return '<a href="' + p.href + '" class="prod-card ' +
-                p.accentClass + '" data-type="' + p.type +
-                '" data-price="' + p.price + '">' +
-
-                '<div class="prod-card-banner ' + p.bannerClass + '">' +
-                '<div class="prod-badges">' + badgesHtml + '</div>' +
-                '<span class="prod-icon">' + p.icon + '</span>' +
-                '<div class="prod-name">' + p.name + '</div>' +
-                '<div class="prod-role">' + p.role + '</div>' +
-                '</div>' +
-
-                '<div class="prod-card-body">' +
-                '<div style="flex:1;">' +
-                '<div class="prod-tags" style="margin-bottom:0.75rem;">' + tagsHtml + '</div>' +
-                '<ul class="prod-features">' + featuresHtml + '</ul>' +
-                '</div>' +
-                '<div class="prod-price-section">' +
-                '<div class="prod-price-row" style="justify-content:flex-end;margin-bottom:0.75rem;">' +
-                priceHtml + '</div>' +
-                '<span class="prod-cta ' + p.ctaClass + '">' + p.ctaText + '</span>' +
-                '</div>' +
-                '</div>' +
-                '</a>';
-        }
-
-        return '<a href="' + p.href + '" class="prod-card ' +
-            p.accentClass + '" data-type="' + p.type +
-            '" data-price="' + p.price + '">' +
-
-            '<div class="prod-card-banner ' + p.bannerClass + '">' +
-            '<div class="prod-badges">' + badgesHtml + '</div>' +
-            '<span class="prod-icon">' + p.icon + '</span>' +
-            '<div class="prod-name">' + p.name + '</div>' +
-            '<div class="prod-role">' + p.role + '</div>' +
-            '</div>' +
-
-            '<div class="prod-card-body">' +
-            '<div class="prod-tags">' + tagsHtml + '</div>' +
-            '<div class="prod-quote">' + p.quote + '</div>' +
-            '<div class="prod-stats">' + statsHtml + '</div>' +
-            '<ul class="prod-features">' + featuresHtml + '</ul>' +
-            '<div class="prod-price-row">' + priceHtml + '</div>' +
-            '<a href="' + p.href + '" class="prod-cta ' + p.ctaClass + '">' +
-            p.ctaText + '</a>' +
-            '</div>' +
-            '</a>';
-    }
-
-    function accentColor(p) {
-        var map = {
-            'acc-gold':   'var(--gold)',
-            'acc-green':  'var(--green)',
-            'acc-purple': 'var(--purple)',
-            'acc-teal':   'var(--teal)',
-            'acc-amber':  'var(--amber)'
-        };
-        return map[p.accentClass] || 'var(--gold)';
-    }
-
-    /* ── FILTER & SORT ──────────────────────────────── */
-    function getFilters() {
-        state.sort     = document.getElementById('sort-select').value;
-        state.maxPrice = parseFloat(document.getElementById('price-range').value);
-
-        state.types = [];
-        ['free','character','bundle','license','subscription'].forEach(function (t) {
-            var el = document.getElementById('type-' + t);
-            if (el && el.checked) state.types.push(t);
+    /* Filter tabs — visual only for now */
+    document.querySelectorAll('.filter-tab').forEach(function (tab) {
+        tab.addEventListener('click', function () {
+            document.querySelectorAll('.filter-tab')
+                    .forEach(function (t) { t.classList.remove('active'); });
+            tab.classList.add('active');
         });
+    });
 
-        state.plugins = [];
-        ['sentience','llama'].forEach(function (key) {
-            var el = document.getElementById('plugin-' + key);
-            if (el && el.checked) {
-                state.plugins.push(key === 'sentience' ? 'SentiencePro' : 'LlamaCraft');
+    /* Scroll reveal */
+    var observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+                entry.target.style.opacity   = '1';
+                entry.target.style.transform = 'translateY(0)';
             }
         });
+    }, { threshold: 0.08 });
 
-        state.features = [];
-        ['commercial','worldlore','revisions','consultation'].forEach(function (f) {
-            var el = document.getElementById('feat-' + f);
-            if (el && el.checked) state.features.push(f);
-        });
-    }
-
-    function filterProducts() {
-        return PRODUCTS.filter(function (p) {
-
-            /* Type filter */
-            if (state.types.length > 0 && state.types.indexOf(p.type) === -1) {
-                return false;
-            }
-
-            /* Price filter */
-            if (p.price > state.maxPrice) return false;
-
-            /* Plugin filter */
-            if (state.plugins.length > 0) {
-                var hasPlugin = state.plugins.some(function (pl) {
-                    return p.plugins.indexOf(pl) !== -1;
-                });
-                if (!hasPlugin) return false;
-            }
-
-            /* Feature filter */
-            if (state.features.length > 0) {
-                var hasAllFeatures = state.features.every(function (f) {
-                    return p.features.indexOf(f) !== -1;
-                });
-                if (!hasAllFeatures) return false;
-            }
-
-            return true;
-        });
-    }
-
-    function sortProducts(products) {
-        var sorted = products.slice();
-        switch (state.sort) {
-            case 'price-asc':
-                sorted.sort(function (a, b) { return a.price - b.price; });
-                break;
-            case 'price-desc':
-                sorted.sort(function (a, b) { return b.price - a.price; });
-                break;
-            case 'memories-desc':
-                sorted.sort(function (a, b) { return b.memories - a.memories; });
-                break;
-            case 'name-asc':
-                sorted.sort(function (a, b) {
-                    return a.name.localeCompare(b.name);
-                });
-                break;
-            default: /* featured */
-                sorted.sort(function (a, b) {
-                    return a.featured - b.featured;
-                });
-        }
-        return sorted;
-    }
-
-    /* ── APPLY FILTERS ──────────────────────────────── */
-    function applyFilters() {
-        getFilters();
-        var filtered = filterProducts();
-        var sorted   = sortProducts(filtered);
-        renderGrid(sorted);
-        updateCounts(sorted.length);
-        renderActiveTags();
-    }
-
-    /* ── RENDER GRID ────────────────────────────────── */
-    function renderGrid(products) {
-        var grid   = document.getElementById('products-grid');
-        var isList = state.view === 'list';
-
-        if (products.length === 0) {
-            grid.innerHTML =
-                '<div class="empty-state">' +
-                '<div class="empty-icon">🔍</div>' +
-                '<h3>No products match your filters</h3>' +
-                '<p>Try adjusting your filters or clearing them to see all products.</p>' +
-                '<button class="reset-btn" onclick="Store.clearFilters()">Clear Filters</button>' +
-                '</div>';
-            return;
-        }
-
-        grid.innerHTML = products.map(function (p) {
-            return renderCard(p, isList);
-        }).join('');
-    }
-
-    /* ── UPDATE COUNTS ──────────────────────────────── */
-    function updateCounts(num) {
-        var el = document.getElementById('showing-count');
-        if (el) el.textContent = num;
-    }
-
-    /* ── ACTIVE FILTER TAGS ─────────────────────────── */
-    function renderActiveTags() {
-        var container = document.getElementById('active-filters');
-        var tags      = [];
-
-        state.types.forEach(function (t) {
-            tags.push({ label: t, remove: function () {
-                var el = document.getElementById('type-' + t);
-                if (el) el.checked = false;
-                applyFilters();
-            }});
-        });
-
-        state.plugins.forEach(function (p) {
-            tags.push({ label: p, remove: function () {
-                var key = p === 'SentiencePro' ? 'sentience' : 'llama';
-                var el  = document.getElementById('plugin-' + key);
-                if (el) el.checked = false;
-                applyFilters();
-            }});
-        });
-
-        state.features.forEach(function (f) {
-            tags.push({ label: f, remove: function () {
-                var el = document.getElementById('feat-' + f);
-                if (el) el.checked = false;
-                applyFilters();
-            }});
-        });
-
-        if (state.maxPrice < 39) {
-            tags.push({ label: 'Max $' + state.maxPrice, remove: function () {
-                var el = document.getElementById('price-range');
-                if (el) { el.value = 39; }
-                updatePriceDisplay(39);
-                applyFilters();
-            }});
-        }
-
-        container.innerHTML = tags.map(function (tag, i) {
-            return '<span class="filter-tag" onclick="Store._removeTag(' + i + ')">' +
-                tag.label + ' <span class="ft-x">✕</span></span>';
-        }).join('');
-
-        Store._tagRemovers = tags.map(function (t) { return t.remove; });
-    }
-
-    /* ── PUBLIC HELPERS ─────────────────────────────── */
-    function setView(view) {
-        state.view = view;
-        var grid = document.getElementById('products-grid');
-
-        document.getElementById('btn-grid').classList.toggle('active', view === 'grid');
-        document.getElementById('btn-list').classList.toggle('active', view === 'list');
-
-        if (view === 'list') {
-            grid.classList.add('view-list');
-        } else {
-            grid.classList.remove('view-list');
-        }
-
-        applyFilters();
-    }
-
-    function togglePanel(header) {
-        var body = header.nextElementSibling;
-        body.classList.toggle('hidden');
-        header.classList.toggle('collapsed');
-    }
-
-    function updatePriceDisplay(val) {
-        var el = document.getElementById('price-display');
-        if (el) el.textContent = val == 0 ? 'Free only' : '$' + val;
-    }
-
-    function clearFilters() {
-        ['type-free','type-character','type-bundle',
-         'type-license','type-subscription',
-         'plugin-sentience','plugin-llama',
-         'feat-commercial','feat-worldlore',
-         'feat-revisions','feat-consultation'
-        ].forEach(function (id) {
-            var el = document.getElementById(id);
-            if (el) el.checked = false;
-        });
-
-        var pr = document.getElementById('price-range');
-        if (pr) pr.value = 39;
-        updatePriceDisplay(39);
-
-        document.getElementById('sort-select').value = 'featured';
-        applyFilters();
-    }
-
-    /* ── INIT ───────────────────────────────────────── */
-    function init() {
-        applyFilters();
-
-        /* Mobile nav */
-        document.addEventListener('click', function (e) {
-            var nav = document.querySelector('.nav-links');
-            var tog = document.querySelector('.nav-toggle');
-            if (nav && nav.classList.contains('cc-open') &&
-                !nav.contains(e.target) && !tog.contains(e.target)) {
-                nav.classList.remove('cc-open');
-            }
-        });
-    }
-
-    init();
-
-    return {
-        applyFilters:      applyFilters,
-        setView:           setView,
-        togglePanel:       togglePanel,
-        updatePriceDisplay:updatePriceDisplay,
-        clearFilters:      clearFilters,
-        _removeTag: function (i) {
-            if (Store._tagRemovers && Store._tagRemovers[i]) {
-                Store._tagRemovers[i]();
-            }
-        },
-        _tagRemovers: []
-    };
+    document.querySelectorAll('.product-card, .compare-table-wrap, .payment-strip')
+            .forEach(function (el) {
+                el.style.opacity    = '0';
+                el.style.transform  = 'translateY(20px)';
+                el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+                observer.observe(el);
+            });
 
 }());
 </script>
